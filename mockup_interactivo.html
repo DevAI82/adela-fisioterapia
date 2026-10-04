@@ -1,0 +1,2219 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adela Alventosa — Fisioterapia Online | Prototipo Interactivo</title>
+  <meta name="description" content="Prototipo interactivo en vivo de la plataforma clínica de Adela Alventosa: Web pública con selector anatómico, CRM omnicanal y portal del paciente.">
+
+  <!-- Open Graph / WhatsApp / Redes Sociales -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Adela Alventosa · Fisioterapia Online">
+  <meta property="og:url" content="https://devai82.github.io/adela-fisioterapia/">
+  <meta property="og:title" content="Adela Alventosa — Fisioterapia Online | Prototipo Interactivo">
+  <meta property="og:description" content="Explora en vivo el prototipo interactivo: Web con selector anatómico de dolor, CRM clínico y portal para pacientes.">
+  <meta property="og:image" content="https://devai82.github.io/adela-fisioterapia/og-adela-fisio.jpg">
+  <meta property="og:image:secure_url" content="https://devai82.github.io/adela-fisioterapia/og-adela-fisio.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Logotipo Oficial Adela Alventosa Fisioterapia">
+
+  <!-- Twitter / X Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Adela Alventosa — Prototipo Interactivo">
+  <meta name="twitter:description" content="Explora en vivo el prototipo interactivo de la clínica digital.">
+  <meta name="twitter:image" content="https://devai82.github.io/adela-fisioterapia/og-adela-fisio.jpg">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f2f7f4',
+              100: '#e1ede6',
+              200: '#c5dcd0',
+              300: '#9ec3b0',
+              400: '#73a48c',
+              500: '#528770',
+              600: '#3e6c58',
+              700: '#335647',
+              800: '#2c463b',
+              900: '#263b32',
+              950: '#13201b',
+            },
+            sand: {
+              50: '#fbfaf8',
+              100: '#f5f2ec',
+              200: '#ece5d9',
+              300: '#ded2c0',
+            }
+          },
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            display: ['"Playfair Display"', 'serif'],
+            hand: ['"Caveat"', 'cursive'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(225, 237, 230, 0.85);
+    }
+    .spring-card {
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+    }
+    .spring-card:hover {
+      transform: translateY(-5px);
+    }
+    .sketch-card {
+      border: 2px dashed rgba(82, 135, 112, 0.35);
+    }
+    .pulse-dot {
+      animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(82, 135, 112, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(82, 135, 112, 0); }
+      100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(82, 135, 112, 0); }
+    }
+  </style>
+</head>
+<body class="bg-sand-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col">
+
+  <!-- TOP BAR CONTROL MOCKUP (Selector de Vistas Global) -->
+  <header class="sticky top-0 z-50 bg-slate-950 text-white px-4 py-2.5 shadow-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center space-x-3">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span class="text-xs font-bold tracking-wider uppercase text-emerald-400">Adela Fisioterapia — Navegación de Prototipo</span>
+      </div>
+      <!-- TABS SWITCHER -->
+      <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-900 p-1 rounded-xl text-xs sm:text-sm font-medium border border-slate-800">
+        <button onclick="switchView('landing')" id="tab-landing" class="px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          <span>Web Pública</span>
+        </button>
+        <button onclick="switchView('crm')" id="tab-crm" class="px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></svg>
+          <span>Panel Fisio (CRM)</span>
+        </button>
+        <button onclick="switchView('paciente')" id="tab-paciente" class="px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+          <span>Portal Paciente</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- VISTA 1: WEB PÚBLICA & LANDING CON CUESTIONARIO CLÍNICO GUIADO -->
+  <!-- ========================================================================= -->
+  <section id="view-landing" class="flex-1 flex flex-col">
+    <!-- Navbar Pública -->
+    <div class="bg-white/95 backdrop-blur-md border-b border-brand-100 sticky top-12 z-40 transition-all">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
+        <!-- Logo Oficial Adela Fisioterapia -->
+        <a href="#inicio" class="flex items-center space-x-3.5 group">
+          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-12 h-12 object-contain rounded-xl border border-brand-200/90 shadow-sm bg-white p-0.5 group-hover:scale-105 transition-transform duration-200">
+          <div>
+            <span class="font-display font-bold text-slate-900 text-lg tracking-tight block leading-tight">ADELA</span>
+            <span class="text-[10px] text-brand-700 font-bold tracking-widest uppercase block leading-none">Fisioterapia Online</span>
+          </div>
+        </a>
+
+        <!-- Menú de Navegación -->
+        <nav class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-600">
+          <a href="#inicio" class="hover:text-brand-700 transition">Inicio</a>
+          <a href="#especialidades" class="hover:text-brand-700 transition">Servicios</a>
+          <a href="#como-funciona" class="hover:text-brand-700 transition">Cómo Funciona</a>
+          <a href="#sobre-mi" class="hover:text-brand-700 transition">Sobre Nosotros</a>
+          <a href="#tarifas" class="hover:text-brand-700 transition">Tarifas</a>
+          <a href="#cuestionario" class="hover:text-brand-700 transition font-bold text-brand-800">Cuestionario Clínico</a>
+        </nav>
+
+        <!-- Botón Reservar Cita -->
+        <div class="flex items-center space-x-3">
+          <button onclick="openBookingModal('General')" class="bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-bold px-5 py-2.5 rounded-full shadow-md shadow-brand-600/20 hover:shadow-lg transition">
+            Reservar Cita
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- HERO SECTION (Silueta Anatómica de Alta Definición) -->
+    <div id="inicio" class="max-w-6xl mx-auto px-4 sm:px-6 py-12 sm:py-16 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+      
+      <!-- Columna Izquierda: Titulares y Llamadas a la Acción -->
+      <div class="lg:col-span-6 space-y-6">
+        <h1 class="text-3xl sm:text-5xl font-display font-semibold text-slate-900 leading-[1.18]">
+          Recupera tu movilidad y dile <span class="italic text-brand-600">adiós al dolor</span> desde casa
+        </h1>
+
+        <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
+          Fisioterapia online profesional: Tratamientos personalizados y efectivos sin moverte del hogar. ¡Comienza hoy tu camino hacia una vida sin dolor!
+        </p>
+        
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a href="#cuestionario" class="bg-brand-700 hover:bg-brand-800 text-white font-semibold px-6 py-3.5 rounded-xl shadow-md shadow-brand-700/20 hover:shadow-lg transition text-sm sm:text-base flex items-center gap-2">
+            <span>Iniciar Valoración Gratuita</span>
+            <span>→</span>
+          </a>
+          <a href="https://wa.me/?text=Hola%20Adela,%20me%20gustar%C3%ADa%20hacer%20una%20consulta%20sobre%20mi%20dolor" target="_blank" class="bg-white hover:bg-slate-50 text-slate-800 font-semibold px-5 py-3.5 rounded-xl border border-slate-200 shadow-sm transition text-sm sm:text-base flex items-center gap-2.5">
+            <svg class="w-5 h-5 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+            <span>Hablar por WhatsApp</span>
+          </a>
+        </div>
+
+        <!-- 3 Badges de Confianza -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6 border-t border-brand-100 text-xs text-slate-600">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-100/80 text-brand-800 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-brand-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <strong class="text-slate-900 block font-bold">Fisioterapia Colegiada</strong>
+              <span class="text-[11px] text-slate-500">Profesionales Certificados</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-brand-100/80 text-brand-800 flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 text-brand-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+            <div>
+              <strong class="text-slate-900 block font-bold">Plan 100% Personalizado</strong>
+              <span class="text-[11px] text-slate-500">Adaptado a tus Necesidades</span>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-800 flex items-center justify-center shrink-0 border border-emerald-200">
+              <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#00832d" d="M18 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5l4 4V6.5l-4 4z"/><path fill="#0066da" d="M18 10.5l4-4v11l-4-4z"/><path fill="#e53935" d="M18 6a2 2 0 0 0-2-2H4L18 18V6z"/><path fill="#ffb300" d="M4 20h12a2 2 0 0 0 2-2L4 4v16z"/></svg>
+            </div>
+            <div>
+              <strong class="text-slate-900 block font-bold">Google Meet HD</strong>
+              <span class="text-[11px] text-slate-500">Sesiones Seguras Online</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Silueta Anatómica Real con Hotspots -->
+      <div class="lg:col-span-6 bg-white p-6 sm:p-8 rounded-3xl shadow-xl shadow-slate-200/50 border border-brand-100 relative">
+        <div class="text-center mb-2">
+          <h3 class="text-xl font-bold text-slate-900">¿Dónde te duele?</h3>
+          <p class="text-xs text-slate-500">Selecciona la zona afectada en la silueta para iniciar tu cuestionario:</p>
+        </div>
+
+        <!-- Contenedor de la Silueta Médica Real -->
+        <div class="relative w-full max-w-[340px] mx-auto h-[430px] flex items-center justify-center my-2">
+          <img src="body-silhouette.jpg" alt="Silueta Anatómica Médica" class="h-full w-auto object-contain select-none pointer-events-none opacity-85">
+
+          <!-- 1. CERVICAL -->
+          <button onclick="selectBodyPart('cervical', 'Cervical / Cuello')" id="btn-cervical" class="body-zone-tag absolute top-[48px] left-0 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span>Cervical</span>
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+          </button>
+          <div class="absolute top-[58px] left-[78px] w-12 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- 2. ESPALDA -->
+          <button onclick="selectBodyPart('espalda', 'Espalda Dorsal')" id="btn-espalda" class="body-zone-tag absolute top-[130px] left-0 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span>Espalda</span>
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+          </button>
+          <div class="absolute top-[140px] left-[72px] w-14 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- 3. HOMBRO -->
+          <button onclick="selectBodyPart('hombro', 'Hombro / Brazo')" id="btn-hombro" class="body-zone-tag absolute top-[75px] right-0 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+            <span>Hombro</span>
+          </button>
+          <div class="absolute top-[85px] right-[75px] w-14 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- 4. LUMBAR -->
+          <button onclick="selectBodyPart('lumbar', 'Zona Lumbar')" id="btn-lumbar" class="body-zone-tag absolute top-[145px] right-0 bg-brand-50 border-2 border-brand-500 text-brand-900 font-bold rounded-full px-3.5 py-1 text-xs shadow-md transition flex items-center gap-1.5 z-20 ring-2 ring-brand-500/20">
+            <span class="w-2 h-2 rounded-full bg-brand-600 indicator"></span>
+            <span>Lumbar</span>
+          </button>
+          <div class="absolute top-[155px] right-[75px] w-14 border-b border-dashed border-brand-500 pointer-events-none"></div>
+
+          <!-- 5. CADERA -->
+          <button onclick="selectBodyPart('cadera', 'Cadera / Pelvis')" id="btn-cadera" class="body-zone-tag absolute top-[200px] right-2 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+            <span>Cadera</span>
+          </button>
+          <div class="absolute top-[210px] right-[75px] w-12 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- 6. RODILLA -->
+          <button onclick="selectBodyPart('rodilla', 'Rodilla')" id="btn-rodilla" class="body-zone-tag absolute top-[265px] left-2 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span>Rodilla</span>
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+          </button>
+          <div class="absolute top-[275px] left-[70px] w-14 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- 7. TOBILLO -->
+          <button onclick="selectBodyPart('tobillo', 'Tobillo / Pie')" id="btn-tobillo" class="body-zone-tag absolute top-[350px] right-2 bg-white hover:bg-brand-50 border border-slate-300 rounded-full px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm transition flex items-center gap-1.5 z-20">
+            <span class="w-2 h-2 rounded-full bg-slate-400 indicator"></span>
+            <span>Tobillo</span>
+          </button>
+          <div class="absolute top-[360px] right-[70px] w-14 border-b border-dashed border-slate-400 pointer-events-none"></div>
+
+          <!-- PUNTO PULSANTE DINÁMICO (NO SE DESCONFIGURA) -->
+          <div id="silhouette-pulse-dot" class="absolute top-[152px] right-[152px] w-4 h-4 rounded-full bg-brand-600 border-2 border-white pulse-dot pointer-events-none transition-all duration-300"></div>
+        </div>
+
+        <!-- Slider de Dolor EVA Dinámico -->
+        <div class="mt-3 p-4 rounded-2xl bg-sand-100/90 border border-sand-200 space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-700">Zona: <strong id="current-zone-label" class="text-brand-900 font-extrabold">Zona Lumbar</strong></span>
+            <span id="current-pain-label" class="font-bold text-brand-800 bg-white px-2.5 py-0.5 rounded-md border border-sand-200">7 / 10 (Moderado-Alto)</span>
+          </div>
+          <input type="range" min="0" max="10" value="7" oninput="updateHeroPain(this.value)" class="w-full accent-brand-600 cursor-pointer h-2 bg-slate-200 rounded-lg">
+          <div class="flex justify-between text-[10px] text-slate-500 font-medium">
+            <span>0 Sin dolor</span>
+            <span>5 Moderado</span>
+            <span>10 Insoportable</span>
+          </div>
+        </div>
+
+        <button onclick="startIntakeWithSelectedZone()" class="block text-center mt-4 w-full bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-bold py-3.5 rounded-xl shadow-md transition">
+          Iniciar Cuestionario Clínico para esta zona →
+        </button>
+      </div>
+    </div>
+
+    <!-- ======================================================================= -->
+    <!-- SECCIÓN CÓMO FUNCIONA: MÉTODO CLÍNICO ADELA (EXCALIDRAW + FRONTEND FX) -->
+    <!-- ======================================================================= -->
+    <section id="como-funciona" class="py-16 sm:py-24 px-4 sm:px-6 bg-white border-t border-brand-100 relative overflow-hidden">
+      <!-- Decoración sutil de fondo -->
+      <div class="absolute -top-24 -right-24 w-96 h-96 bg-brand-50/60 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-sand-100/80 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto relative z-10 space-y-12">
+        <div class="text-center space-y-3">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-50 border border-brand-200 text-brand-800 text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <span>📐</span> <span>Arquitectura del Método Clínico</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900">
+            ¿Cómo funciona el tratamiento de Fisioterapia Online?
+          </h2>
+          <p class="text-slate-600 text-xs sm:text-base max-w-2xl mx-auto leading-relaxed">
+            Eliminamos desplazamientos y salas de espera. Un proceso en 4 etapas claras, conectadas y respaldadas por evidencia clínica:
+          </p>
+        </div>
+
+        <!-- DIAGRAMA INTERACTIVO DE 4 PASOS (ESTÉTICA EXCALIDRAW + FRONTEND SPRINGS) -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 items-stretch relative">
+
+          <!-- PASO 1: ENTRADA CLÍNICA (AZUL EXCALIDRAW) -->
+          <div onclick="selectMethodStep(1)" id="method-card-1" class="spring-card cursor-pointer rounded-3xl p-6 border-2 border-[#1971c2] bg-[#e7f5ff] text-slate-900 flex flex-col justify-between shadow-lg shadow-blue-500/5 ring-4 ring-blue-500/20 transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#1971c2] text-white">Fase 1</span>
+                <span class="font-hand text-lg font-bold text-[#1971c2]">¡Toma 2 min! ✍️</span>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-white border border-[#1971c2]/30 flex items-center justify-center text-[#1971c2] shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 leading-snug">1. Mapeo y Anamnesis</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Seleccionas tu zona de dolor en la silueta y respondes al cuestionario clínico guiado. Adela recibe tu caso al instante.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#1971c2]/20 flex items-center justify-between text-xs font-bold text-[#1971c2]">
+              <span>Explorar fase</span> <span>→</span>
+            </div>
+          </div>
+
+          <!-- PASO 2: DIAGNÓSTICO (AMARILLO EXCALIDRAW) -->
+          <div onclick="selectMethodStep(2)" id="method-card-2" class="spring-card cursor-pointer rounded-3xl p-6 border-2 border-[#f59f00] bg-[#fff9db] text-slate-900 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#f59f00] text-slate-900 font-extrabold">Fase 2</span>
+                <span class="font-hand text-lg font-bold text-[#b27200]">Google Meet HD 📹</span>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-white border border-[#f59f00]/30 flex items-center justify-center shadow-sm">
+                <svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="#00832d" d="M18 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5l4 4V6.5l-4 4z"/><path fill="#0066da" d="M18 10.5l4-4v11l-4-4z"/><path fill="#e53935" d="M18 6a2 2 0 0 0-2-2H4L18 18V6z"/><path fill="#ffb300" d="M4 20h12a2 2 0 0 0 2-2L4 4v16z"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 leading-snug">2. Videoconsulta Directa</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Sesión de 45 min por Google Meet. Adela realiza test biomecánico en directo y descarta banderas rojas.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#f59f00]/20 flex items-center justify-between text-xs font-bold text-[#b27200]">
+              <span>Explorar fase</span> <span>→</span>
+            </div>
+          </div>
+
+          <!-- PASO 3: TRATAMIENTO ACTIVO (VERDE EXCALIDRAW) -->
+          <div onclick="selectMethodStep(3)" id="method-card-3" class="spring-card cursor-pointer rounded-3xl p-6 border-2 border-[#2f9e44] bg-[#d3f9d8] text-slate-900 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#2f9e44] text-white">Fase 3</span>
+                <span class="font-hand text-lg font-bold text-[#237032]">15 min en casa 🧘‍♀️</span>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-white border border-[#2f9e44]/30 flex items-center justify-center text-[#2f9e44] shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 leading-snug">3. Rutinas en Vídeo HD</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Pautas terapéuticas adaptadas en tu portal. Cada ejercicio incluye vídeo guiado por Adela con corrección postural.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#2f9e44]/20 flex items-center justify-between text-xs font-bold text-[#237032]">
+              <span>Explorar fase</span> <span>→</span>
+            </div>
+          </div>
+
+          <!-- PASO 4: SEGUIMIENTO & ALIVIO (MORADO EXCALIDRAW) -->
+          <div onclick="selectMethodStep(4)" id="method-card-4" class="spring-card cursor-pointer rounded-3xl p-6 border-2 border-[#862e9c] bg-[#f3d9fa] text-slate-900 flex flex-col justify-between shadow-sm hover:shadow-md transition-all">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] font-bold px-2.5 py-1 rounded-full bg-[#862e9c] text-white">Fase 4</span>
+                <span class="font-hand text-lg font-bold text-[#862e9c]">Adherencia 88% 📈</span>
+              </div>
+              <div class="w-12 h-12 rounded-2xl bg-white border border-[#862e9c]/30 flex items-center justify-center text-[#862e9c] shadow-sm">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+              </div>
+              <h3 class="text-lg font-bold text-slate-900 leading-snug">4. Registro Diario EVA</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Valoras tu dolor diario de 0 a 10 con 1 clic. Adela monitoriza tu curva de evolución y ajusta los ejercicios semanalmente.
+              </p>
+            </div>
+            <div class="pt-4 mt-4 border-t border-[#862e9c]/20 flex items-center justify-between text-xs font-bold text-[#862e9c]">
+              <span>Explorar fase</span> <span>→</span>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PANEL DE PROFUNDIDAD CLÍNICA INTERACTIVO -->
+        <div id="method-detail-box" class="p-6 sm:p-8 rounded-3xl bg-sand-100/90 border border-brand-200 glass-card space-y-4 transition-all">
+          <div class="flex flex-wrap items-center justify-between gap-3 border-b border-brand-100 pb-3">
+            <div class="flex items-center gap-3">
+              <div id="detail-step-badge" class="w-8 h-8 rounded-xl bg-[#1971c2] text-white flex items-center justify-center font-bold text-xs">1</div>
+              <div>
+                <h4 id="detail-step-title" class="text-base font-bold text-slate-900">Fase 1: Mapeo Biomecánico & Anamnesis Previa</h4>
+                <span id="detail-step-subtitle" class="text-xs text-brand-700 font-semibold">Toma de datos clínicas previa a la videoconsulta</span>
+              </div>
+            </div>
+            <span class="font-hand text-xl font-bold text-brand-800">"El 70% del éxito reside en un buen diagnóstico inicial"</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-xs text-slate-700 pt-2">
+            <div class="space-y-1.5 p-3.5 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+              <strong class="text-slate-900 block font-bold text-sm">👤 Lo que hace el paciente:</strong>
+              <p id="detail-patient-action">Entra en la web, pulsa en la zona de su cuerpo con molestia y contesta a las 8 preguntas clínicas (sensación, tiempo, factores agravantes y pruebas).</p>
+            </div>
+            <div class="space-y-1.5 p-3.5 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+              <strong class="text-slate-900 block font-bold text-sm">👩‍⚕️ Lo que hace Adela:</strong>
+              <p id="detail-fisio-action">Recibe la ficha en su CRM antes de la cita. Analiza las pruebas médicas aportadas y estructura la estrategia terapéutica previa.</p>
+            </div>
+            <div class="space-y-1.5 p-3.5 bg-white rounded-2xl border border-slate-200 shadow-2xs">
+              <strong class="text-slate-900 block font-bold text-sm">🛡️ Garantía y Seguridad:</strong>
+              <p id="detail-safety-action">Cifrado de datos de salud bajo Art. 9 del RGPD y custodia obligatoria de historia clínica según la Ley 41/2002.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- CUESTIONARIO CLÍNICO PASO A PASO (ANAMNESIS COMPLETA PARA ADELA) -->
+    <!-- ======================================================================= -->
+    <section id="cuestionario" class="py-16 sm:py-24 px-4 sm:px-6 bg-sand-100/70 border-t border-brand-100">
+      <div class="max-w-3xl mx-auto bg-white p-6 sm:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-brand-100">
+        
+        <!-- Header del Cuestionario -->
+        <div class="text-center space-y-2 mb-8">
+          <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Anamnesis Clínica Guiada</span>
+          <h2 class="text-2xl sm:text-3xl font-display font-semibold text-slate-900">
+            Cuestionario de Valoración Terapéutica
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-600 max-w-lg mx-auto">
+            Estas preguntas permiten a Adela analizar tu patrón biomecánico antes de proponerte el tratamiento y pautar tus ejercicios.
+          </p>
+          
+          <!-- Barra de Progreso 4 Pasos -->
+          <div class="pt-4 max-w-md mx-auto">
+            <div class="flex justify-between text-[11px] font-bold text-slate-500 mb-1.5">
+              <span id="step-indicator-text" class="text-brand-800">Paso 1 de 4: Patrón del Dolor</span>
+              <span id="step-percent">25%</span>
+            </div>
+            <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div id="step-progress-bar" class="h-full bg-brand-600 w-1/4 rounded-full transition-all duration-300"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Banner Obligatorio RGPD Art. 9 -->
+        <div class="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 mb-6 flex items-start gap-3">
+          <svg class="w-5 h-5 text-amber-800 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <div class="text-xs text-amber-950">
+            <strong>Consentimiento Sanitario (Art. 9 RGPD & Ley 41/2002):</strong> Toda la información médica se transfiere con cifrado para la valoración exclusiva de Adela Alventosa.
+          </div>
+        </div>
+
+        <form id="clinical-intake-form" onsubmit="handleIntakeFormComplete(event)" class="space-y-6">
+          
+          <!-- PASO 1: PATRÓN DEL DOLOR E IRRADIACIÓN -->
+          <div id="step-1" class="space-y-5">
+            <div class="p-3.5 bg-brand-50/80 rounded-2xl border border-brand-200 text-xs flex justify-between items-center">
+              <span>Zona seleccionada: <strong id="step1-zone-badge" class="text-brand-900 font-bold">Zona Lumbar</strong></span>
+              <button type="button" onclick="selectAndScroll('lumbar', 'Zona Lumbar')" class="text-brand-700 underline font-semibold">Cambiar zona</button>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                1. ¿Cómo describirías la sensación de tu molestia?
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" onclick="selectPainType(this, 'Punzante / Agudo')" class="pain-type-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Punzante / Agudo
+                </button>
+                <button type="button" onclick="selectPainType(this, 'Opresivo / Sordo')" class="pain-type-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20">
+                  Opresivo / Sordo
+                </button>
+                <button type="button" onclick="selectPainType(this, 'Quemazón / Hormigueo')" class="pain-type-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Quemazón / Hormigueo
+                </button>
+                <button type="button" onclick="selectPainType(this, 'Rigidez / Bloqueo')" class="pain-type-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Rigidez / Bloqueo
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                2. ¿El dolor se queda localizado o se irradia hacia otra zona?
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <button type="button" onclick="selectRadiation(this, 'Solo localizado en el punto')" class="rad-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Solo localizado en el punto
+                </button>
+                <button type="button" onclick="selectRadiation(this, 'Baja hacia la pierna / brazo')" class="rad-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20">
+                  Baja hacia la pierna / brazo
+                </button>
+                <button type="button" onclick="selectRadiation(this, 'Se expande hacia la espalda alta')" class="rad-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Se expande hacia la espalda alta
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-end pt-4">
+              <button type="button" onclick="goToStep(2)" class="px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
+                <span>Continuar al Paso 2</span> <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 2: TEMPORALIDAD Y COMPORTAMIENTO -->
+          <div id="step-2" class="space-y-5 hidden">
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                3. ¿Desde hace cuánto tiempo convives con esta dolencia?
+              </label>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                <button type="button" onclick="selectTime(this, 'Menos de 1 semana')" class="time-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  &lt; 1 semana (Agudo)
+                </button>
+                <button type="button" onclick="selectTime(this, 'Entre 1 y 4 semanas')" class="time-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20">
+                  1 a 4 semanas
+                </button>
+                <button type="button" onclick="selectTime(this, 'Entre 1 y 3 meses')" class="time-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  1 a 3 meses
+                </button>
+                <button type="button" onclick="selectTime(this, 'Más de 6 meses (Crónico)')" class="time-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  &gt; 6 meses (Crónico)
+                </button>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                4. ¿En qué momento del día o actividad empeora?
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <button type="button" onclick="selectAggravating(this, 'Al levantarme por la mañana')" class="agg-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Al levantarme por la mañana
+                </button>
+                <button type="button" onclick="selectAggravating(this, 'Al estar sentado mucho tiempo')" class="agg-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20">
+                  Al estar sentado mucho tiempo
+                </button>
+                <button type="button" onclick="selectAggravating(this, 'Al caminar o hacer deporte')" class="agg-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Al caminar o hacer deporte
+                </button>
+              </div>
+            </div>
+
+            <div class="flex justify-between pt-4">
+              <button type="button" onclick="goToStep(1)" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 transition">
+                ← Anterior
+              </button>
+              <button type="button" onclick="goToStep(3)" class="px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
+                <span>Continuar al Paso 3</span> <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 3: ANTECEDENTES Y PRUEBAS MÉDICAS -->
+          <div id="step-3" class="space-y-5 hidden">
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                5. ¿Dispones de pruebas diagnósticas previas?
+              </label>
+              <input type="text" id="intake-tests" value="Resonancia magnética lumbar: ligera protrusión L5-S1" placeholder="Ej. Resonancia, radiografía, informe traumatológico..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                6. ¿Tomas medicación analgésica o antiinflamatoria actualmente?
+              </label>
+              <input type="text" id="intake-meds" value="Ibuprofeno ocasional cuando el dolor supera 7/10" placeholder="Ej. Enantyum, paracetamol, relajante muscular..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-1.5">
+                7. ¿Has tenido cirugías previas, traumatismos o caídas recientes?
+              </label>
+              <input type="text" id="intake-surgery" value="Ninguna cirugía previa" placeholder="Indica si hubo alguna operación o caída importante..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-xs sm:text-sm focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div class="flex justify-between pt-4">
+              <button type="button" onclick="goToStep(2)" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 transition">
+                ← Anterior
+              </button>
+              <button type="button" onclick="goToStep(4)" class="px-6 py-3 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs sm:text-sm shadow-md transition flex items-center gap-2">
+                <span>Continuar al Paso Final</span> <span>→</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- PASO 4: OBJETIVOS Y DATOS DE CONTACTO -->
+          <div id="step-4" class="space-y-5 hidden">
+            <div>
+              <label class="block text-xs font-bold text-slate-800 uppercase tracking-wider mb-2">
+                8. ¿Cuál es tu objetivo prioritario con este tratamiento?
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+                <button type="button" onclick="selectGoal(this, 'Poder trabajar sentado sin dolor')" class="goal-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20">
+                  Poder trabajar sentado sin dolor
+                </button>
+                <button type="button" onclick="selectGoal(this, 'Volver a correr y hacer deporte')" class="goal-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Volver a correr y hacer deporte
+                </button>
+                <button type="button" onclick="selectGoal(this, 'Dormir y descansar sin molestias')" class="goal-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition">
+                  Dormir y descansar sin molestias
+                </button>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Nombre Completo *</label>
+                <input type="text" id="final-name" required value="Javier García" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500">
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">WhatsApp de contacto *</label>
+                <input type="tel" id="final-phone" required value="612 34 56 78" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Correo Electrónico *</label>
+              <input type="email" id="final-email" required value="javier.garcia@gmail.com" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 text-sm focus:outline-none focus:border-brand-500">
+            </div>
+
+            <div class="flex justify-between pt-4">
+              <button type="button" onclick="goToStep(3)" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-50 transition">
+                ← Anterior
+              </button>
+              <button type="submit" class="px-8 py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-lg shadow-brand-700/20 transition flex items-center gap-2">
+                <span>Enviar Cuestionario Completo a Adela</span> <span>✓</span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- PANTALLA DE ÉXITO TRAS ENVIAR -->
+        <div id="intake-success-screen" class="hidden p-8 sm:p-12 text-center space-y-4">
+          <div class="w-16 h-16 rounded-2xl bg-brand-100 text-brand-800 flex items-center justify-center text-3xl mx-auto font-bold">✓</div>
+          <h3 class="text-2xl font-bold text-slate-900">¡Cuestionario Clínico Entregado!</h3>
+          <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+            Adela ha recibido tu anamnesis completa en su panel clínico. Ya puede revisar el informe detallado para estructurar tu plan terapéutico o preparar tu videoconsulta de Google Meet.
+          </p>
+          <div class="pt-4 flex flex-wrap justify-center gap-3">
+            <button onclick="switchView('crm')" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white font-bold text-xs shadow hover:bg-slate-800 transition">
+              Ver cómo lo recibe Adela en su CRM →
+            </button>
+            <button onclick="switchView('paciente')" class="px-5 py-2.5 rounded-xl bg-brand-700 text-white font-bold text-xs shadow hover:bg-brand-800 transition">
+              Ir al Portal del Paciente →
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECCIÓN: TARIFAS & PRECIOS -->
+    <section id="tarifas" class="py-16 sm:py-20 bg-white border-t border-brand-100">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="text-center space-y-3 mb-12">
+          <span class="text-xs font-bold text-brand-700 uppercase tracking-widest">Precios Transparentes</span>
+          <h2 class="text-2xl sm:text-4xl font-display font-semibold text-slate-900">Tarifas claras, sin sorpresas</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
+          <div class="bg-sand-50 p-8 rounded-3xl border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+            <div class="space-y-4">
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-slate-700 inline-block border border-slate-200">Sesión Suelta</span>
+              <h3 class="text-xl font-bold text-slate-900">Videoconsulta Clínica</h3>
+              <p class="text-xs text-slate-500">Valoración inicial en directo, diagnóstico funcional y pautas de alivio inmediato.</p>
+              <div class="pt-2">
+                <span class="text-4xl font-bold text-slate-900">45€</span>
+                <span class="text-xs text-slate-500"> / sesión</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-600 pt-4 border-t border-slate-200">
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> 45 min por Google Meet</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Test biomecánico en directo</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Pautas y consejos posturales</li>
+              </ul>
+            </div>
+            <button onclick="openBookingModal('Videoconsulta 45€')" class="mt-8 w-full py-3 rounded-xl border border-slate-300 font-bold text-xs hover:bg-white transition">
+              Reservar Sesión
+            </button>
+          </div>
+
+          <div class="bg-white p-8 rounded-3xl border-2 border-brand-500 shadow-xl shadow-brand-500/10 flex flex-col justify-between relative">
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-brand-700 text-white text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow">
+              Más Recomendado
+            </div>
+            <div class="space-y-4">
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-brand-50 text-brand-800 inline-block">Plan Mensual</span>
+              <h3 class="text-xl font-bold text-slate-900">Rutinas Guiadas en Vídeo</h3>
+              <p class="text-xs text-slate-500">Tratamiento continuado con pautas progresivas en vídeo y seguimiento de dolor diario.</p>
+              <div class="pt-2">
+                <span class="text-4xl font-bold text-slate-900">59€</span>
+                <span class="text-xs text-slate-500"> / mes</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-700 pt-4 border-t border-brand-100">
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Rutinas terapéuticas personalizadas</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Registro diario de dolor (0-10)</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Ajuste semanal por Adela</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Consultas asíncronas ilimitadas</li>
+              </ul>
+            </div>
+            <button onclick="openBookingModal('Plan Rutinas 59€/mes')" class="mt-8 w-full py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs shadow-md shadow-brand-700/20 transition">
+              Comenzar Plan Guiado
+            </button>
+          </div>
+
+          <div class="bg-sand-50 p-8 rounded-3xl border border-slate-200 flex flex-col justify-between hover:shadow-md transition">
+            <div class="space-y-4">
+              <span class="text-xs font-bold px-3 py-1 rounded-full bg-white text-slate-700 inline-block border border-slate-200">Tratamiento Integral</span>
+              <h3 class="text-xl font-bold text-slate-900">Plan Premium Híbrido</h3>
+              <p class="text-xs text-slate-500">Rutinas diarias guiadas + 2 videoconsultas en directo al mes con Adela.</p>
+              <div class="pt-2">
+                <span class="text-4xl font-bold text-slate-900">89€</span>
+                <span class="text-xs text-slate-500"> / mes</span>
+              </div>
+              <ul class="space-y-2 text-xs text-slate-600 pt-4 border-t border-slate-200">
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Todo lo del Plan de Rutinas</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> <strong>2 Google Meet al mes</strong> (45 min)</li>
+                <li class="flex items-center gap-2"><span class="text-brand-600 font-bold">✓</span> Reevaluación postural en directo</li>
+              </ul>
+            </div>
+            <button onclick="openBookingModal('Plan Premium 89€/mes')" class="mt-8 w-full py-3 rounded-xl border border-slate-300 font-bold text-xs hover:bg-white transition">
+              Elegir Plan Premium
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Sanitario -->
+    <footer class="bg-slate-900 text-slate-400 py-12 text-xs">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 mb-6">
+        <div>
+          <strong class="text-white font-bold text-sm block mb-2">ADELA FISIOTERAPIA</strong>
+          <p>Clínica de fisioterapia digital colegiada. Atención clínica a distancia en España.</p>
+        </div>
+        <div>
+          <strong class="text-white font-bold block mb-2">Gobernanza Sanitaria</strong>
+          <p>Custodia de historia clínica mínima de 5 años según Ley 41/2002. Cumplimiento de Art. 9 RGPD.</p>
+        </div>
+        <div>
+          <strong class="text-white font-bold block mb-2">Canales</strong>
+          <p>WhatsApp & Instagram integrados con Zernio. Videoconsultas encriptadas por Google Meet.</p>
+        </div>
+      </div>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 border-t border-slate-800 text-slate-500 text-center">
+        © 2026 Adela Fisioterapia. Plataforma desarrollada por Altera.
+      </div>
+    </footer>
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VISTA 2: PANEL FISIO (CRM COMPLETO CON ANAMNESIS CLÍNICA INTEGRADA) -->
+  <!-- ========================================================================= -->
+  <section id="view-crm" class="flex-1 flex hidden bg-slate-100 min-h-screen">
+    
+    <!-- SIDEBAR IZQUIERDA DEL CRM -->
+    <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between p-4 shrink-0 shadow-sm">
+      <div class="space-y-6">
+        <!-- Logo de la Clínica Adela Fisioterapia -->
+        <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
+          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-10 h-10 object-contain rounded-xl border border-brand-200/90 bg-white p-0.5 shadow-2xs">
+          <div>
+            <span class="font-display font-bold text-slate-900 text-sm leading-tight block">ADELA FISIOTERAPIA</span>
+            <span class="text-[9px] text-brand-700 font-bold uppercase tracking-wider block">Panel de Control Clínico</span>
+          </div>
+        </div>
+
+        <!-- Perfil Profesional Adela Alventosa -->
+        <div class="flex items-center space-x-3 p-2.5 bg-sand-50 rounded-2xl border border-sand-200">
+          <img src="adela-avatar.jpg" alt="Dra. Adela Alventosa" class="w-11 h-11 rounded-xl object-cover border-2 border-brand-500 shadow-sm">
+          <div>
+            <h4 class="text-sm font-bold text-slate-900 leading-tight">Adela Alventosa</h4>
+            <span class="text-[10px] text-brand-700 font-bold uppercase tracking-wider block">Fisioterapeuta</span>
+            <span class="text-[9px] text-slate-400">Col. Nº 4.812</span>
+          </div>
+        </div>
+
+        <nav class="space-y-1.5 text-xs font-semibold text-slate-600">
+          <button onclick="switchCrmTab('pipeline')" id="crm-tab-btn-pipeline" class="crm-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-brand-50 text-brand-900 font-bold border border-brand-200 transition">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-brand-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              <span>Pipeline / Leads</span>
+            </div>
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-brand-200 text-brand-900">7</span>
+          </button>
+          
+          <button onclick="switchCrmTab('conversaciones')" id="crm-tab-btn-conversaciones" class="crm-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-slate-50 hover:text-slate-900 text-slate-600 transition">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <span>Conversaciones</span>
+            </div>
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-500 text-white animate-pulse">3</span>
+          </button>
+
+          <button onclick="switchCrmTab('informes')" id="crm-tab-btn-informes" class="crm-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-slate-50 hover:text-slate-900 text-slate-600 transition">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+              <span>Informes & Métricas</span>
+            </div>
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-slate-100 text-slate-600">KPIs</span>
+          </button>
+
+          <button onclick="openBookingModal('Reunión Google Meet con Adela Alventosa')" class="crm-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-slate-50 hover:text-slate-900 text-slate-600 transition">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Calendario</span>
+            </div>
+          </button>
+
+          <button onclick="switchCrmTab('informes')" class="crm-nav-item w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-slate-50 hover:text-slate-900 text-slate-600 transition">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+              <span>Pacientes Activos</span>
+            </div>
+            <span class="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-brand-100 text-brand-800">28</span>
+          </button>
+        </nav>
+      </div>
+
+      <div class="pt-4 border-t border-slate-100 text-xs text-slate-500">
+        <button onclick="alert('Ajustes del CRM y conexiones API')" class="flex items-center gap-2.5 hover:text-slate-800 transition w-full py-1.5">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span>Ajustes</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL DEL CRM -->
+    <div class="flex-1 flex flex-col min-w-0">
+      
+      <!-- TOP NAV DEL CRM -->
+      <div class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
+        <div class="flex items-center space-x-6">
+          <h2 class="text-lg font-bold text-slate-900 tracking-tight">Adela Fisioterapia - Panel Clínico</h2>
+          <div class="hidden sm:flex items-center space-x-1 text-xs font-semibold">
+            <button onclick="switchCrmTab('pipeline')" id="crm-top-btn-pipeline" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-slate-900 border-b-2 border-brand-600">Pipeline</button>
+            <button onclick="switchCrmTab('conversaciones')" id="crm-top-btn-conversaciones" class="px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 flex items-center gap-1.5">
+              <span>Conversaciones</span>
+              <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            </button>
+            <button onclick="switchCrmTab('informes')" id="crm-top-btn-informes" class="px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-900">Informes & Métricas</button>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <div class="relative hidden md:block">
+            <input type="text" placeholder="Buscar paciente..." class="w-48 pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500">
+            <svg class="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          </div>
+          <button onclick="alert('Sincronizando Google Calendar...')" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm">
+            <svg class="w-3.5 h-3.5" viewBox="0 0 24 24"><path fill="#00832d" d="M18 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5l4 4V6.5l-4 4z"/><path fill="#0066da" d="M18 10.5l4-4v11l-4-4z"/><path fill="#e53935" d="M18 6a2 2 0 0 0-2-2H4L18 18V6z"/><path fill="#ffb300" d="M4 20h12a2 2 0 0 0 2-2L4 4v16z"/></svg>
+            <span>Google Calendar</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- ===================================================================== -->
+      <!-- SUB-VISTA 1: PIPELINE KANBAN & VALORACIONES -->
+      <!-- ===================================================================== -->
+      <div id="crm-subview-pipeline" class="crm-subview flex-1 flex flex-col min-w-0">
+        <div class="px-6 pt-5 pb-2">
+          <h3 class="text-base font-bold text-slate-800">Kanban pipeline</h3>
+        </div>
+
+      <!-- KANBAN COLUMNS -->
+      <div class="p-6 pt-2 flex-1 overflow-x-auto flex gap-5 items-start">
+        
+        <!-- 1. NUEVO LEAD -->
+        <div class="w-72 bg-slate-200/60 p-3.5 rounded-2xl flex flex-col gap-3 shrink-0">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold text-slate-700">Nuevo Lead</span>
+            <span class="text-xs font-bold bg-white px-2 py-0.5 rounded-full text-slate-600 shadow-xs">2</span>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Isabel Rubio', 'Cervicalgia', '6/10', 'instagram', 'Punzante / Rigidez', '1 a 4 semanas', 'Al estar sentada con el ordenador', 'Sin pruebas previas', 'Poder trabajar sin dolor de cuello')" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Isabel Rubio</span>
+              <svg class="w-4 h-4 fill-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+            <p class="text-xs text-slate-600">Cervicalgia</p>
+            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100">
+              <span class="text-amber-700 font-bold">Dolor: 6/10</span>
+              <span class="text-slate-400">Hace 15 min</span>
+            </div>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Pedro Ruiz', 'Esguince tobillo', '7/10', 'whatsapp', 'Punzante al apoyar', '< 1 semana', 'Al dar pasos o girar el pie', 'Radiografía sin fractura', 'Bajar hinchazón y volver a jugar a pádel')" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Pedro Ruiz</span>
+              <svg class="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+            </div>
+            <p class="text-xs text-slate-600">Esguince tobillo</p>
+            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100">
+              <span class="text-rose-600 font-bold">Dolor: 7/10</span>
+              <span class="text-slate-400">Hace 1 hora</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. EN CONVERSACIÓN -->
+        <div class="w-72 bg-slate-200/60 p-3.5 rounded-2xl flex flex-col gap-3 shrink-0">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold text-slate-700">En Conversación</span>
+            <span class="text-xs font-bold bg-white px-2 py-0.5 rounded-full text-slate-600 shadow-xs">1</span>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Carmen Ortiz', 'Tendinitis hombro', '5/10', 'whatsapp', 'Opresivo al subir el brazo', '1 a 3 meses', 'Al elevar el brazo por encima de 90°', 'Ecografía: tendinopatía leve', 'Poder nadar y levantar peso')" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Carmen Ortiz</span>
+              <svg class="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+            </div>
+            <p class="text-xs text-slate-600">Tendinitis hombro</p>
+            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100">
+              <span class="text-amber-700 font-bold">Dolor: 5/10</span>
+              <span class="text-blue-600 font-semibold">Siguiente: Hoy</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. VALORACIÓN ENVIADA (Javier García con Cuestionario Completo Recibido) -->
+        <div class="w-72 bg-slate-200/60 p-3.5 rounded-2xl flex flex-col gap-3 shrink-0">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold text-slate-700">Valoración Enviada</span>
+            <span class="text-xs font-bold bg-white px-2 py-0.5 rounded-full text-slate-600 shadow-xs">2</span>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Javier García', 'Lumbociatalgia L5-S1', '7/10', 'web', 'Opresivo y punzante', '3 semanas', 'Sentado en el trabajo > 30 min', 'Resonancia con protrusión L5-S1', 'Poder trabajar 8 horas sin dolor lumbar')" class="bg-white p-4 rounded-xl shadow-md border-2 border-brand-500 cursor-pointer hover:shadow-lg transition space-y-2.5 ring-2 ring-brand-500/20">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Javier García</span>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-brand-100 text-brand-800">Cuestionario Listo</span>
+            </div>
+            <p class="text-xs text-slate-600">Lumbar L5-S1 (Anamnesis completa)</p>
+            <div class="p-2 bg-brand-50 rounded-lg text-[11px] text-brand-900 font-medium">
+              ✓ 8 respuestas clínicas registradas
+            </div>
+            <div class="flex items-center justify-between text-[11px] pt-1">
+              <span class="text-rose-600 font-bold">Dolor: 7/10</span>
+              <span class="text-brand-800 font-bold underline">Analizar Caso →</span>
+            </div>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Beatriz Santos', 'Hernia discal', '7/10', 'whatsapp', 'Quemazón en pierna', '> 6 meses', 'Al doblarse hacia adelante', 'RMN 2024', 'Evitar recaídas y fortalecer abdomen')" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Beatriz Santos</span>
+              <svg class="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+            </div>
+            <p class="text-xs text-slate-600">Hernia discal</p>
+            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100">
+              <span class="text-rose-600 font-bold">Dolor: 7/10</span>
+              <span class="text-slate-400">Esperando</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. PACIENTE ACTIVO -->
+        <div class="w-72 bg-slate-200/60 p-3.5 rounded-2xl flex flex-col gap-3 shrink-0">
+          <div class="flex items-center justify-between px-1">
+            <span class="text-xs font-bold text-slate-700">Paciente Activo</span>
+            <span class="text-xs font-bold bg-white px-2 py-0.5 rounded-full text-slate-600 shadow-xs">2</span>
+          </div>
+
+          <div onclick="openPatientClinicalDrawer('Antonio López', 'Lumbar L5-S1', '3/10', 'whatsapp', 'Rigidez matutina leve', 'Semana 2 de tratamiento', 'Ha mejorado un 70% sentado', 'RMN previa', 'Mantenimiento y fuerza lumbar')" class="bg-white p-4 rounded-xl shadow-sm border border-slate-200 cursor-pointer hover:shadow-md transition space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-900">Antonio López</span>
+              <svg class="w-4 h-4 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+            </div>
+            <p class="text-xs text-slate-600">Lumbar L5-S1</p>
+            <div class="flex items-center justify-between text-[11px] pt-2 border-t border-slate-100">
+              <span class="text-emerald-700 font-bold">Dolor: 3/10</span>
+              <span class="text-slate-500 font-semibold">Sesión 4/10</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- DRAWER LATERAL: RESPUESTAS DEL CUESTIONARIO Y ESTRATEGIA CLÍNICA DE ADELA -->
+        <aside class="w-96 bg-white p-5 rounded-2xl border border-slate-300 shadow-xl space-y-4 shrink-0">
+          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+            <span class="text-xs font-bold text-slate-700 flex items-center gap-1.5">
+              <span>📋</span> <span>Respuestas del Cuestionario Clínico</span>
+            </span>
+            <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Recibido</span>
+          </div>
+
+          <div>
+            <h4 id="drawer-patient-name" class="text-base font-bold text-slate-900">Javier García</h4>
+            <span id="drawer-diagnosis" class="text-xs font-bold text-brand-800 block">Zona Lumbar L5-S1 (Dolor: 7/10)</span>
+          </div>
+
+          <!-- DETALLE DE LAS RESPUESTAS DEL PACIENTE -->
+          <div class="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-2">
+            <div>
+              <span class="text-[10px] font-bold text-slate-500 uppercase block">Sensación / Tipo de dolor:</span>
+              <strong id="drawer-pain-type" class="text-slate-800">Opresivo y punzante al inclinar</strong>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-slate-500 uppercase block">Irradiación / Antigüedad:</span>
+              <span id="drawer-time" class="text-slate-800">3 semanas. Se expande hacia glúteo izq.</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-slate-500 uppercase block">Factores agravantes:</span>
+              <span id="drawer-agg" class="text-slate-800">Sentado en el trabajo > 30 minutos</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-slate-500 uppercase block">Pruebas médicas previas:</span>
+              <span id="drawer-tests" class="text-slate-800">Resonancia con protrusión L5-S1</span>
+            </div>
+            <div>
+              <span class="text-[10px] font-bold text-slate-500 uppercase block">Objetivo del paciente:</span>
+              <span id="drawer-goal" class="text-brand-900 font-semibold">Poder trabajar 8 horas sin dolor lumbar</span>
+            </div>
+          </div>
+
+          <!-- ÁREA PARA QUE ADELA DEFINA SU ESTRATEGIA CLÍNICA PRELIMINAR -->
+          <div class="p-3.5 bg-amber-50/90 rounded-xl border border-amber-200 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-amber-950 flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5 text-amber-800" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>Estrategia de Tratamiento (Adela)</span>
+              </span>
+              <span class="text-[9px] bg-amber-200/90 text-amber-900 px-1.5 py-0.5 rounded font-bold uppercase">Privado</span>
+            </div>
+            <textarea rows="3" id="drawer-private-notes" class="w-full text-xs bg-white p-2.5 rounded-lg border border-amber-300 focus:outline-none text-slate-800 font-medium" placeholder="Escribe aquí el plan a seguir antes de asignar la rutina...">Estrategia fase 1: Descompresión de raíces L5-S1 mediante respiración diafragmática y puente glúteo suave. Citar para Google Meet jueves 11:30 para test neural de Lasègue.</textarea>
+            
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button onclick="alert('Estrategia guardada. Se ha generado la propuesta de rutina terapéutica.');" class="py-2 bg-brand-700 hover:bg-brand-800 text-white rounded-lg text-[11px] font-bold transition">
+                ✓ Validar Plan
+              </button>
+              <button onclick="alert('Convocando videoconsulta de valoración Google Meet...');" class="py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-lg text-[11px] font-bold transition flex items-center justify-center gap-1">
+                <span>📹</span> <span>Citar Meet</span>
+              </button>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- SUB-VISTA 2: BANDEJA DE CONVERSACIONES & FEEDBACK DE PACIENTES -->
+    <!-- ===================================================================== -->
+    <div id="crm-subview-conversaciones" class="crm-subview hidden flex-1 flex flex-col min-w-0 p-6 h-[calc(100vh-140px)]">
+      <div class="flex items-center justify-between pb-4">
+        <div>
+          <h3 class="text-lg font-bold text-slate-900">Bandeja de Conversaciones & Feedback de Pacientes</h3>
+          <p class="text-xs text-slate-500">Comentarios diarios, dudas sobre ejercicios y mensajes recibidos vía WhatsApp, Instagram y Portal Web.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold border border-emerald-200">
+            <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            Zernio Omnicanal Activo (WhatsApp + Instagram)
+          </span>
+        </div>
+      </div>
+
+      <div class="flex-1 flex gap-5 overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+        <!-- LISTADO DE CHATS / COMENTARIOS -->
+        <div class="w-80 sm:w-96 border-r border-slate-200 flex flex-col shrink-0 bg-slate-50/50">
+          <div class="p-3 border-b border-slate-200 space-y-2">
+            <input type="text" placeholder="Buscar en comentarios o pacientes..." class="w-full px-3 py-2 rounded-xl border border-slate-200 text-xs bg-white focus:outline-none focus:border-brand-500">
+            <div class="flex gap-1 text-[11px] font-semibold">
+              <button onclick="filterChats('all')" class="chat-filter-btn px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold">Todos (4)</button>
+              <button onclick="filterChats('whatsapp')" class="chat-filter-btn px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">WhatsApp (2)</button>
+              <button onclick="filterChats('instagram')" class="chat-filter-btn px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Instagram (1)</button>
+              <button onclick="filterChats('portal')" class="chat-filter-btn px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200 hover:bg-slate-50">Portal (1)</button>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto divide-y divide-slate-100">
+            <!-- Chat 1: Javier García -->
+            <div onclick="openChat('javier')" id="chat-item-javier" class="chat-list-item p-3.5 bg-brand-50/70 border-l-4 border-brand-600 cursor-pointer hover:bg-brand-50 transition space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-brand-700 text-white text-xs font-bold flex items-center justify-center">JG</div>
+                  <strong class="text-xs font-bold text-slate-900">Javier García</strong>
+                </div>
+                <span class="text-[10px] text-slate-400">Hace 12 min</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-brand-800 font-semibold">
+                <span class="px-1.5 py-0.5 rounded bg-brand-100 font-bold">Portal Paciente</span>
+                <span>Lumbar L5-S1 (Dolor: 7/10)</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2">"Hola Adela, tras el ejercicio 2 sigo con leve pinchazo al sentarme. ¿Hago 2 o 3 series hoy?"</p>
+              <span class="inline-block text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">Pendiente de respuesta</span>
+            </div>
+
+            <!-- Chat 2: Carmen Ortiz -->
+            <div onclick="openChat('carmen')" id="chat-item-carmen" class="chat-list-item p-3.5 bg-white cursor-pointer hover:bg-slate-50 transition space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-emerald-600 text-white text-xs font-bold flex items-center justify-center">CO</div>
+                  <strong class="text-xs font-bold text-slate-900">Carmen Ortiz</strong>
+                </div>
+                <span class="text-[10px] text-slate-400">Hace 45 min</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-800 font-semibold">
+                <svg class="w-3.5 h-3.5 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+                <span>WhatsApp (Zernio)</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2">"Confirmado el Google Meet de mañana a las 11:30. Ya tengo el espacio despejado en casa."</p>
+              <span class="inline-block text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded">Respondido</span>
+            </div>
+
+            <!-- Chat 3: Isabel Rubio -->
+            <div onclick="openChat('isabel')" id="chat-item-isabel" class="chat-list-item p-3.5 bg-white cursor-pointer hover:bg-slate-50 transition space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-pink-600 text-white text-xs font-bold flex items-center justify-center">IR</div>
+                  <strong class="text-xs font-bold text-slate-900">Isabel Rubio</strong>
+                </div>
+                <span class="text-[10px] text-slate-400">Hace 2 horas</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-pink-700 font-semibold">
+                <svg class="w-3.5 h-3.5 fill-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                <span>Instagram Direct</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2">"Hola Adela! Acabo de enviar el cuestionario para el dolor de cuello. ¿Cuándo me indicas la rutina?"</p>
+              <span class="inline-block text-[9px] font-bold text-amber-700 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded">Pendiente</span>
+            </div>
+
+            <!-- Chat 4: Pedro Ruiz -->
+            <div onclick="openChat('pedro')" id="chat-item-pedro" class="chat-list-item p-3.5 bg-white cursor-pointer hover:bg-slate-50 transition space-y-1">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                  <div class="w-7 h-7 rounded-full bg-slate-700 text-white text-xs font-bold flex items-center justify-center">PR</div>
+                  <strong class="text-xs font-bold text-slate-900">Pedro Ruiz</strong>
+                </div>
+                <span class="text-[10px] text-slate-400">Ayer</span>
+              </div>
+              <div class="flex items-center gap-1.5 text-[10px] text-emerald-800 font-semibold">
+                <svg class="w-3.5 h-3.5 fill-emerald-600" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2zm.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24zm4.52 11.66c-.25-.13-1.47-.72-1.7-.81-.23-.08-.39-.13-.56.13-.17.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.13-1.06-.39-2.02-1.25-.75-.67-1.26-1.5-1.41-1.75-.14-.25-.02-.39.11-.51.11-.11.25-.29.38-.44.12-.14.17-.25.25-.42.08-.17.04-.31-.02-.44-.06-.13-.56-1.35-.77-1.85-.2-.49-.41-.42-.56-.43h-.48c-.17 0-.44.06-.67.31-.23.25-.88.86-.88 2.1 0 1.24.9 2.44 1.03 2.61.12.17 1.78 2.72 4.31 3.81.6.26 1.07.42 1.44.54.61.19 1.16.17 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.07.15-1.18-.07-.12-.23-.19-.48-.31z"/></svg>
+                <span>WhatsApp (Zernio)</span>
+              </div>
+              <p class="text-xs text-slate-600 line-clamp-2">"El esguince ha bajado un 50% la hinchazón tras los baños de contraste que me dijiste."</p>
+              <span class="inline-block text-[9px] font-bold text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded">Cerrado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL ACTIVO DE CONVERSACIÓN -->
+        <div class="flex-1 flex flex-col bg-white">
+          <div class="p-4 border-b border-slate-200 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <div id="chat-header-avatar" class="w-10 h-10 rounded-xl bg-brand-700 text-white font-bold text-sm flex items-center justify-center shadow-xs">JG</div>
+              <div>
+                <h4 id="chat-header-name" class="text-sm font-bold text-slate-900">Javier García</h4>
+                <div class="flex items-center gap-2 text-[11px] text-slate-500">
+                  <span id="chat-header-diag" class="font-semibold text-brand-800">Lumbar L5-S1 (Dolor: 7/10)</span>
+                  <span>•</span>
+                  <span id="chat-header-channel" class="text-emerald-700 font-bold">Portal del Paciente</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="openPatientClinicalDrawer('Javier García', 'Lumbociatalgia L5-S1', '7/10', 'web', 'Opresivo y punzante', '3 semanas', 'Sentado en el trabajo > 30 min', 'Resonancia con protrusión L5-S1', 'Poder trabajar 8 horas sin dolor lumbar'); switchCrmTab('pipeline');" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
+                Ver Ficha Médica
+              </button>
+              <button onclick="alert('Abriendo videoconsulta Google Meet con Javier García...')" class="px-3 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold transition flex items-center gap-1.5 shadow-sm">
+                <span>📹</span> <span>Llamar por Meet</span>
+              </button>
+            </div>
+          </div>
+
+          <div id="chat-messages-container" class="flex-1 p-5 overflow-y-auto space-y-4 bg-slate-50/40">
+            <div class="text-center">
+              <span class="text-[10px] font-bold px-3 py-1 rounded-full bg-slate-200 text-slate-600">
+                Cuestionario clínico de anamnesis recibido vía Web (Dolor 7/10)
+              </span>
+            </div>
+
+            <!-- Mensaje Paciente -->
+            <div class="flex items-start gap-2.5 max-w-xl">
+              <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">JG</div>
+              <div class="bg-white p-3.5 rounded-2xl rounded-tl-none border border-slate-200 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between gap-4 text-[10px] text-slate-400">
+                  <strong class="text-slate-800 font-bold">Javier García</strong>
+                  <span>Hoy 10:14</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                  Hola Adela, hoy he completado el ejercicio 2 de elevación isométrica. He notado alivio en la zona lumbar baja al agacharme, pero al estar más de 20 minutos sentado en el trabajo sigo notando un pinchacito hacia el glúteo izquierdo. ¿Hago 2 o 3 series esta tarde?
+                </p>
+              </div>
+            </div>
+
+            <!-- Respuesta Adela -->
+            <div class="flex items-start gap-2.5 max-w-xl ml-auto flex-row-reverse">
+              <img src="adela-avatar.jpg" alt="Adela Alventosa" class="w-8 h-8 rounded-full object-cover border-2 border-brand-500 shrink-0">
+              <div class="bg-brand-50 p-3.5 rounded-2xl rounded-tr-none border border-brand-200 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between gap-4 text-[10px] text-brand-700">
+                  <strong class="font-bold">Adela Alventosa (Fisioterapeuta)</strong>
+                  <span>Hoy 10:22</span>
+                </div>
+                <p class="text-xs text-slate-800 leading-relaxed">
+                  ¡Hola Javier! Muy buena observación biomecánica. Es completamente esperable: en la fase descompresiva inicial la postura sentada prolongada comprime la raíz L5. Para hoy reduce a 2 series de 8 repeticiones y realiza 3 pausas activas con respiración diafragmática. Mañana en nuestra sesión de Google Meet a las 11:30 revisamos la movilidad en directo.
+                </p>
+              </div>
+            </div>
+
+            <!-- Respuesta Paciente -->
+            <div class="flex items-start gap-2.5 max-w-xl">
+              <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">JG</div>
+              <div class="bg-white p-3.5 rounded-2xl rounded-tl-none border border-slate-200 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between gap-4 text-[10px] text-slate-400">
+                  <strong class="text-slate-800 font-bold">Javier García</strong>
+                  <span>Hoy 10:30</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">
+                  Perfecto Adela, muchas gracias. Ya tengo el enlace de Google Meet guardado para mañana. ¡Nos vemos a las 11:30!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-3 border-t border-slate-200 bg-white space-y-2">
+            <div class="flex flex-wrap items-center gap-1.5 text-[11px]">
+              <span class="text-slate-400 font-medium">Plantillas clínicas rápidas:</span>
+              <button onclick="insertQuickReply('Reducir a 2 series y mantener descanso de 60s')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-brand-50 hover:text-brand-800 text-slate-600 transition">Pautar 2 series</button>
+              <button onclick="insertQuickReply('Recordatorio de videoconsulta Google Meet enviada')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-brand-50 hover:text-brand-800 text-slate-600 transition">Recordatorio Meet</button>
+              <button onclick="insertQuickReply('Recuerda registrar tu dolor en la escala EVA de 0 a 10')" class="px-2 py-0.5 rounded-md bg-slate-100 hover:bg-brand-50 hover:text-brand-800 text-slate-600 transition">Pedir EVA 0-10</button>
+            </div>
+            <form onsubmit="handleSendReply(event)" class="flex gap-2">
+              <input type="text" id="chat-reply-input" placeholder="Escribe una respuesta clínica personalizada para Javier..." class="flex-1 px-4 py-2.5 rounded-xl border border-slate-200 text-xs focus:outline-none focus:border-brand-500">
+              <button type="submit" class="px-5 py-2.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5">
+                <span>Enviar</span>
+                <span>→</span>
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================================================================== -->
+    <!-- SUB-VISTA 3: INFORMES & MÉTRICAS CLÍNICAS Y DE NEGOCIO -->
+    <!-- ===================================================================== -->
+    <div id="crm-subview-informes" class="crm-subview hidden flex-1 flex flex-col min-w-0 p-6 overflow-y-auto space-y-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 pb-2 border-b border-slate-200">
+        <div>
+          <h3 class="text-xl font-bold text-slate-900">Panel Ejecutivo de Métricas & Rendimiento Clínico</h3>
+          <p class="text-xs text-slate-500">Monitorización de captación omnicanal, salud financiera de la clínica y eficacia terapéutica de Adela Alventosa.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-slate-500">Periodo:</span>
+          <select class="text-xs font-bold bg-white border border-slate-200 rounded-xl px-3 py-1.5 focus:outline-none text-slate-800">
+            <option>Últimos 30 días (Octubre 2026)</option>
+            <option>Último trimestre</option>
+            <option>Año 2026 completo</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- 6 KPI CARDS PRINCIPALES -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <!-- KPI 1: Clientes Activos -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Clientes Activos</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-slate-900">28</span>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+4 este mes</span>
+          </div>
+          <p class="text-[10px] text-slate-500">96.4% tasa de retención</p>
+        </div>
+
+        <!-- KPI 2: Total Clientes Histórico -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Total Pacientes</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-slate-900">142</span>
+            <span class="text-[11px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full">Histórico</span>
+          </div>
+          <p class="text-[10px] text-slate-500">Con historia clínica custodiada</p>
+        </div>
+
+        <!-- KPI 3: Facturación Mensual -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Facturación Mes</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-slate-900">3.240 €</span>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">+18.2%</span>
+          </div>
+          <p class="text-[10px] text-slate-500">Ticket medio: 72,50 €</p>
+        </div>
+
+        <!-- KPI 4: Ratio Conversión -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Ratio Conversión</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-slate-900">34,2%</span>
+            <span class="text-[11px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">Excelente</span>
+          </div>
+          <p class="text-[10px] text-slate-500">De cuestionario a plan de pago</p>
+        </div>
+
+        <!-- KPI 5: Adherencia a Rutinas -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Adherencia Diaria</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-slate-900">88,5%</span>
+            <span class="text-[11px] font-bold text-brand-700 bg-brand-50 px-2 py-0.5 rounded-full">Meta &gt;80%</span>
+          </div>
+          <p class="text-[10px] text-slate-500">Ejercicios marcados a diario</p>
+        </div>
+
+        <!-- KPI 6: Reducción Media de Dolor -->
+        <div class="bg-white p-4 rounded-2xl border border-slate-200 shadow-sm space-y-2">
+          <span class="text-[11px] font-bold text-slate-400 uppercase tracking-wider block">Alivio Dolor EVA</span>
+          <div class="flex items-baseline justify-between">
+            <span class="text-2xl font-black text-emerald-700">-4,8 pts</span>
+            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">4 semanas</span>
+          </div>
+          <p class="text-[10px] text-slate-500">De 7,1 inicial a 2,3 actual</p>
+        </div>
+      </div>
+
+      <!-- FILA DE GRÁFICOS: EMBUDO Y DESGLOSE FACTURACIÓN -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        
+        <!-- EMBUDO DE CONVERSIÓN OMNICANAL -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h4 class="text-sm font-bold text-slate-900">Embudo de Conversión (Funnel Omnicanal)</h4>
+            <span class="text-[10px] text-slate-400">Octubre 2026</span>
+          </div>
+
+          <div class="space-y-3 pt-2 text-xs">
+            <div class="space-y-1">
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-600">1. Visitantes web y redes (WhatsApp / IG)</span>
+                <span class="text-slate-900 font-bold">1.240 visitas (100%)</span>
+              </div>
+              <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-400 w-full rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-600">2. Cuestionarios de Anamnesis completados</span>
+                <span class="text-brand-900 font-bold">82 leads (6,6%)</span>
+              </div>
+              <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-500 w-[45%] rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-600">3. Videoconsultas de Valoración Google Meet</span>
+                <span class="text-blue-900 font-bold">38 citas (46,3% de leads)</span>
+              </div>
+              <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-500 w-[30%] rounded-full"></div>
+              </div>
+            </div>
+
+            <div class="space-y-1">
+              <div class="flex justify-between font-semibold">
+                <span class="text-slate-600">4. Pacientes en Tratamiento de Pago Activo</span>
+                <span class="text-emerald-900 font-bold">28 pacientes (73,7% de Meets)</span>
+              </div>
+              <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-emerald-600 w-[22%] rounded-full"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DESGLOSE DE FACTURACIÓN POR PLAN -->
+        <div class="lg:col-span-6 bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+            <h4 class="text-sm font-bold text-slate-900">Distribución de Ingresos por Servicio</h4>
+            <span class="text-sm font-bold text-emerald-700">Total: 3.240 €</span>
+          </div>
+
+          <div class="space-y-4 pt-2">
+            <div class="p-3.5 rounded-2xl bg-brand-50/70 border border-brand-200 flex items-center justify-between text-xs">
+              <div>
+                <strong class="text-slate-900 block font-bold text-sm">Plan Premium Híbrido (89€/mes)</strong>
+                <span class="text-slate-500">18 pacientes activos • Incluye 2 Meets al mes</span>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-black text-brand-900">1.602 €</span>
+                <span class="text-[10px] text-brand-700 block font-bold">49,4% de ingresos</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-amber-50/70 border border-amber-200 flex items-center justify-between text-xs">
+              <div>
+                <strong class="text-slate-900 block font-bold text-sm">Plan Rutinas Guiadas (59€/mes)</strong>
+                <span class="text-slate-500">18 pacientes activos • Seguimiento diario EVA</span>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-black text-amber-900">1.062 €</span>
+                <span class="text-[10px] text-amber-700 block font-bold">32,8% de ingresos</span>
+              </div>
+            </div>
+
+            <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
+              <div>
+                <strong class="text-slate-900 block font-bold text-sm">Videoconsultas Sueltas (45€)</strong>
+                <span class="text-slate-500">13 consultas puntuales de valoración</span>
+              </div>
+              <div class="text-right">
+                <span class="text-base font-black text-slate-900">576 €</span>
+                <span class="text-[10px] text-slate-500 block font-bold">17,8% de ingresos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- TABLA DE EVOLUCIÓN CLÍNICA DE PACIENTES -->
+      <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+          <div>
+            <h4 class="text-sm font-bold text-slate-900">Seguimiento de Progreso & Alivio por Paciente</h4>
+            <p class="text-xs text-slate-500">Monitorización objetiva de la escala analógica visual (EVA) y adherencia a las rutinas de Adela Alventosa.</p>
+          </div>
+          <button onclick="alert('Exportando informe clínico en PDF...')" class="px-3 py-1.5 rounded-xl border border-slate-300 text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
+            Descargar Informe PDF
+          </button>
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="text-[10px] uppercase font-bold text-slate-400 bg-slate-50 rounded-lg">
+              <tr>
+                <th class="p-3">Paciente</th>
+                <th class="p-3">Patología</th>
+                <th class="p-3">Semana</th>
+                <th class="p-3">Dolor Inicial → Actual</th>
+                <th class="p-3">Adherencia</th>
+                <th class="p-3">Próximo Google Meet</th>
+                <th class="p-3">Estado Clínico</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-bold text-slate-900">Javier García</td>
+                <td class="p-3 text-slate-600">Lumbociatalgia L5-S1</td>
+                <td class="p-3 font-semibold text-slate-700">Semana 2</td>
+                <td class="p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="text-rose-600 font-bold">7/10</span>
+                    <span>→</span>
+                    <span class="text-emerald-700 font-extrabold">3/10</span>
+                    <span class="text-[10px] text-emerald-600 font-bold">(-4 pts)</span>
+                  </div>
+                </td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">92%</span></td>
+                <td class="p-3 font-medium text-blue-600">Mañana 11:30</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 font-semibold text-[10px]">Fase Descompresiva</span></td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-bold text-slate-900">Carmen Ortiz</td>
+                <td class="p-3 text-slate-600">Tendinopatía supraespinoso</td>
+                <td class="p-3 font-semibold text-slate-700">Semana 4</td>
+                <td class="p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="text-rose-600 font-bold">6/10</span>
+                    <span>→</span>
+                    <span class="text-emerald-700 font-extrabold">1/10</span>
+                    <span class="text-[10px] text-emerald-600 font-bold">(-5 pts)</span>
+                  </div>
+                </td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">95%</span></td>
+                <td class="p-3 font-medium text-slate-500">Jueves 16:00</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-[10px]">Listo para Alta</span></td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-bold text-slate-900">Beatriz Santos</td>
+                <td class="p-3 text-slate-600">Hernia discal L4-L5</td>
+                <td class="p-3 font-semibold text-slate-700">Semana 1</td>
+                <td class="p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="text-rose-600 font-bold">8/10</span>
+                    <span>→</span>
+                    <span class="text-amber-700 font-extrabold">6/10</span>
+                    <span class="text-[10px] text-emerald-600 font-bold">(-2 pts)</span>
+                  </div>
+                </td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">86%</span></td>
+                <td class="p-3 font-medium text-blue-600">Viernes 10:00</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 font-semibold text-[10px]">Tratamiento Activo</span></td>
+              </tr>
+
+              <tr class="hover:bg-slate-50 transition">
+                <td class="p-3 font-bold text-slate-900">Antonio López</td>
+                <td class="p-3 text-slate-600">Lumbalgia mecánica crónica</td>
+                <td class="p-3 font-semibold text-slate-700">Semana 6</td>
+                <td class="p-3">
+                  <div class="flex items-center gap-2">
+                    <span class="text-rose-600 font-bold">7/10</span>
+                    <span>→</span>
+                    <span class="text-emerald-700 font-extrabold">0/10</span>
+                    <span class="text-[10px] text-emerald-600 font-bold">(-7 pts)</span>
+                  </div>
+                </td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-bold">98%</span></td>
+                <td class="p-3 font-medium text-slate-400">Revisión mensual</td>
+                <td class="p-3"><span class="px-2 py-0.5 rounded-full bg-slate-100 text-slate-700 font-semibold text-[10px]">Mantenimiento Preventivo</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ========================================================================= -->
+  <!-- VISTA 3: PORTAL DEL PACIENTE (CON MENÚ SUPERIOR COMO EL MOCKUP) -->
+  <!-- ========================================================================= -->
+  <section id="view-paciente" class="flex-1 flex flex-col hidden bg-slate-50 min-h-screen">
+    
+    <!-- NAVBAR SUPERIOR DEL PACIENTE -->
+    <header class="bg-white border-b border-slate-200 px-6 py-3.5 sticky top-12 z-40">
+      <div class="max-w-6xl mx-auto flex items-center justify-between">
+        
+        <!-- Logo Adela Fisioterapia en Portal Paciente -->
+        <div class="flex items-center space-x-3">
+          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-10 h-10 object-contain rounded-xl border border-brand-200/90 bg-white p-0.5 shadow-2xs">
+          <div>
+            <span class="font-display font-bold text-slate-900 text-base leading-none">Adela Alventosa</span>
+            <span class="text-[9px] text-brand-700 font-bold uppercase block tracking-wider leading-none">Fisioterapia Online</span>
+          </div>
+        </div>
+
+        <nav class="hidden md:flex items-center space-x-1 text-xs font-semibold">
+          <button class="px-4 py-2 rounded-xl bg-brand-50 text-brand-900 font-bold border border-brand-200">Inicio</button>
+          <button onclick="alert('Viendo historial de rutinas asignadas...')" class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Mis Rutinas</button>
+          <button onclick="alert('Viendo agenda de citas con Adela...')" class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Citas</button>
+          <button onclick="alert('Abriendo chat directo de seguimiento...')" class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Mensajes</button>
+          <button onclick="alert('Abriendo gráfica de evolución del dolor...')" class="px-4 py-2 rounded-xl text-slate-600 hover:text-slate-900 transition">Progreso</button>
+        </nav>
+
+        <div class="flex items-center space-x-3">
+          <button class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 hover:bg-slate-200 transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+          </button>
+          <div class="w-8 h-8 rounded-full bg-brand-700 text-white font-bold text-xs flex items-center justify-center shadow-sm">
+            JG
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL DEL PORTAL -->
+    <main class="max-w-6xl mx-auto w-full p-6 sm:p-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <div class="lg:col-span-8 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200 shadow-sm space-y-6">
+        <div>
+          <h2 class="text-xl sm:text-2xl font-bold text-slate-900">
+            Rutina de Hoy: Rehabilitación Lumbar - Semana 2 (Día 3 de 5)
+          </h2>
+        </div>
+
+        <!-- REPRODUCTOR DE VÍDEO CON FOTO REAL -->
+        <div class="relative aspect-video rounded-2xl overflow-hidden bg-slate-950 shadow-md group">
+          <img src="video-preview.jpg" alt="Demostración de ejercicio por Adela" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 flex flex-col justify-between p-4">
+            <div class="flex justify-between items-center text-white text-xs">
+              <span class="bg-black/60 backdrop-blur px-2.5 py-1 rounded-md font-semibold">Técnica: Elevación pélvica isométrica</span>
+              <span class="bg-brand-600 px-2 py-0.5 rounded text-[10px] font-bold">HD</span>
+            </div>
+            
+            <button onclick="alert('Reproduciendo sesión guiada por Adela...')" class="self-center w-16 h-16 rounded-full bg-white/90 hover:bg-white text-slate-900 flex items-center justify-center shadow-2xl transition transform hover:scale-105">
+              <svg class="w-6 h-6 fill-slate-900 translate-x-0.5" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+            </button>
+
+            <div class="space-y-1">
+              <div class="w-full h-1.5 bg-white/30 rounded-full overflow-hidden">
+                <div class="h-full bg-brand-500 w-1/3 rounded-full"></div>
+              </div>
+              <div class="flex justify-between text-[11px] text-white/90 font-medium">
+                <span>00:45 / 02:15</span>
+                <span>Guiado por Adela</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="space-y-4 pt-2">
+          <div class="flex items-center justify-between text-sm">
+            <strong class="text-slate-800 font-bold">3 series × 12 repeticiones</strong>
+            <span class="text-xs text-slate-500">Descanso entre series: 45 seg</span>
+          </div>
+
+          <button onclick="alert('¡Ejercicio de hoy registrado con éxito! Adela lo verá en el CRM.');" class="w-full py-4 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-md shadow-brand-700/20 transition flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Completar Ejercicio de Hoy</span>
+          </button>
+        </div>
+
+        <div class="pt-6 border-t border-slate-100 space-y-3">
+          <div class="flex justify-between items-center text-xs">
+            <strong class="text-slate-800 font-bold">Pain Rating Slider (EVA Escala Visual Analógica)</strong>
+            <span id="patient-pain-value" class="text-brand-800 font-extrabold bg-sand-100 px-2.5 py-0.5 rounded-md border border-sand-200">5 / 10 (Moderado)</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-1 pt-1">
+            <button onclick="selectDotPain(0)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">0</button>
+            <button onclick="selectDotPain(1)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">1</button>
+            <button onclick="selectDotPain(2)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">2</button>
+            <button onclick="selectDotPain(3)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 hover:bg-emerald-200 transition">3</button>
+            <button onclick="selectDotPain(4)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-amber-100 text-amber-800 hover:bg-amber-200 transition">4</button>
+            <button onclick="selectDotPain(5)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-amber-500 text-white ring-4 ring-amber-200 shadow-md transition font-black">5</button>
+            <button onclick="selectDotPain(6)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-amber-100 text-amber-800 hover:bg-amber-200 transition">6</button>
+            <button onclick="selectDotPain(7)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-orange-100 text-orange-800 hover:bg-orange-200 transition">7</button>
+            <button onclick="selectDotPain(8)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-rose-100 text-rose-800 hover:bg-rose-200 transition">8</button>
+            <button onclick="selectDotPain(9)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-rose-100 text-rose-800 hover:bg-rose-200 transition">9</button>
+            <button onclick="selectDotPain(10)" class="pain-dot w-7 h-7 sm:w-8 sm:h-8 rounded-full text-xs font-bold bg-rose-200 text-rose-900 hover:bg-rose-300 transition">10</button>
+          </div>
+          <div class="flex justify-between text-[11px] text-slate-400 font-medium px-1">
+            <span>sin dolor</span>
+            <span>dolor intenso</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- COLUMNA DERECHA -->
+      <div class="lg:col-span-4 space-y-6">
+        
+        <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-md space-y-4">
+          <div class="flex items-center gap-3">
+            <svg class="w-6 h-6" viewBox="0 0 24 24"><path fill="#00832d" d="M18 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5l4 4V6.5l-4 4z"/><path fill="#0066da" d="M18 10.5l4-4v11l-4-4z"/><path fill="#e53935" d="M18 6a2 2 0 0 0-2-2H4L18 18V6z"/><path fill="#ffb300" d="M4 20h12a2 2 0 0 0 2-2L4 4v16z"/></svg>
+            <div>
+              <h3 class="text-sm font-bold text-slate-900">Próxima Videoconsulta</h3>
+              <p class="text-xs text-slate-500">Mañana a las 11:30 con Adela</p>
+            </div>
+          </div>
+
+          <button onclick="alert('Abriendo videoconsulta de Google Meet: meet.google.com/fis-adel-ses')" class="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition flex items-center justify-center gap-2">
+            <span>Unirse con Google Meet</span>
+            <span>→</span>
+          </button>
+        </div>
+
+        <div class="bg-brand-50/70 p-6 rounded-3xl border border-brand-200 space-y-4">
+          <h4 class="text-xs font-bold text-brand-900 uppercase tracking-wider flex items-center gap-2">
+            <span>🩺</span> <span>Consejos de Técnica por Adela</span>
+          </h4>
+          <ul class="space-y-3 text-xs text-slate-700">
+            <li class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-brand-200 text-brand-800 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">✓</span>
+              <span><strong>Mantén la espalda recta:</strong> no compenses arqueando la zona dorsal.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-brand-200 text-brand-800 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">✓</span>
+              <span><strong>Respira profundamente:</strong> exhala durante la elevación e inhala al descender.</span>
+            </li>
+            <li class="flex items-start gap-2.5">
+              <span class="w-5 h-5 rounded-full bg-brand-200 text-brand-800 flex items-center justify-center text-[10px] font-bold shrink-0 mt-0.5">✓</span>
+              <span><strong>Movimiento controlado:</strong> pausa de 2 segundos en el punto de máxima contracción.</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </main>
+  </section>
+
+  <!-- MODAL RESERVA DE CITA GOOGLE MEET -->
+  <div id="booking-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-5">
+      <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#00832d" d="M18 10.5V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4.5l4 4V6.5l-4 4z"/><path fill="#0066da" d="M18 10.5l4-4v11l-4-4z"/><path fill="#e53935" d="M18 6a2 2 0 0 0-2-2H4L18 18V6z"/><path fill="#ffb300" d="M4 20h12a2 2 0 0 0 2-2L4 4v16z"/></svg>
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Reservar Videoconsulta</h3>
+            <span class="text-xs text-slate-500" id="booking-service-title">Sesión Clínica con Adela</span>
+          </div>
+        </div>
+        <button onclick="closeBookingModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm flex items-center justify-center transition">✕</button>
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Selecciona el Día</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="selectDate(this, 'Mañana')" class="date-btn p-2.5 rounded-xl border-2 border-brand-500 bg-brand-50 text-xs font-bold text-brand-900 text-center">
+              Mañana<br><span class="font-normal text-[10px]">10:00 - 18:00</span>
+            </button>
+            <button onclick="selectDate(this, 'Pasado mañana')" class="date-btn p-2.5 rounded-xl border border-slate-200 hover:border-brand-500 text-xs font-bold text-slate-700 text-center">
+              Pasado M.<br><span class="font-normal text-[10px]">10:00 - 18:00</span>
+            </button>
+            <button onclick="selectDate(this, 'Jueves')" class="date-btn p-2.5 rounded-xl border border-slate-200 hover:border-brand-500 text-xs font-bold text-slate-700 text-center">
+              Jueves<br><span class="font-normal text-[10px]">10:00 - 18:00</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1">Hueco Horario Disponible</label>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="selectSlot(this, '10:00')" class="slot-btn p-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:border-brand-500">10:00</button>
+            <button onclick="selectSlot(this, '11:30')" class="slot-btn p-2 rounded-xl border-2 border-brand-500 bg-brand-50 text-xs font-bold text-brand-900">11:30</button>
+            <button onclick="selectSlot(this, '16:00')" class="slot-btn p-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:border-brand-500">16:00</button>
+          </div>
+        </div>
+
+        <button onclick="confirmBooking()" class="w-full py-3.5 rounded-xl bg-brand-700 hover:bg-brand-800 text-white font-bold text-sm shadow-md transition">
+          Confirmar Reserva y Generar Sala Meet →
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT CONTROLADOR GLOBAL -->
+  <script>
+    let selectedBodyZone = 'lumbar';
+    let selectedBodyLabel = 'Zona Lumbar';
+    let currentPain = 7;
+    let selectedPainTypeVal = 'Opresivo / Sordo';
+    let selectedRadVal = 'Baja hacia la pierna / brazo';
+    let selectedTimeVal = '1 a 4 semanas';
+    let selectedAggVal = 'Al estar sentado mucho tiempo';
+    let selectedGoalVal = 'Poder trabajar sentado sin dolor';
+
+    function switchView(viewName) {
+      document.getElementById('view-landing').classList.add('hidden');
+      document.getElementById('view-crm').classList.add('hidden');
+      document.getElementById('view-paciente').classList.add('hidden');
+
+      document.getElementById('tab-landing').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2';
+      document.getElementById('tab-crm').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2';
+      document.getElementById('tab-paciente').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2';
+
+      if (viewName === 'landing') {
+        document.getElementById('view-landing').classList.remove('hidden');
+        document.getElementById('tab-landing').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2';
+      } else if (viewName === 'crm') {
+        document.getElementById('view-crm').classList.remove('hidden');
+        document.getElementById('tab-crm').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2';
+      } else if (viewName === 'paciente') {
+        document.getElementById('view-paciente').classList.remove('hidden');
+        document.getElementById('tab-paciente').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2';
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    const zoneCoordinates = {
+      cervical: { top: '50px', left: '160px', right: 'auto' },
+      espalda: { top: '135px', left: '160px', right: 'auto' },
+      hombro: { top: '80px', left: 'auto', right: '120px' },
+      lumbar: { top: '152px', left: 'auto', right: '152px' },
+      cadera: { top: '200px', left: 'auto', right: '140px' },
+      rodilla: { top: '275px', left: '145px', right: 'auto' },
+      tobillo: { top: '355px', left: 'auto', right: '135px' }
+    };
+
+    function selectBodyPart(id, label) {
+      selectedBodyZone = id;
+      selectedBodyLabel = label;
+
+      // Restablecer todas las etiquetas sin alterar sus clases de posición (top/left/right)
+      document.querySelectorAll('.body-zone-tag').forEach(tag => {
+        tag.classList.remove('bg-brand-50', 'border-2', 'border-brand-500', 'text-brand-900', 'font-bold', 'ring-2', 'ring-brand-500/20', 'shadow-md');
+        tag.classList.add('bg-white', 'border', 'border-slate-300', 'text-slate-700', 'font-semibold', 'shadow-sm');
+        const ind = tag.querySelector('.indicator');
+        if (ind) {
+          ind.classList.remove('bg-brand-600');
+          ind.classList.add('bg-slate-400');
+        }
+      });
+
+      // Activar la etiqueta seleccionada
+      const activeBtn = document.getElementById('btn-' + id);
+      if (activeBtn) {
+        activeBtn.classList.remove('bg-white', 'border', 'border-slate-300', 'text-slate-700', 'font-semibold', 'shadow-sm');
+        activeBtn.classList.add('bg-brand-50', 'border-2', 'border-brand-500', 'text-brand-900', 'font-bold', 'ring-2', 'ring-brand-500/20', 'shadow-md');
+        const ind = activeBtn.querySelector('.indicator');
+        if (ind) {
+          ind.classList.remove('bg-slate-400');
+          ind.classList.add('bg-brand-600');
+        }
+      }
+
+      // Mover el punto anatómico pulsante dinámico
+      const dot = document.getElementById('silhouette-pulse-dot');
+      if (dot && zoneCoordinates[id]) {
+        dot.style.top = zoneCoordinates[id].top;
+        dot.style.left = zoneCoordinates[id].left;
+        dot.style.right = zoneCoordinates[id].right;
+      }
+
+      document.getElementById('current-zone-label').innerText = label;
+      const step1Badge = document.getElementById('step1-zone-badge');
+      if (step1Badge) step1Badge.innerText = label;
+    }
+
+    /* Selector interactivo de pasos del método Excalidraw + Frontend */
+    function selectMethodStep(step) {
+      const data = [
+        {
+          num: 1,
+          color: '#1971c2',
+          title: 'Fase 1: Mapeo Biomecánico & Anamnesis Previa',
+          subtitle: 'Toma de datos clínicas previa a la videoconsulta',
+          patient: 'Entra en la web, pulsa en la zona de su cuerpo con molestia y contesta a las 8 preguntas clínicas (sensación, tiempo, factores agravantes y pruebas).',
+          fisio: 'Recibe la ficha en su CRM antes de la cita. Analiza las pruebas médicas aportadas y estructura la estrategia terapéutica previa.',
+          safety: 'Cifrado de datos de salud bajo Art. 9 del RGPD y custodia obligatoria de historia clínica según la Ley 41/2002.'
+        },
+        {
+          num: 2,
+          color: '#f59f00',
+          title: 'Fase 2: Videoconsulta Clínica Directa (Google Meet HD)',
+          subtitle: '45 minutos de exploración postural y test ortopédico',
+          patient: 'Se conecta con 1 clic desde el móvil o portátil a Google Meet. Realiza los movimientos guiados por Adela Alventosa.',
+          fisio: 'Evalúa arcos de movimiento articular, palpación visual funcional, reflejos y descarta señales de alarma traumatológica.',
+          safety: 'Videollamada encriptada de punto a punto en Google Meet sin registro de vídeo para máxima privacidad.'
+        },
+        {
+          num: 3,
+          color: '#2f9e44',
+          title: 'Fase 3: Prescripción de Rutinas Activas en Vídeo',
+          subtitle: '10-15 minutos diarios guiados en tu portal privado',
+          patient: 'Accede a sus ejercicios personalizados con vídeos demostrativos grabados por Adela Alventosa, marcando series y descansos.',
+          fisio: 'Asigna ejercicios en descarga o fortalecimiento progresivo según la fase biológica de reparación del tejido.',
+          safety: 'Corrección de técnica con consejos posturales explícitos para evitar sobrecargas o malas posturas.'
+        },
+        {
+          num: 4,
+          color: '#862e9c',
+          title: 'Fase 4: Seguimiento Diario EVA (0-10) y Alta Funcional',
+          subtitle: 'Monitorización de adherencia y ajuste terapéutico semanal',
+          patient: 'Marca su dolor tras cada sesión con 1 clic en la escala analógica visual y envía dudas en cualquier momento.',
+          fisio: 'Supervisa la gráfica de evolución del paciente y reajusta la intensidad cada semana hasta alcanzar el alta.',
+          safety: 'Detección temprana de estancamientos para convocar sesión de ajuste Meet inmediata si el dolor no desciende.'
+        }
+      ];
+
+      const item = data[step - 1];
+      if (!item) return;
+
+      [1, 2, 3, 4].forEach(i => {
+        const card = document.getElementById('method-card-' + i);
+        if (card) {
+          if (i === step) {
+            card.classList.add('ring-4', 'ring-brand-500/20', 'shadow-lg');
+          } else {
+            card.classList.remove('ring-4', 'ring-brand-500/20', 'shadow-lg');
+          }
+        }
+      });
+
+      const badge = document.getElementById('detail-step-badge');
+      if (badge) {
+        badge.innerText = item.num;
+        badge.style.backgroundColor = item.color;
+      }
+      document.getElementById('detail-step-title').innerText = item.title;
+      document.getElementById('detail-step-subtitle').innerText = item.subtitle;
+      document.getElementById('detail-patient-action').innerText = item.patient;
+      document.getElementById('detail-fisio-action').innerText = item.fisio;
+      document.getElementById('detail-safety-action').innerText = item.safety;
+    }
+
+    /* Controlador de Sub-vistas en el CRM de Adela */
+    function switchCrmTab(tabName) {
+      document.querySelectorAll('.crm-subview').forEach(view => {
+        view.classList.add('hidden');
+      });
+
+      document.querySelectorAll('.crm-nav-item').forEach(btn => {
+        btn.classList.remove('bg-brand-50', 'text-brand-900', 'font-bold', 'border', 'border-brand-200');
+        btn.classList.add('text-slate-600');
+      });
+
+      const activeSidebarBtn = document.getElementById('crm-tab-btn-' + tabName);
+      if (activeSidebarBtn) {
+        activeSidebarBtn.classList.add('bg-brand-50', 'text-brand-900', 'font-bold', 'border', 'border-brand-200');
+        activeSidebarBtn.classList.remove('text-slate-600');
+      }
+
+      ['pipeline', 'conversaciones', 'informes'].forEach(t => {
+        const topBtn = document.getElementById('crm-top-btn-' + t);
+        if (topBtn) {
+          if (t === tabName) {
+            topBtn.className = 'px-3.5 py-1.5 rounded-lg bg-slate-100 text-slate-900 border-b-2 border-brand-600 font-bold';
+          } else {
+            topBtn.className = 'px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 font-semibold';
+          }
+        }
+      });
+
+      const targetView = document.getElementById('crm-subview-' + tabName);
+      if (targetView) {
+        targetView.classList.remove('hidden');
+      }
+    }
+
+    /* Mensajes y Conversaciones del CRM */
+    const chatData = {
+      javier: {
+        name: 'Javier García',
+        initials: 'JG',
+        diag: 'Lumbar L5-S1 (Dolor: 7/10)',
+        channel: 'Portal del Paciente',
+        messages: [
+          { sender: 'patient', text: 'Hola Adela, hoy he completado el ejercicio 2 de elevación isométrica. He notado alivio en la zona lumbar baja al agacharme, pero al estar más de 20 minutos sentado en el trabajo sigo notando un pinchacito hacia el glúteo izquierdo. ¿Hago 2 o 3 series esta tarde?', time: 'Hoy 10:14' },
+          { sender: 'adela', text: '¡Hola Javier! Muy buena observación biomecánica. Es completamente esperable: en la fase descompresiva inicial la postura sentada prolongada comprime la raíz L5. Para hoy reduce a 2 series de 8 repeticiones y realiza 3 pausas activas con respiración diafragmática. Mañana en nuestra sesión de Google Meet a las 11:30 revisamos la movilidad en directo.', time: 'Hoy 10:22' },
+          { sender: 'patient', text: 'Perfecto Adela, muchas gracias. Ya tengo el enlace de Google Meet guardado para mañana. ¡Nos vemos a las 11:30!', time: 'Hoy 10:30' }
+        ]
+      },
+      carmen: {
+        name: 'Carmen Ortiz',
+        initials: 'CO',
+        diag: 'Tendinopatía supraespinoso (Dolor: 5/10)',
+        channel: 'WhatsApp (Zernio)',
+        messages: [
+          { sender: 'patient', text: 'Hola Adela! Acabo de hacer la sesión con bandas elásticas y casi no he tenido dolor al elevar el brazo a 90 grados. Me noto con mucha más seguridad.', time: 'Hoy 09:30' },
+          { sender: 'adela', text: '¡Fantástica noticia Carmen! El tendón está respondiendo a la carga isométrica. Mantén las mismas repeticiones durante 3 días más antes de aumentar tensión.', time: 'Hoy 09:42' },
+          { sender: 'patient', text: 'Confirmado el Google Meet de mañana a las 11:30. Ya tengo el espacio despejado en casa.', time: 'Hoy 09:50' }
+        ]
+      },
+      isabel: {
+        name: 'Isabel Rubio',
+        initials: 'IR',
+        diag: 'Cervicalgia postural (Dolor: 6/10)',
+        channel: 'Instagram Direct',
+        messages: [
+          { sender: 'patient', text: 'Hola Adela! Vi vuestro post sobre dolor de trapecio en teletrabajo. Acabo de enviar el cuestionario de la web para el dolor de cuello. ¿Cuándo me indicas la rutina?', time: 'Hoy 08:15' },
+          { sender: 'adela', text: '¡Hola Isabel! He revisado tu anamnesis: tu patrón es de sobrecarga muscular por flexión de cuello. Te he agendado valoración por Google Meet para validar el plan de ejercicios descontracturantes.', time: 'Hoy 08:35' }
+        ]
+      },
+      pedro: {
+        name: 'Pedro Ruiz',
+        initials: 'PR',
+        diag: 'Esguince tobillo grado II (Dolor: 7/10)',
+        channel: 'WhatsApp (Zernio)',
+        messages: [
+          { sender: 'patient', text: 'Hola Adela, el esguince ha bajado un 50% la hinchazón tras los baños de contraste que me dijiste. Al apoyar sigo cojeando un poco.', time: 'Ayer 18:20' },
+          { sender: 'adela', text: 'Muy bien Pedro. El edema está cediendo. Empieza hoy con movimientos suaves de tobillo en descarga sin carga de peso. Te veo el jueves en Meet.', time: 'Ayer 18:45' }
+        ]
+      }
+    };
+
+    let currentActiveChat = 'javier';
+
+    function openChat(patientId) {
+      currentActiveChat = patientId;
+      const data = chatData[patientId];
+      if (!data) return;
+
+      document.querySelectorAll('.chat-list-item').forEach(el => {
+        el.classList.remove('bg-brand-50/70', 'border-l-4', 'border-brand-600');
+        el.classList.add('bg-white');
+      });
+
+      const activeItem = document.getElementById('chat-item-' + patientId);
+      if (activeItem) {
+        activeItem.classList.add('bg-brand-50/70', 'border-l-4', 'border-brand-600');
+        activeItem.classList.remove('bg-white');
+      }
+
+      document.getElementById('chat-header-name').innerText = data.name;
+      document.getElementById('chat-header-avatar').innerText = data.initials;
+      document.getElementById('chat-header-diag').innerText = data.diag;
+      document.getElementById('chat-header-channel').innerText = data.channel;
+
+      const container = document.getElementById('chat-messages-container');
+      let html = '<div class="text-center"><span class="text-[10px] font-bold px-3 py-1 rounded-full bg-slate-200 text-slate-600">Historial de mensajes conectado vía ' + data.channel + '</span></div>';
+
+      data.messages.forEach(msg => {
+        if (msg.sender === 'patient') {
+          html += `
+            <div class="flex items-start gap-2.5 max-w-xl">
+              <div class="w-8 h-8 rounded-full bg-slate-300 text-slate-700 text-xs font-bold flex items-center justify-center shrink-0">${data.initials}</div>
+              <div class="bg-white p-3.5 rounded-2xl rounded-tl-none border border-slate-200 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between gap-4 text-[10px] text-slate-400">
+                  <strong class="text-slate-800 font-bold">${data.name}</strong>
+                  <span>${msg.time}</span>
+                </div>
+                <p class="text-xs text-slate-700 leading-relaxed">${msg.text}</p>
+              </div>
+            </div>`;
+        } else {
+          html += `
+            <div class="flex items-start gap-2.5 max-w-xl ml-auto flex-row-reverse">
+              <img src="adela-avatar.jpg" alt="Adela Alventosa" class="w-8 h-8 rounded-full object-cover border-2 border-brand-500 shrink-0">
+              <div class="bg-brand-50 p-3.5 rounded-2xl rounded-tr-none border border-brand-200 shadow-2xs space-y-1">
+                <div class="flex items-center justify-between gap-4 text-[10px] text-brand-700">
+                  <strong class="font-bold">Adela Alventosa (Fisioterapeuta)</strong>
+                  <span>${msg.time}</span>
+                </div>
+                <p class="text-xs text-slate-800 leading-relaxed">${msg.text}</p>
+              </div>
+            </div>`;
+        }
+      });
+
+      container.innerHTML = html;
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function filterChats(channel) {
+      document.querySelectorAll('.chat-filter-btn').forEach(b => {
+        b.className = 'chat-filter-btn px-2.5 py-1 rounded-lg bg-white text-slate-600 border border-slate-200 hover:bg-slate-50';
+      });
+      event.target.className = 'chat-filter-btn px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold';
+
+      document.querySelectorAll('.chat-list-item').forEach(item => {
+        if (channel === 'all') {
+          item.classList.remove('hidden');
+        } else if (channel === 'whatsapp' && (item.id === 'chat-item-carmen' || item.id === 'chat-item-pedro')) {
+          item.classList.remove('hidden');
+        } else if (channel === 'instagram' && item.id === 'chat-item-isabel') {
+          item.classList.remove('hidden');
+        } else if (channel === 'portal' && item.id === 'chat-item-javier') {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    function insertQuickReply(text) {
+      const input = document.getElementById('chat-reply-input');
+      if (input) {
+        input.value = text;
+        input.focus();
+      }
+    }
+
+    function handleSendReply(e) {
+      e.preventDefault();
+      const input = document.getElementById('chat-reply-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      if (chatData[currentActiveChat]) {
+        chatData[currentActiveChat].messages.push({
+          sender: 'adela',
+          text: text,
+          time: 'Ahora'
+        });
+        openChat(currentActiveChat);
+        input.value = '';
+      }
+    }
+
+    function startIntakeWithSelectedZone() {
+      const el = document.getElementById('cuestionario');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      goToStep(1);
+    }
+
+    function selectAndScroll(id, label) {
+      selectBodyPart(id, label);
+      startIntakeWithSelectedZone();
+    }
+
+    function updateHeroPain(val) {
+      currentPain = val;
+      const text = val == 0 ? 'Sin dolor' : val < 4 ? 'Leve' : val < 8 ? 'Moderado-Alto' : 'Muy Severo';
+      document.getElementById('current-pain-label').innerText = val + ' / 10 (' + text + ')';
+    }
+
+    /* Navegación por pasos del cuestionario */
+    function goToStep(stepNumber) {
+      document.getElementById('step-1').classList.add('hidden');
+      document.getElementById('step-2').classList.add('hidden');
+      document.getElementById('step-3').classList.add('hidden');
+      document.getElementById('step-4').classList.add('hidden');
+
+      const progressBar = document.getElementById('step-progress-bar');
+      const stepIndicator = document.getElementById('step-indicator-text');
+      const stepPercent = document.getElementById('step-percent');
+
+      if (stepNumber === 1) {
+        document.getElementById('step-1').classList.remove('hidden');
+        progressBar.style.width = '25%';
+        stepIndicator.innerText = 'Paso 1 de 4: Patrón del Dolor';
+        stepPercent.innerText = '25%';
+      } else if (stepNumber === 2) {
+        document.getElementById('step-2').classList.remove('hidden');
+        progressBar.style.width = '50%';
+        stepIndicator.innerText = 'Paso 2 de 4: Temporalidad y Factores';
+        stepPercent.innerText = '50%';
+      } else if (stepNumber === 3) {
+        document.getElementById('step-3').classList.remove('hidden');
+        progressBar.style.width = '75%';
+        stepIndicator.innerText = 'Paso 3 de 4: Antecedentes y Pruebas';
+        stepPercent.innerText = '75%';
+      } else if (stepNumber === 4) {
+        document.getElementById('step-4').classList.remove('hidden');
+        progressBar.style.width = '100%';
+        stepIndicator.innerText = 'Paso 4 de 4: Objetivos y Contacto';
+        stepPercent.innerText = '100%';
+      }
+    }
+
+    function selectPainType(btn, val) {
+      document.querySelectorAll('.pain-type-btn').forEach(b => {
+        b.className = 'pain-type-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition';
+      });
+      btn.className = 'pain-type-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20';
+      selectedPainTypeVal = val;
+    }
+
+    function selectRadiation(btn, val) {
+      document.querySelectorAll('.rad-btn').forEach(b => {
+        b.className = 'rad-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition';
+      });
+      btn.className = 'rad-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20';
+      selectedRadVal = val;
+    }
+
+    function selectTime(btn, val) {
+      document.querySelectorAll('.time-btn').forEach(b => {
+        b.className = 'time-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition';
+      });
+      btn.className = 'time-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20';
+      selectedTimeVal = val;
+    }
+
+    function selectAggravating(btn, val) {
+      document.querySelectorAll('.agg-btn').forEach(b => {
+        b.className = 'agg-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition';
+      });
+      btn.className = 'agg-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20';
+      selectedAggVal = val;
+    }
+
+    function selectGoal(btn, val) {
+      document.querySelectorAll('.goal-btn').forEach(b => {
+        b.className = 'goal-btn p-3 rounded-xl border border-slate-200 hover:border-brand-500 text-left text-xs font-semibold text-slate-700 transition';
+      });
+      btn.className = 'goal-btn p-3 rounded-xl border-2 border-brand-500 bg-brand-50 text-left text-xs font-bold text-brand-900 transition ring-2 ring-brand-500/20';
+      selectedGoalVal = val;
+    }
+
+    function handleIntakeFormComplete(e) {
+      e.preventDefault();
+      const patientName = document.getElementById('final-name').value;
+      const tests = document.getElementById('intake-tests').value;
+
+      // Actualizar los datos del Drawer en el CRM de Adela
+      document.getElementById('drawer-patient-name').innerText = patientName;
+      document.getElementById('drawer-diagnosis').innerText = selectedBodyLabel + ' (Dolor: ' + currentPain + '/10)';
+      document.getElementById('drawer-pain-type').innerText = selectedPainTypeVal + ' (' + selectedRadVal + ')';
+      document.getElementById('drawer-time').innerText = selectedTimeVal;
+      document.getElementById('drawer-agg').innerText = selectedAggVal;
+      document.getElementById('drawer-tests').innerText = tests;
+      document.getElementById('drawer-goal').innerText = selectedGoalVal;
+      document.getElementById('drawer-private-notes').value = 'Estrategia preliminar para ' + patientName + ': Abordar dolor ' + selectedPainTypeVal.toLowerCase() + ' en ' + selectedBodyLabel.toLowerCase() + '. Enfoque descompresivo inicial. Citar a videoconsulta de valoración Google Meet.';
+
+      // Mostrar pantalla de éxito
+      document.getElementById('clinical-intake-form').classList.add('hidden');
+      document.getElementById('intake-success-screen').classList.remove('hidden');
+    }
+
+    function openBookingModal(title) {
+      document.getElementById('booking-service-title').innerText = title;
+      document.getElementById('booking-modal').classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('booking-modal').classList.add('hidden');
+    }
+
+    function selectDate(btn, day) {
+      document.querySelectorAll('.date-btn').forEach(b => {
+        b.className = 'date-btn p-2.5 rounded-xl border border-slate-200 hover:border-brand-500 text-xs font-bold text-slate-700 text-center';
+      });
+      btn.className = 'date-btn p-2.5 rounded-xl border-2 border-brand-500 bg-brand-50 text-xs font-bold text-brand-900 text-center';
+    }
+
+    function selectSlot(btn, time) {
+      document.querySelectorAll('.slot-btn').forEach(b => {
+        b.className = 'slot-btn p-2 rounded-xl border border-slate-200 text-xs font-semibold text-slate-700 hover:border-brand-500';
+      });
+      btn.className = 'slot-btn p-2 rounded-xl border-2 border-brand-500 bg-brand-50 text-xs font-bold text-brand-900';
+    }
+
+    function confirmBooking() {
+      alert('¡Videoconsulta confirmada con éxito!\n\nSe ha creado el evento en Google Calendar y generado tu sala de Google Meet:\nmeet.google.com/fis-adel-ses\n\nAdela Alventosa te espera a esa hora.');
+      closeBookingModal();
+      switchView('paciente');
+    }
+
+    function selectDotPain(val) {
+      document.getElementById('patient-pain-value').innerText = val + ' / 10 (' + (val <= 3 ? 'Leve' : val <= 6 ? 'Moderado' : 'Intenso') + ')';
+    }
+
+    function openPatientClinicalDrawer(name, diag, pain, channel, ptype, time, agg, tests, goal) {
+      document.getElementById('drawer-patient-name').innerText = name;
+      document.getElementById('drawer-diagnosis').innerText = diag + ' (Dolor: ' + pain + ')';
+      document.getElementById('drawer-pain-type').innerText = ptype;
+      document.getElementById('drawer-time').innerText = time;
+      document.getElementById('drawer-agg').innerText = agg;
+      document.getElementById('drawer-tests').innerText = tests;
+      document.getElementById('drawer-goal').innerText = goal;
+      document.getElementById('drawer-private-notes').value = 'Estrategia para ' + name + ' (' + diag + '): Valorar mecánica en videoconsulta Google Meet y prescribir ejercicios en descarga para su objetivo: ' + goal;
+    }
+  </script>
+</body>
+</html>

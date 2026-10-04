@@ -1,0 +1,577 @@
+﻿{
+    "version":  2,
+    "source":  "https://excalidraw.com",
+    "files":  {
+
+              },
+    "elements":  [
+                     {
+                         "locked":  false,
+                         "textAlign":  "left",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "METODO CLINICO ADELA ALVENTOSA - FISIOTERAPIA ONLINE",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1e1e1e",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  30,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  28,
+                         "id":  "title-1",
+                         "containerId":  null,
+                         "originalText":  "METODO CLINICO ADELA ALVENTOSA - FISIOTERAPIA ONLINE",
+                         "height":  40,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  900,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  50,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.25,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "updated":  1,
+                         "y":  100,
+                         "groupIds":  [
+
+                                      ],
+                         "roundness":  {
+                                           "type":  3
+                                       },
+                         "width":  240,
+                         "id":  "box-fase-1",
+                         "strokeWidth":  2,
+                         "height":  280,
+                         "frameId":  null,
+                         "roughness":  1,
+                         "boundElements":  [
+
+                                           ],
+                         "opacity":  100,
+                         "strokeStyle":  "solid",
+                         "strokeColor":  "#1971c2",
+                         "type":  "rectangle",
+                         "backgroundColor":  "#e7f5ff",
+                         "link":  null,
+                         "locked":  false,
+                         "angle":  0,
+                         "x":  50,
+                         "fillStyle":  "solid"
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "center",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "FASE 1: ENTRADA \u0026 MAPEO",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1971c2",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  115,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  18,
+                         "id":  "text-fase-1",
+                         "containerId":  null,
+                         "originalText":  "FASE 1: ENTRADA \u0026 MAPEO",
+                         "height":  25,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  65,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.25,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "left",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "- Silueta Anatomica Digital\n- Seleccion de Dolor EVA (0-10)\n- Anamnesis Clinica 4 Pasos\n- Consentimiento RGPD Art. 9\n- Ingesta en CRM de Adela",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1e1e1e",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  150,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  14,
+                         "id":  "text-fase-1-desc",
+                         "containerId":  null,
+                         "originalText":  "- Silueta Anatomica Digital\n- Seleccion de Dolor EVA (0-10)\n- Anamnesis Clinica 4 Pasos\n- Consentimiento RGPD Art. 9\n- Ingesta en CRM de Adela",
+                         "height":  200,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  65,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.3,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "height":  0,
+                         "groupIds":  [
+
+                                      ],
+                         "frameId":  null,
+                         "strokeColor":  "#1971c2",
+                         "y":  230,
+                         "width":  60,
+                         "fillStyle":  "solid",
+                         "roughness":  1,
+                         "strokeStyle":  "solid",
+                         "locked":  false,
+                         "backgroundColor":  "transparent",
+                         "link":  null,
+                         "points":  [
+                                        [
+                                            0,
+                                            0
+                                        ],
+                                        [
+                                            60,
+                                            0
+                                        ]
+                                    ],
+                         "x":  290,
+                         "startBinding":  null,
+                         "endBinding":  null,
+                         "startArrowhead":  null,
+                         "id":  "arrow-1-2",
+                         "opacity":  100,
+                         "boundElements":  [
+
+                                           ],
+                         "strokeWidth":  2,
+                         "type":  "arrow",
+                         "endArrowhead":  "arrow",
+                         "lastCommittedPoint":  null,
+                         "updated":  1,
+                         "angle":  0,
+                         "roundness":  {
+                                           "type":  2
+                                       }
+                     },
+                     {
+                         "updated":  1,
+                         "y":  100,
+                         "groupIds":  [
+
+                                      ],
+                         "roundness":  {
+                                           "type":  3
+                                       },
+                         "width":  240,
+                         "id":  "box-fase-2",
+                         "strokeWidth":  2,
+                         "height":  280,
+                         "frameId":  null,
+                         "roughness":  1,
+                         "boundElements":  [
+
+                                           ],
+                         "opacity":  100,
+                         "strokeStyle":  "solid",
+                         "strokeColor":  "#f59f00",
+                         "type":  "rectangle",
+                         "backgroundColor":  "#fff9db",
+                         "link":  null,
+                         "locked":  false,
+                         "angle":  0,
+                         "x":  350,
+                         "fillStyle":  "solid"
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "center",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "FASE 2: GOOGLE MEET HD",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#f59f00",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  115,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  18,
+                         "id":  "text-fase-2",
+                         "containerId":  null,
+                         "originalText":  "FASE 2: GOOGLE MEET HD",
+                         "height":  25,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  365,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.25,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "left",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "- Cita 45 min en directo\n- Test de movilidad activa\n- Descarte banderas rojas\n- Explicacion biomecanica\n- Estrategia en CRM privada",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1e1e1e",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  150,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  14,
+                         "id":  "text-fase-2-desc",
+                         "containerId":  null,
+                         "originalText":  "- Cita 45 min en directo\n- Test de movilidad activa\n- Descarte banderas rojas\n- Explicacion biomecanica\n- Estrategia en CRM privada",
+                         "height":  200,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  365,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.3,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "height":  0,
+                         "groupIds":  [
+
+                                      ],
+                         "frameId":  null,
+                         "strokeColor":  "#f59f00",
+                         "y":  230,
+                         "width":  60,
+                         "fillStyle":  "solid",
+                         "roughness":  1,
+                         "strokeStyle":  "solid",
+                         "locked":  false,
+                         "backgroundColor":  "transparent",
+                         "link":  null,
+                         "points":  [
+                                        [
+                                            0,
+                                            0
+                                        ],
+                                        [
+                                            60,
+                                            0
+                                        ]
+                                    ],
+                         "x":  590,
+                         "startBinding":  null,
+                         "endBinding":  null,
+                         "startArrowhead":  null,
+                         "id":  "arrow-2-3",
+                         "opacity":  100,
+                         "boundElements":  [
+
+                                           ],
+                         "strokeWidth":  2,
+                         "type":  "arrow",
+                         "endArrowhead":  "arrow",
+                         "lastCommittedPoint":  null,
+                         "updated":  1,
+                         "angle":  0,
+                         "roundness":  {
+                                           "type":  2
+                                       }
+                     },
+                     {
+                         "updated":  1,
+                         "y":  100,
+                         "groupIds":  [
+
+                                      ],
+                         "roundness":  {
+                                           "type":  3
+                                       },
+                         "width":  240,
+                         "id":  "box-fase-3",
+                         "strokeWidth":  2,
+                         "height":  280,
+                         "frameId":  null,
+                         "roughness":  1,
+                         "boundElements":  [
+
+                                           ],
+                         "opacity":  100,
+                         "strokeStyle":  "solid",
+                         "strokeColor":  "#2f9e44",
+                         "type":  "rectangle",
+                         "backgroundColor":  "#d3f9d8",
+                         "link":  null,
+                         "locked":  false,
+                         "angle":  0,
+                         "x":  650,
+                         "fillStyle":  "solid"
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "center",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "FASE 3: RUTINAS VIDEO HD",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#2f9e44",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  115,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  18,
+                         "id":  "text-fase-3",
+                         "containerId":  null,
+                         "originalText":  "FASE 3: RUTINAS VIDEO HD",
+                         "height":  25,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  665,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.25,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "left",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "- Pautas guiadas por Adela\n- 10 a 15 min al dia en casa\n- Series, descansos y angulos\n- Consejos de respiracion\n- Portal movil y web paciente",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1e1e1e",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  150,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  14,
+                         "id":  "text-fase-3-desc",
+                         "containerId":  null,
+                         "originalText":  "- Pautas guiadas por Adela\n- 10 a 15 min al dia en casa\n- Series, descansos y angulos\n- Consejos de respiracion\n- Portal movil y web paciente",
+                         "height":  200,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  665,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.3,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "height":  0,
+                         "groupIds":  [
+
+                                      ],
+                         "frameId":  null,
+                         "strokeColor":  "#2f9e44",
+                         "y":  230,
+                         "width":  60,
+                         "fillStyle":  "solid",
+                         "roughness":  1,
+                         "strokeStyle":  "solid",
+                         "locked":  false,
+                         "backgroundColor":  "transparent",
+                         "link":  null,
+                         "points":  [
+                                        [
+                                            0,
+                                            0
+                                        ],
+                                        [
+                                            60,
+                                            0
+                                        ]
+                                    ],
+                         "x":  890,
+                         "startBinding":  null,
+                         "endBinding":  null,
+                         "startArrowhead":  null,
+                         "id":  "arrow-3-4",
+                         "opacity":  100,
+                         "boundElements":  [
+
+                                           ],
+                         "strokeWidth":  2,
+                         "type":  "arrow",
+                         "endArrowhead":  "arrow",
+                         "lastCommittedPoint":  null,
+                         "updated":  1,
+                         "angle":  0,
+                         "roundness":  {
+                                           "type":  2
+                                       }
+                     },
+                     {
+                         "updated":  1,
+                         "y":  100,
+                         "groupIds":  [
+
+                                      ],
+                         "roundness":  {
+                                           "type":  3
+                                       },
+                         "width":  240,
+                         "id":  "box-fase-4",
+                         "strokeWidth":  2,
+                         "height":  280,
+                         "frameId":  null,
+                         "roughness":  1,
+                         "boundElements":  [
+
+                                           ],
+                         "opacity":  100,
+                         "strokeStyle":  "solid",
+                         "strokeColor":  "#862e9c",
+                         "type":  "rectangle",
+                         "backgroundColor":  "#f3d9fa",
+                         "link":  null,
+                         "locked":  false,
+                         "angle":  0,
+                         "x":  950,
+                         "fillStyle":  "solid"
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "center",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "FASE 4: REGISTRO EVA \u0026 ALTA",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#862e9c",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  115,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  18,
+                         "id":  "text-fase-4",
+                         "containerId":  null,
+                         "originalText":  "FASE 4: REGISTRO EVA \u0026 ALTA",
+                         "height":  25,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  965,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.25,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     },
+                     {
+                         "locked":  false,
+                         "textAlign":  "left",
+                         "strokeStyle":  "solid",
+                         "opacity":  100,
+                         "text":  "- Registro diario dolor (0-10)\n- Monitorizacion de adherencia\n- Ajuste terapeutico semanal\n- Canal directo WhatsApp / Web\n- Alta clinica y prevencion",
+                         "verticalAlign":  "top",
+                         "fillStyle":  "solid",
+                         "strokeColor":  "#1e1e1e",
+                         "updated":  1,
+                         "roughness":  1,
+                         "y":  150,
+                         "angle":  0,
+                         "type":  "text",
+                         "fontSize":  14,
+                         "id":  "text-fase-4-desc",
+                         "containerId":  null,
+                         "originalText":  "- Registro diario dolor (0-10)\n- Monitorizacion de adherencia\n- Ajuste terapeutico semanal\n- Canal directo WhatsApp / Web\n- Alta clinica y prevencion",
+                         "height":  200,
+                         "backgroundColor":  "transparent",
+                         "strokeWidth":  2,
+                         "roundness":  null,
+                         "width":  210,
+                         "groupIds":  [
+
+                                      ],
+                         "x":  965,
+                         "link":  null,
+                         "frameId":  null,
+                         "lineHeight":  1.3,
+                         "fontFamily":  1,
+                         "boundElements":  [
+
+                                           ]
+                     }
+                 ],
+    "type":  "excalidraw",
+    "appState":  {
+                     "viewBackgroundColor":  "#ffffff",
+                     "gridSize":  null
+                 }
+}
