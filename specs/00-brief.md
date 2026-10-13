@@ -21,7 +21,7 @@
 ## 2. Problema que resolvemos
 
 - Captar pacientes online y generar confianza en un tratamiento a distancia.
-- Que Adela no pierda llamadas ni mensajes mientras está en consulta.
+- Que ninguna llamada quede sin respuesta **sin que Adela tenga que atender el teléfono**: toda la comunicación se canaliza por escrito (WhatsApp, email y web).
 - Centralizar pacientes, conversaciones, rutinas y seguimiento en un solo panel.
 - Medir la adherencia y la evolución del dolor del paciente.
 
@@ -31,7 +31,7 @@
 |---|---|---|
 | Captación | Cuestionarios completados al mes | ❓ |
 | Conversión | % de cuestionarios que acaban en paciente | ❓ |
-| Atención | Llamadas o mensajes sin responder | 0 |
+| Atención | Mensajes escritos sin responder en 24 h ❓ | 0 |
 | Clínico | Adherencia a rutinas / reducción de EVA | ❓ |
 
 ## 4. Módulos (según la demo)
@@ -44,7 +44,7 @@
 | M4 | **Bandeja omnicanal** | WhatsApp, Instagram y portal unificados (Zernio) con plantillas | ❓ |
 | M5 | **Informes** | KPIs, embudo, ingresos por plan y evolución EVA | ❓ |
 | M6 | **Portal del paciente** | Rutina del día en vídeo, registro de dolor, citas y Meet | ❓ |
-| M7 | **Contestador de voz IA** | "Sofía" (ElevenLabs): tarifas, citas y desvío | ❓ |
+| M7 | **Atención telefónica** | Mensaje fijo en todas las llamadas que deriva a WhatsApp, email o web. **Sin recepcionista IA** (D-006). Spec: `features/001-atencion-telefonica.md` | ✅ Sí |
 | M8 | **Pagos y suscripciones** | Cobro de sesiones y planes mensuales | ❓ |
 
 ## 5. Oferta y tarifas (las de la demo) ❓
@@ -67,6 +67,8 @@
 ## 7. Fuera de alcance ❓
 
 - App nativa (iOS/Android): el portal es web adaptada a móvil.
+- Recepcionista o contestador de voz con IA (ElevenLabs). Fase futura, si se retoma (D-006).
+- Atención telefónica en directo: Adela no coge el teléfono.
 - Facturación o contabilidad completa.
 - ❓
 
@@ -83,5 +85,5 @@
 3. ¿Cómo cobra hoy Adela y cómo quiere cobrar (Stripe, Bizum, transferencia)?
 4. ¿Tiene dominio, email profesional, Google Workspace o cuentas de WhatsApp Business o Instagram?
 5. ¿Quién graba y sube los vídeos de ejercicios?
-6. ¿Se mantiene el contestador de voz IA? ¿Con qué número?
+6. ~~¿Se mantiene el contestador de voz IA?~~ → No (D-006). Teléfono con mensaje fijo y derivación; línea y operador pendientes.
 7. ¿Fecha de lanzamiento deseada?

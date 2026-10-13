@@ -130,7 +130,7 @@
         <span class="text-xs font-bold tracking-wider uppercase text-emerald-400">Fisioterapia Online con Adela — Navegación de Prototipo</span>
       </div>
       <!-- TABS SWITCHER -->
-      <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-900 p-1 rounded-xl text-xs sm:text-sm font-medium border border-slate-800">
+      <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-900 p-1 rounded-xl text-xs sm:text-sm font-medium border border-slate-800 max-w-full overflow-x-auto whitespace-nowrap">
         <button onclick="switchView('landing')" id="tab-landing" class="px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           <span>Web Pública</span>
@@ -145,7 +145,7 @@
         </button>
         <button onclick="switchView('telefono')" id="tab-telefono" class="px-3.5 py-1.5 rounded-lg transition-all duration-200 text-slate-300 hover:text-white flex items-center gap-2">
           <span>📞</span>
-          <span>Voz IA 24/7 (ElevenLabs)</span>
+          <span>Teléfono → WhatsApp</span>
         </button>
       </nav>
     </div>
@@ -1767,254 +1767,116 @@
   </div>
 
   <!-- ========================================================================= -->
-  <!-- VISTA 4: RECEPCIÓN TELEFÓNICA IA 24/7 (ELEVENLABS HD)                     -->
+  <!-- VISTA 4: ATENCIÓN TELEFÓNICA — MENSAJE FIJO Y DERIVACIÓN A WHATSAPP / EMAIL / WEB -->
+  <!-- Spec: specs/features/001-atencion-telefonica.md                                    -->
   <!-- ========================================================================= -->
-  <section id="view-telefono" class="flex-1 flex flex-col hidden bg-slate-900 min-h-screen py-10 px-4 sm:px-6">
-    <div class="max-w-6xl mx-auto w-full space-y-6">
+  <section id="view-telefono" class="flex-1 flex flex-col hidden bg-sand-50 min-h-screen py-10 px-4 sm:px-6">
+    <div class="max-w-6xl mx-auto w-full space-y-8">
 
-      <!-- Header del Pilar Telefónico -->
-      <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-800 pb-5">
-        <div>
-          <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest">Pilar 4 · Telefonía IA Conversacional (ElevenLabs HD)</span>
-          <h1 class="text-2xl sm:text-4xl font-display font-extrabold text-white mt-1">
-            Contestador Inteligente & Filtro de Precios
-          </h1>
-          <p class="text-xs sm:text-sm text-slate-400 mt-1">
-            Desvío condicional de llamadas cuando Adela está en consulta. Cero llamadas perdidas, explicación empática de tarifas y agenda directa.
-          </p>
+      <!-- Cabecera -->
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-brand-100">
+        <div class="space-y-2">
+          <span class="text-xs font-bold text-ocean-700 uppercase tracking-widest">Canal teléfono · Mensaje automático</span>
+          <h2 class="text-3xl sm:text-4xl font-display font-semibold text-slate-900">Ninguna llamada se queda sin respuesta</h2>
+          <p class="text-slate-600 max-w-2xl">El teléfono de la clínica no se atiende en directo. Todas las llamadas escuchan un breve mensaje que invita al paciente a escribir por <strong>WhatsApp</strong>, por <strong>email</strong> o a través de la <strong>web</strong>. Así Adela gestiona todo por escrito y a su ritmo.</p>
         </div>
-        <div class="flex flex-wrap items-center gap-2">
-          <button onclick="toggleElevenConfigFisio()" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-emerald-950 hover:bg-emerald-900 text-emerald-300 border border-emerald-700 transition shadow cursor-pointer">
-            <span>⚙️</span> <span id="headerVoiceBadgeFisio">ElevenLabs HD (Sofía)</span>
-          </button>
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold bg-slate-950 text-slate-300 border border-slate-800">
-            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span> Desvío Activo
-          </span>
-        </div>
+        <span class="inline-flex items-center gap-2 self-start md:self-auto px-3 py-1.5 rounded-full text-xs font-bold bg-sun-100 text-sun-600 border border-sun-300">
+          <span class="w-2 h-2 rounded-full bg-sun-400"></span> Línea pendiente de alta
+        </span>
       </div>
 
-      <!-- BANNER DE CONFIGURACIÓN ELEVENLABS -->
-      <div id="eleven-fisio-banner" class="bg-gradient-to-r from-emerald-950/70 via-slate-950 to-slate-900 p-4 rounded-3xl border border-emerald-800/60 shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div class="flex items-start sm:items-center gap-3">
-          <div class="w-10 h-10 rounded-2xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-xl shrink-0">
-            🎙️
-          </div>
-          <div>
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="text-sm font-bold text-white">Voz Humana de Estudio · ElevenLabs Conversational</span>
-              <span id="eleven-badge-status-fisio" class="text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 font-bold border border-emerald-700">Verificando...</span>
-            </div>
-            <p class="text-xs text-slate-300 mt-0.5 leading-relaxed">
-              Escucha a <strong>Sofía</strong> hablar con naturalidad, respiración y acento peninsular clínico, respondiendo con fluidez médica y sin trompicones ni voces sintéticas.
-            </p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 shrink-0">
-          <button onclick="toggleElevenConfigFisio()" class="w-full sm:w-auto px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition flex items-center justify-center gap-1.5 shadow-md shadow-emerald-950 cursor-pointer">
-            <span>⚙️</span> <span id="btn-text-config-fisio">Configurar API Key / Voz</span>
-          </button>
-        </div>
-      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-      <!-- PANEL DESPLEGABLE: CONFIGURACIÓN ELEVENLABS (API KEY & VOCES) -->
-      <div id="eleven-config-panel-fisio" class="hidden bg-slate-950 p-5 rounded-3xl border border-emerald-600/50 space-y-4 shadow-2xl">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-          <div class="flex items-center gap-2">
-            <span class="text-base font-bold text-emerald-400">✨ Configuración de Audio de Estudio ElevenLabs</span>
-            <span class="text-[11px] text-slate-400">Voz oficial para la clínica de Adela</span>
-          </div>
-          <button onclick="toggleElevenConfigFisio()" class="text-slate-400 hover:text-white text-xs px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 transition cursor-pointer">
-            ✕ Cerrar
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 items-end">
-          <!-- Paso 1: API Key -->
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between">
-              <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Paso 1: API Key de tu cuenta ElevenLabs</label>
-              <a href="https://elevenlabs.io/app/developers/api-keys" target="_blank" class="text-[11px] text-emerald-400 hover:underline font-semibold">Obtener clave en elevenlabs.io ↗</a>
+        <!-- Simulador de llamada -->
+        <div class="lg:col-span-5">
+          <div class="bg-slate-900 rounded-[2.5rem] p-6 shadow-2xl border-4 border-slate-800 max-w-sm mx-auto">
+            <div class="flex justify-between text-[11px] text-slate-400 font-mono pb-3 border-b border-slate-800">
+              <span>📶 4G</span>
+              <span id="phoneClock" class="text-ocean-300">--:--</span>
+              <span>🔋 98%</span>
             </div>
-            <div class="flex gap-2 items-center">
-              <div class="relative flex-1">
-                <input type="password" id="eleven-api-key-fisio" placeholder="Pega tu Secret Key (32 carac. o sk_...)" class="w-full bg-slate-900 text-white border border-slate-700 rounded-xl px-3 py-2 pr-9 text-xs focus:ring-1 focus:ring-emerald-500 focus:outline-none font-mono">
-                <button type="button" onclick="toggleVerClaveFisio('eleven-api-key-fisio', this)" title="Ver / Ocultar clave" class="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white text-xs cursor-pointer">
-                  👁️
-                </button>
+
+            <div class="text-center py-6 space-y-4">
+              <div class="relative w-28 h-28 mx-auto">
+                <div id="phoneRing" class="absolute inset-0 rounded-full bg-ocean-500/20 transition-transform duration-500"></div>
+                <img src="logo-fisio-online-adela.png" alt="Fisioterapia Online con Adela" class="relative z-10 w-28 h-28 rounded-full object-contain border-2 border-ocean-500 shadow-xl bg-white p-2.5">
               </div>
-              <button onclick="guardarYDetectarVocesFisio()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs px-4 py-2 rounded-xl transition whitespace-nowrap shadow cursor-pointer">
-                Conectar API
-              </button>
-            </div>
-          </div>
-
-          <!-- Paso 2: Selector de Voz -->
-          <div class="space-y-1.5">
-            <label class="text-[11px] font-bold text-slate-300 uppercase tracking-wider">Paso 2: Voz seleccionada (Sofía)</label>
-            <div class="flex gap-2 items-center">
-              <select id="eleven-voice-select-fisio" onchange="seleccionarVozElevenFisio(this.value)" class="flex-1 bg-slate-900 text-slate-200 border border-slate-700 rounded-xl px-3 py-2 text-xs focus:ring-1 focus:ring-emerald-500 focus:outline-none">
-                <option value="EXAVITQu4vr4xnSDxMaL" selected>Sofía - Fisioterapia & Citas (Empática y Serena) ⭐</option>
-                <option value="uQw4jpKzMLrZuo0RLPS9">Laura - Atención Telefónica (Spanish Peninsular)</option>
-                <option value="21m00Tcm4TlvDq8ikWAM">Rachel - Voz Cálida Multilingual</option>
-              </select>
-              <button onclick="probarVozSofiatestFisio()" id="btn-test-eleven-fisio" class="bg-slate-800 hover:bg-slate-700 text-emerald-300 border border-emerald-500/40 text-xs px-3.5 py-2 rounded-xl transition font-semibold whitespace-nowrap shadow cursor-pointer">
-                🔊 Probar Voz
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div id="eleven-status-msg-fisio" class="text-xs text-slate-300 p-3 rounded-xl bg-slate-900 border border-slate-800 break-words leading-relaxed">
-          Introduce tu API Key de ElevenLabs para que la simulación utilice voz humana de estudio en lugar del sintetizador básico.
-        </div>
-      </div>
-
-      <!-- GRID SIMULADOR LLAMADA -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        
-        <!-- COLUMNA IZQUIERDA: TELÉFONO INTERACTIVO (5 COLS) -->
-        <div class="lg:col-span-5 bg-slate-950 rounded-3xl p-6 text-white shadow-2xl border border-slate-800 flex flex-col justify-between min-h-[580px]">
-          
-          <!-- Top Status Bar -->
-          <div class="flex items-center justify-between text-xs text-slate-400 border-b border-slate-800 pb-3">
-            <div class="flex items-center gap-1.5 font-mono">
-              <span>📶 5G</span>
-              <span>HD Voice</span>
-            </div>
-            <span class="font-mono text-emerald-400">11:15 AM</span>
-            <div class="flex items-center gap-1">
-              <span>98%</span>
-              <span>🔋</span>
-            </div>
-          </div>
-
-          <!-- Call Screen Center -->
-          <div class="text-center py-6 space-y-4">
-            <div class="relative w-28 h-28 mx-auto">
-              <div id="callAvatarRingFisio" class="absolute inset-0 rounded-full bg-emerald-500/20 scale-100 transition-transform duration-500"></div>
-              <img src="logo-fisio-online-adela.png" alt="Fisioterapia Online con Adela" class="relative z-10 w-28 h-28 rounded-full object-contain border-2 border-ocean-500 shadow-xl bg-white p-2.5">
-            </div>
-
-            <div>
-              <h2 class="text-xl font-bold font-display text-white tracking-wide">Fisioterapia Online con Adela</h2>
-              <p class="text-xs text-slate-400 font-medium">Llamada a consulta: 624 93 90 23</p>
-              <p id="callStatusTextFisio" class="text-xs font-semibold text-emerald-400 mt-1 uppercase tracking-wider">Listo para simular llamada</p>
-            </div>
-
-            <!-- Waveform Animation -->
-            <div id="waveformHolderFisio" class="h-12 flex items-center justify-center gap-1.5 opacity-20 transition-opacity">
-              <span class="w-1.5 bg-emerald-400 rounded-full wave-bar" style="height: 30%"></span>
-              <span class="w-1.5 bg-emerald-500 rounded-full wave-bar" style="height: 60%"></span>
-              <span class="w-1.5 bg-teal-300 rounded-full wave-bar" style="height: 90%"></span>
-              <span class="w-1.5 bg-emerald-400 rounded-full wave-bar" style="height: 40%"></span>
-              <span class="w-1.5 bg-teal-300 rounded-full wave-bar" style="height: 80%"></span>
-              <span class="w-1.5 bg-emerald-500 rounded-full wave-bar" style="height: 50%"></span>
-              <span class="w-1.5 bg-teal-400 rounded-full wave-bar" style="height: 70%"></span>
-            </div>
-
-            <p id="callTimerFisio" class="font-mono text-sm text-slate-400">00:00</p>
-          </div>
-
-          <!-- Botones de Acción de Llamada -->
-          <div class="space-y-4 pt-4 border-t border-slate-800">
-            <div class="flex items-center justify-center gap-4">
-              <button id="btnStartCallFisio" onclick="startCallSimulationFisio()" class="w-full py-3.5 px-6 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg shadow-emerald-900/40 transition flex items-center justify-center gap-2 cursor-pointer">
-                <span>📞</span> <span>Llamar a la Consulta</span>
-              </button>
-              <button id="btnEndCallFisio" onclick="endCallSimulationFisio()" class="hidden w-full py-3.5 px-6 rounded-2xl bg-rose-600 hover:bg-rose-500 text-white font-bold text-sm shadow-lg shadow-rose-900/40 transition flex items-center justify-center gap-2 cursor-pointer">
-                <span>📵</span> <span>Colgar Llamada</span>
-              </button>
-            </div>
-
-            <!-- Audio TTS Toggle & Quick Config -->
-            <div class="flex items-center justify-between text-xs text-slate-400 px-1 gap-2">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="checkbox" id="toggleSpeechFisio" checked class="rounded accent-emerald-500">
-                <span>Audio activo</span>
-              </label>
-              <button onclick="toggleElevenConfigFisio()" id="phoneVoicePillFisio" class="text-[11px] text-emerald-400 hover:text-emerald-300 font-semibold bg-emerald-950/80 px-2 py-0.5 rounded-lg border border-emerald-800 flex items-center gap-1 transition cursor-pointer">
-                <span>✨ ElevenLabs (Sofía)</span>
-                <span>⚙️</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- COLUMNA DERECHA: TRANSCRIPCIÓN EN VIVO & ESCENARIOS (7 COLS) -->
-        <div class="lg:col-span-7 space-y-4">
-          
-          <!-- Selector de Escenarios con Reproducción Directa -->
-          <div class="bg-slate-950 p-5 rounded-3xl border border-slate-800 shadow-sm space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">🎙️ Casos Clínicos de Demostración:</span>
-              <span class="text-[11px] text-emerald-400 font-medium">⚡ Pulsa cualquier caso para iniciar la llamada</span>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
-              <button onclick="playScenarioDirectlyFisio(0)" id="scen-fisio-0" class="scenario-btn p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-950/60 text-left text-xs font-semibold text-white transition hover:scale-[1.01] active:scale-[0.99] cursor-pointer shadow-lg group">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="block text-emerald-400 font-bold group-hover:text-emerald-300">▶ Caso 1: Precios</span>
-                  <span id="scen-status-0" class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold">Listo</span>
-                </div>
-                <span class="text-[11px] text-slate-300 font-normal block">Bono y tarifas de consulta</span>
-                <span class="text-[10px] text-emerald-400 mt-1 block font-mono">Llamar ahora →</span>
-              </button>
-              <button onclick="playScenarioDirectlyFisio(1)" id="scen-fisio-1" class="scenario-btn p-3.5 rounded-2xl border border-slate-800 hover:border-emerald-600/60 bg-slate-900 text-left text-xs font-semibold text-slate-300 hover:text-white transition hover:scale-[1.01] active:scale-[0.99] cursor-pointer group">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="block text-white font-bold group-hover:text-emerald-300">▶ Caso 2: Cita Lumbar</span>
-                  <span id="scen-status-1" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">Listo</span>
-                </div>
-                <span class="text-[11px] text-slate-400 font-normal block">Adela en sesión con paciente</span>
-                <span class="text-[10px] text-emerald-400 mt-1 block font-mono">Llamar ahora →</span>
-              </button>
-              <button onclick="playScenarioDirectlyFisio(2)" id="scen-fisio-2" class="scenario-btn p-3.5 rounded-2xl border border-slate-800 hover:border-emerald-600/60 bg-slate-900 text-left text-xs font-semibold text-slate-300 hover:text-white transition hover:scale-[1.01] active:scale-[0.99] cursor-pointer group">
-                <div class="flex items-center justify-between mb-1">
-                  <span class="block text-white font-bold group-hover:text-emerald-300">▶ Caso 3: Fisio Online</span>
-                  <span id="scen-status-2" class="text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold">Listo</span>
-                </div>
-                <span class="text-[11px] text-slate-400 font-normal block">Resolución de dudas clínicas</span>
-                <span class="text-[10px] text-emerald-400 mt-1 block font-mono">Llamar ahora →</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Caja de Transcripción -->
-          <div class="bg-slate-950 rounded-3xl border border-slate-800 shadow-sm p-5 space-y-3">
-            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-              <div class="flex items-center gap-2">
-                <span class="text-sm font-bold text-white">Transcripción en Tiempo Real</span>
-                <span id="transcriptionBadgeFisio" class="text-[10px] bg-slate-800 text-slate-300 font-bold px-2 py-0.5 rounded-full">En espera</span>
+              <div>
+                <h3 class="text-xl font-bold font-display text-white">Fisioterapia Online con Adela</h3>
+                <p class="text-xs text-slate-400">Móvil de la clínica · <span class="italic">nº pendiente de alta</span></p>
+                <p id="phoneStatus" class="text-xs font-semibold text-ocean-300 mt-1 uppercase tracking-wider">Listo para simular una llamada</p>
               </div>
-              <span class="text-xs text-emerald-400 font-mono">ElevenLabs + Supabase/Cal.com</span>
+
+              <!-- Mensaje que escucha el paciente -->
+              <div id="phoneMessage" class="hidden text-left bg-slate-800/80 border border-slate-700 rounded-2xl p-4 text-sm text-slate-200 leading-relaxed">
+                <span class="block text-[10px] font-bold uppercase tracking-wider text-ocean-300 mb-1">🔊 Mensaje grabado</span>
+                <span id="phoneMessageText"></span>
+              </div>
+
+              <p id="phoneTimer" class="text-slate-500 font-mono text-sm">00:00</p>
             </div>
 
-            <div id="transcriptBoxFisio" class="space-y-3 min-h-[260px] max-h-[320px] overflow-y-auto pr-2 text-xs sm:text-sm text-slate-200">
-              <p class="text-slate-500 italic text-center py-12">
-                Pulsa en <strong>"Llamar a la Consulta"</strong> para iniciar la conversación en tiempo real con la voz de Sofía.
-              </p>
+            <div class="flex justify-center pb-2">
+              <button id="phoneCallBtn" onclick="startPhoneSimulation()" class="flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white font-bold px-6 py-3 rounded-full shadow-lg transition">
+                <span>📞</span> <span id="phoneCallBtnText">Simular llamada</span>
+              </button>
+            </div>
+          </div>
+          <p class="text-center text-[11px] text-slate-500 mt-3">La simulación usa la voz del navegador. En producción, el mensaje lo graba Adela o se genera una vez y lo reproduce el operador.</p>
+        </div>
+
+        <!-- Flujo y canales -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <!-- Flujo en 3 pasos -->
+          <div class="bg-white rounded-3xl p-6 border border-brand-100 shadow-sm">
+            <h3 class="font-bold text-slate-900 mb-4">Qué pasa cuando alguien llama</h3>
+            <ol class="space-y-4">
+              <li class="flex gap-4">
+                <span class="w-9 h-9 shrink-0 rounded-xl bg-ocean-50 text-ocean-700 border border-ocean-200 font-bold flex items-center justify-center">1</span>
+                <div><strong class="text-slate-900 text-sm block">El paciente llama al móvil de la clínica</strong><span class="text-xs text-slate-500">A cualquier hora. El teléfono no suena para Adela.</span></div>
+              </li>
+              <li class="flex gap-4">
+                <span class="w-9 h-9 shrink-0 rounded-xl bg-ocean-50 text-ocean-700 border border-ocean-200 font-bold flex items-center justify-center">2</span>
+                <div><strong class="text-slate-900 text-sm block">Escucha siempre el mismo mensaje y la llamada termina</strong><span class="text-xs text-slate-500">Unos 20 segundos. Sin buzón de voz: no se acumulan mensajes que escuchar.</span></div>
+              </li>
+              <li class="flex gap-4">
+                <span class="w-9 h-9 shrink-0 rounded-xl bg-brand-50 text-brand-700 border border-brand-200 font-bold flex items-center justify-center">3</span>
+                <div><strong class="text-slate-900 text-sm block">Escribe por el canal que prefiera</strong><span class="text-xs text-slate-500">WhatsApp, email o la web. Todo llega a la bandeja de conversaciones del panel de Adela.</span></div>
+              </li>
+            </ol>
+          </div>
+
+          <!-- Canales -->
+          <div id="phoneChannels" class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm spring-card">
+              <svg class="w-7 h-7 fill-emerald-600 mb-3" viewBox="0 0 24 24"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2z"/></svg>
+              <strong class="text-slate-900 text-sm block">WhatsApp</strong>
+              <span class="text-xs text-slate-500 block mb-3">Al mismo número del teléfono.</span>
+              <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-sun-100 text-sun-600">Pendiente de contratar</span>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm spring-card">
+              <svg class="w-7 h-7 text-ocean-600 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <strong class="text-slate-900 text-sm block">Email</strong>
+              <span class="text-xs text-slate-500 block mb-3">Dirección profesional de la clínica.</span>
+              <span class="inline-block text-[10px] font-bold px-2 py-0.5 rounded-full bg-sun-100 text-sun-600">Pendiente de definir</span>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm spring-card">
+              <svg class="w-7 h-7 text-brand-600 mb-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              <strong class="text-slate-900 text-sm block">Web</strong>
+              <span class="text-xs text-slate-500 block mb-3">Cuestionario clínico y reserva.</span>
+              <button onclick="switchView('landing'); setTimeout(()=>document.getElementById('cuestionario').scrollIntoView({behavior:'smooth'}),300)" class="text-[11px] font-bold text-brand-700 hover:underline">Ver cuestionario →</button>
             </div>
           </div>
 
-          <!-- Tarjeta de Confirmación de Cita Generada -->
-          <div id="callResultCardFisio" class="hidden p-4 rounded-2xl bg-emerald-950 border border-emerald-600 text-white space-y-2">
-            <div class="flex items-center justify-between">
-              <span class="text-xs font-bold text-emerald-300 uppercase flex items-center gap-1.5">
-                <span>✅</span> <span>Cita Registrada en Calendario & WhatsApp Enviado</span>
-              </span>
-              <span class="text-[11px] font-mono text-emerald-400" id="callResultTimeFisio">11:16 AM</span>
+          <!-- Texto del mensaje -->
+          <div class="bg-white rounded-3xl p-6 border border-brand-100 shadow-sm">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold text-slate-900">Texto del mensaje <span class="text-xs font-semibold text-slate-400">(borrador)</span></h3>
+              <span class="text-[10px] font-bold text-ocean-700 bg-ocean-50 px-2 py-0.5 rounded-full border border-ocean-200">≈ 20 s</span>
             </div>
-            <p class="text-xs text-slate-300" id="callResultDetailsFisio">
-              Paciente: <strong>Marcos García</strong> · Sesión: <strong>Videoconsulta (45€)</strong> mañana a las 16:00h. WhatsApp de confirmación con enlace Google Meet enviado al 622 33 44 55.
-            </p>
-          </div>
-
-          <!-- Explicación Técnica de la Integración -->
-          <div class="p-4 rounded-2xl bg-slate-950/60 border border-slate-800 text-xs text-slate-400 space-y-1.5">
-            <p class="font-bold text-slate-200 flex items-center gap-1.5">
-              <span>ℹ️</span> ¿Cómo funciona con el teléfono real de Adela?
-            </p>
-            <p>
-              Adela <strong>no tiene que instalar ninguna aplicación</strong> en su teléfono. La clínica mantiene su número habitual y activa el desvío condicional (<code class="bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 font-mono">*67*NÚMERO#</code> o <code class="bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 font-mono">*61*NÚMERO#</code> en su operador). Si Adela está en camilla o videoconsulta, la llamada se desvía en 3 tonos hacia el número virtual SIP de ElevenLabs, atendiendo al paciente al instante sin perder ingresos.
-            </p>
+            <blockquote id="phoneScript" class="font-display italic text-slate-700 leading-relaxed border-l-4 border-brand-400 pl-4"></blockquote>
+            <p class="text-[11px] text-slate-500 mt-3">El email y la dirección web se completarán cuando estén contratados.</p>
           </div>
         </div>
       </div>
@@ -2033,6 +1895,7 @@
     let selectedGoalVal = 'Poder trabajar sentado sin dolor';
 
     function switchView(viewName) {
+      if (typeof phoneActive !== 'undefined' && phoneActive) endPhoneSimulation('Llamada colgada');
       document.getElementById('view-landing').classList.add('hidden');
       document.getElementById('view-crm').classList.add('hidden');
       document.getElementById('view-paciente').classList.add('hidden');
@@ -2056,7 +1919,7 @@
         document.getElementById('tab-paciente').className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2';
       } else if (viewName === 'telefono') {
         if (viewTel) viewTel.classList.remove('hidden');
-        if (tabTel) tabTel.className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-emerald-600 text-white shadow-sm flex items-center gap-2';
+        if (tabTel) tabTel.className = 'px-3.5 py-1.5 rounded-lg transition-all duration-200 bg-brand-600 text-white shadow-sm flex items-center gap-2';
       }
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -2518,650 +2381,80 @@
     }
 
     // =========================================================================
-    // SIMULADOR DE LLAMADA TELEFÓNICA (ELEVENLABS VOZ SOFÍA) - FISIOTERAPIA
+    // ATENCIÓN TELEFÓNICA: MENSAJE FIJO Y DERIVACIÓN (spec 001)
+    // Simulación con la voz del navegador (Web Speech API). Sin servicios externos.
     // =========================================================================
-    const callScenariosFisio = [
-      {
-        patient: "Marcos (Paciente nuevo)",
-        dialogue: [
-          { speaker: "IA", text: "¡Hola! Gracias por llamar a la consulta de Adela Alventosa Fisioterapia. En este momento Adela se encuentra en sesión clínica con un paciente y no puede atender el teléfono. Soy Sofía, su asistente virtual. Puedo resolver tus dudas sobre tarifas o agendar tu cita de inmediato. ¿En qué puedo ayudarte?" },
-          { speaker: "User", text: "Hola buenas, llamaba para preguntar cuánto cuesta una sesión de fisioterapia y si tenéis algún bono." },
-          { speaker: "IA", text: "¡Con mucho gusto! La primera sesión de valoración clínica y diagnóstico funcional tiene un precio de 45 euros y dura 45 minutos. Si necesitas tratamiento continuado, tenemos el Plan Mensual con rutinas guiadas en vídeo y seguimiento diario por 59 euros al mes, o el Plan Premium Híbrido con dos videoconsultas al mes por 89 euros. ¿Tienes dolor en alguna zona concreta ahora mismo?" },
-          { speaker: "User", text: "Sí, llevo una semana con dolor en las lumbares que me baja hacia la pierna, no puedo estar sentado trabajando." },
-          { speaker: "IA", text: "Entendido, parece una sobrecarga lumbar con posible compromiso ciático. Para no retrasar el alivio, Adela tiene un hueco disponible mañana a las cuatro de la tarde o el jueves a las once de la mañana. ¿Cuál te viene mejor?" },
-          { speaker: "User", text: "Mañana a las cuatro me viene genial, muchas gracias." },
-          { speaker: "IA", text: "Perfecto. Te reservo para mañana a las cuatro de la tarde. Dime por favor tu nombre y un número de teléfono móvil para enviarte por WhatsApp el enlace de acceso y unas recomendaciones posturales previas." },
-          { speaker: "User", text: "Soy Marcos García, mi móvil es el 622 33 44 55." },
-          { speaker: "IA", text: "Anotado, Marcos. Cita confirmada con Adela para mañana a las cuatro. En unos segundos recibirás la confirmación por WhatsApp. ¡Que mejores y nos vemos mañana!" }
-        ],
-        result: "Paciente: Marcos García · Sesión: Videoconsulta Lumbar (45€) mañana a las 16:00h. WhatsApp con enlace Google Meet y pautas posturales enviado al 622 33 44 55."
-      },
-      {
-        patient: "Elena (Cita de rehabilitación)",
-        dialogue: [
-          { speaker: "IA", text: "¡Hola! Gracias por llamar a Adela Alventosa Fisioterapia. Adela está en este momento tratando a un paciente en camilla. Soy Sofía, su asistente virtual, y puedo gestionar tu cita de inmediato. ¿Para qué día te vendría bien tu próxima sesión?" },
-          { speaker: "User", text: "Hola, quería reservar para continuar con mi rehabilitación de hombro este viernes por la mañana si hay hueco." },
-          { speaker: "IA", text: "¡Hola Elena! Sí, para este viernes Adela tiene disponible a las diez de la mañana o a las doce y cuarto. ¿Cuál prefieres?" },
-          { speaker: "User", text: "A las diez me viene perfecto." },
-          { speaker: "IA", text: "Excelente, te he agendado para este viernes a las diez de la mañana para el seguimiento de hombro. Te envío los detalles por WhatsApp ahora mismo." }
-        ],
-        result: "Paciente: Elena Navarro · Cita: Viernes 10:00h (Rehabilitación de Hombro). Confirmación enviada por WhatsApp al +34 654 998 877."
-      },
-      {
-        patient: "David (Duda sobre Fisioterapia Online)",
-        dialogue: [
-          { speaker: "IA", text: "¡Hola! Estás llamando a Adela Alventosa Fisioterapia Online. Adela está en consulta ahora mismo. Soy Sofía, su asistente virtual. ¿En qué puedo ayudarte?" },
-          { speaker: "User", text: "Hola, quería saber si de verdad la fisioterapia online funciona sin que me toques físicamente la espalda." },
-          { speaker: "IA", text: "¡Es una pregunta muy habitual! La evidencia científica demuestra que el 80% de la recuperación depende de la educación sobre el dolor, la corrección biomecánica y el ejercicio terapéutico progresivo. Adela realiza un test de movimiento en directo por videoconsulta, identifica la causa exacta y te pauta ejercicios guiados con seguimiento diario. Una sesión de valoración de 45 minutos son 45 euros. ¿Te gustaría que busquemos un hueco para probar?" },
-          { speaker: "User", text: "Vale, pues me parece interesante, vamos a probar." },
-          { speaker: "IA", text: "¡Fantástico! Tenemos disponibilidad mañana a las once y media o a las seis de la tarde. ¿Cuál te encaja mejor?" }
-        ],
-        result: "Paciente: David Serrano · Valoración Inicial Online (45€) · Pendiente de elección de hora. Enviado dossier explicativo por WhatsApp al 633 44 55 66."
-      }
-    ];
+    const PHONE_MESSAGE = 'Hola, has llamado a Fisioterapia Online con Adela. En este momento no podemos atenderte por teléfono. ' +
+      'Escríbenos por WhatsApp a este mismo número, envíanos un email o entra en nuestra web y rellena el cuestionario de valoración. ' +
+      'Te responderemos lo antes posible. ¡Gracias!';
+    let phoneTimerInterval = null;
+    let phoneSeconds = 0;
+    let phoneActive = false;
 
-    let currentScenarioFisio = 0;
-    let isCallingFisio = false;
-    let callTimerIntervalFisio = null;
-    let callSecondsFisio = 0;
-    let currentElevenAudioFisio = null;
-    let currentStepTimeoutFisio = null;
-
-    // Configuración ElevenLabs UI
-    function toggleElevenConfigFisio() {
-      const panel = document.getElementById('eleven-config-panel-fisio');
-      if (panel) {
-        panel.classList.toggle('hidden');
-        if (!panel.classList.contains('hidden')) {
-          const input = document.getElementById('eleven-api-key-fisio');
-          if (input && !input.value) {
-            const saved = localStorage.getItem('elevenlabs_api_key');
-            if (saved) input.value = saved;
-          }
-        }
-      }
+    function setPhoneStatus(text) {
+      document.getElementById('phoneStatus').textContent = text;
     }
 
-    function toggleVerClaveFisio(inputId, btn) {
-      const input = document.getElementById(inputId);
-      if (!input) return;
-      if (input.type === 'password') {
-        input.type = 'text';
-        btn.innerText = '🙈';
-      } else {
-        input.type = 'password';
-        btn.innerText = '👁️';
-      }
-    }
-
-    function checkElevenLabsStatusFisio() {
-      // Soporte para clave preconfigurada en query param (?key=sk_... o #key=...)
-      try {
-        const urlParams = new URLSearchParams(window.location.search);
-        const qKey = urlParams.get('key') || urlParams.get('api_key');
-        if (qKey) {
-          localStorage.setItem('elevenlabs_api_key', qKey.trim());
-        }
-      } catch(e){}
-
-      const apiKey = localStorage.getItem('elevenlabs_api_key');
-      const voiceId = localStorage.getItem('elevenlabs_voice_id_fisio') || 'EXAVITQu4vr4xnSDxMaL';
-      const badge = document.getElementById('eleven-badge-status-fisio');
-      const headerBadge = document.getElementById('headerVoiceBadgeFisio');
-      const phonePill = document.getElementById('phoneVoicePillFisio');
-      const btnText = document.getElementById('btn-text-config-fisio');
-      const statusMsg = document.getElementById('eleven-status-msg-fisio');
-      const input = document.getElementById('eleven-api-key-fisio');
-
-      if (input && apiKey) input.value = apiKey;
-
-      if (apiKey && apiKey.length >= 20) {
-        if (badge) {
-          badge.textContent = "✨ ElevenLabs Conectado (Sofía HD)";
-          badge.className = "text-[10px] px-2.5 py-0.5 rounded-full bg-emerald-950 text-emerald-300 font-bold border border-emerald-600 shadow-sm";
-        }
-        if (headerBadge) headerBadge.textContent = "ElevenLabs HD (Sofía) ✓";
-        if (phonePill) {
-          phonePill.innerHTML = `<span>✨ ElevenLabs (Sofía)</span> <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>`;
-          phonePill.className = "text-[11px] text-emerald-300 font-semibold bg-emerald-950/90 px-2 py-0.5 rounded-lg border border-emerald-700 flex items-center gap-1 transition cursor-pointer";
-        }
-        if (btnText) btnText.textContent = "Cambiar Voz / API Key";
-        if (statusMsg) {
-          statusMsg.innerHTML = `✅ <strong>ElevenLabs Conectado con éxito:</strong> La llamada reproducirá la voz de alta fidelidad de <strong>Sofía</strong> en tiempo real con latencia ultra-baja.`;
-          statusMsg.className = "text-xs text-emerald-300 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700/80 block leading-relaxed";
-        }
-      } else {
-        if (badge) {
-          badge.textContent = "⚠️ Clave no configurada (Voz navegador de respaldo)";
-          badge.className = "text-[10px] px-2.5 py-0.5 rounded-full bg-amber-950/90 text-amber-300 font-bold border border-amber-600/80";
-        }
-        if (headerBadge) headerBadge.textContent = "Configurar Voz Sofía ⚙️";
-        if (phonePill) {
-          phonePill.innerHTML = `<span>⚠️ Activar Voz Sofía</span> <span>⚙️</span>`;
-          phonePill.className = "text-[11px] text-amber-300 font-bold bg-amber-950/90 hover:bg-amber-900 px-2 py-0.5 rounded-lg border border-amber-600 flex items-center gap-1 transition cursor-pointer animate-pulse";
-        }
-        if (btnText) btnText.textContent = "Pega tu API Key de ElevenLabs";
-        if (statusMsg) {
-          statusMsg.innerHTML = `💡 <strong>Para escuchar la voz real y ultra-natural de Sofía:</strong> Pega tu API Key de ElevenLabs arriba y pulsa <em>"Conectar API"</em>. Si no tienes una, créala gratis en <a href="https://elevenlabs.io" target="_blank" class="text-emerald-400 underline font-bold">elevenlabs.io</a> (tienes 10.000 caracteres de prueba gratuita).`;
-          statusMsg.className = "text-xs text-amber-200 p-3 rounded-xl bg-amber-950/40 border border-amber-700/70 block leading-relaxed";
-        }
-      }
-    }
-
-    async function guardarYDetectarVocesFisio() {
-      const input = document.getElementById('eleven-api-key-fisio');
-      let val = (input ? input.value : '').trim();
-      const statusMsg = document.getElementById('eleven-status-msg-fisio');
-      const voiceSelect = document.getElementById('eleven-voice-select-fisio');
-
-      val = val.replace(/^xi-api-key[:\s=]+/i, '')
-               .replace(/^bearer\s+/i, '')
-               .replace(/^api[_-]?key[:\s=]+/i, '')
-               .replace(/^["'`]|["'`]$/g, '')
-               .trim();
-
-      if (input) input.value = val;
-
-      if (!val) {
-        localStorage.removeItem('elevenlabs_api_key');
-        checkElevenLabsStatusFisio();
-        return;
-      }
-
-      localStorage.setItem('elevenlabs_api_key', val);
-      if (statusMsg) {
-        statusMsg.innerHTML = '⏳ Conectando con ElevenLabs y sincronizando voces de tu cuenta...';
-        statusMsg.className = 'text-xs text-amber-300 p-3 rounded-xl bg-slate-900 border border-slate-800 block';
-      }
-
-      try {
-        const res = await fetch('https://api.elevenlabs.io/v1/voices', {
-          method: 'GET',
-          headers: { 'xi-api-key': val }
-        });
-
-        if (res.status === 401 || res.status === 400) {
-          const errData = await res.json().catch(() => null);
-          const serverMsg = errData?.detail?.message || res.statusText || '';
-          const preview = val.length > 8 ? `${val.substring(0, 4)}...${val.substring(val.length - 4)}` : val;
-
-          // Si el servidor indica falta de voices_read, la clave sigue siendo válida para generar TTS
-          if (serverMsg.includes('voices_read')) {
-            if (statusMsg) {
-              statusMsg.innerHTML = `✅ <strong>¡API Key válida y confirmada por ElevenLabs!</strong><br>Tu clave está conectada. Usaremos la voz de estudio de <strong>Sofía</strong>. Pulsa abajo <em>"🔊 Probar Voz"</em> para escucharla.`;
-              statusMsg.className = 'text-xs text-emerald-300 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700 block leading-relaxed';
-            }
-            checkElevenLabsStatusFisio();
-            return;
-          }
-
-          let tip = '';
-          if (val.startsWith('key_') || val.startsWith('api_key_') || val.length === 37) {
-            tip = `<div class="mt-2 p-2.5 bg-amber-950/80 border border-amber-700 rounded-lg text-amber-200">
-              <strong>🚨 ¡Atención! Has copiado el "Key ID" (${preview}) en vez de la "Secret API Key".</strong><br>
-              En ElevenLabs, la Secret API Key solo se muestra una vez al pulsar <em>"+ Create Key"</em>. Copia esa clave secreta y pégala aquí.
-            </div>`;
-          }
-
-          if (statusMsg) {
-            statusMsg.innerHTML = `❌ <strong>Error de autenticación con ElevenLabs:</strong> Clave no reconocida.${tip}`;
-            statusMsg.className = 'text-xs text-rose-300 p-3 rounded-xl bg-rose-950/60 border border-rose-800 block leading-relaxed';
-          }
-          return;
-        }
-
-        if (!res.ok) {
-          if (statusMsg) {
-            statusMsg.innerHTML = `❌ <strong>Error ${res.status}:</strong> No se pudo conectar a ElevenLabs.`;
-            statusMsg.className = 'text-xs text-rose-300 p-3 rounded-xl bg-rose-950/60 border border-rose-800 block';
-          }
-          return;
-        }
-
-        const data = await res.json();
-        const voices = data.voices || [];
-
-        if (voiceSelect && voices.length > 0) {
-          voiceSelect.innerHTML = '';
-          const savedVoiceId = localStorage.getItem('elevenlabs_voice_id_fisio') || 'EXAVITQu4vr4xnSDxMaL';
-          let foundSaved = false;
-
-          // Ordenar: primero voces con "sofia", "laura", o acento español
-          const sorted = [...voices].sort((a, b) => {
-            const aName = (a.name || '').toLowerCase();
-            const bName = (b.name || '').toLowerCase();
-            const aIsSofia = aName.includes('sofia') || aName.includes('sofía');
-            const bIsSofia = bName.includes('sofia') || bName.includes('sofía');
-            if (aIsSofia && !bIsSofia) return -1;
-            if (!aIsSofia && bIsSofia) return 1;
-            const aEs = (a.labels?.language || a.labels?.accent || '').toLowerCase().includes('span');
-            const bEs = (b.labels?.language || b.labels?.accent || '').toLowerCase().includes('span');
-            if (aEs && !bEs) return -1;
-            if (!aEs && bEs) return 1;
-            return aName.localeCompare(bName);
-          });
-
-          sorted.forEach((v) => {
-            const opt = document.createElement('option');
-            opt.value = v.voice_id;
-            const langLabel = v.labels?.language || v.labels?.accent || v.category || 'HD';
-            opt.innerText = `${v.name} (${langLabel})`;
-            if (v.voice_id === savedVoiceId || v.name.toLowerCase().includes('sofia')) {
-              opt.selected = true;
-              foundSaved = true;
-              localStorage.setItem('elevenlabs_voice_id_fisio', v.voice_id);
-            }
-            voiceSelect.appendChild(opt);
-          });
-
-          if (!foundSaved && sorted.length > 0) {
-            sorted[0].selected = true;
-            localStorage.setItem('elevenlabs_voice_id_fisio', sorted[0].voice_id);
-          }
-        }
-
-        checkElevenLabsStatusFisio();
-        if (statusMsg) {
-          statusMsg.innerHTML = `✅ <strong>¡Conexión completada con éxito!</strong> ${voices.length} voces sincronizadas de tu cuenta. Voz seleccionada lista para la consulta.`;
-          statusMsg.className = 'text-xs text-emerald-300 p-3 rounded-xl bg-emerald-950/70 border border-emerald-600 block leading-relaxed';
-        }
-      } catch (err) {
-        console.warn("ElevenLabs connect notice:", err);
-        checkElevenLabsStatusFisio();
-      }
-    }
-
-    function seleccionarVozElevenFisio(voiceId) {
-      if (!voiceId) return;
-      localStorage.setItem('elevenlabs_voice_id_fisio', voiceId);
-      const voiceSelect = document.getElementById('eleven-voice-select-fisio');
-      const voiceName = voiceSelect && voiceSelect.selectedOptions[0] ? voiceSelect.selectedOptions[0].innerText : 'Sofía';
-      const statusMsg = document.getElementById('eleven-status-msg-fisio');
-      if (statusMsg) {
-        statusMsg.innerHTML = `✨ Voz asignada: <strong>${voiceName}</strong>. Pulsa en <em>"🔊 Probar Voz"</em> para escucharla.`;
-        statusMsg.className = 'text-xs text-emerald-300 p-3 rounded-xl bg-emerald-950/60 border border-emerald-700 block';
-      }
-    }
-
-    async function probarVozSofiatestFisio() {
-      const btn = document.getElementById('btn-test-eleven-fisio');
-      const originalText = btn ? btn.innerHTML : '🔊 Probar Voz';
-      const statusMsg = document.getElementById('eleven-status-msg-fisio');
-
-      if (btn) {
-        btn.innerHTML = '⏳ Generando...';
-        btn.disabled = true;
-      }
-      if (statusMsg) {
-        statusMsg.innerHTML = '🔊 <em>Generando audio con ElevenLabs en alta definición...</em>';
-        statusMsg.className = 'text-xs text-emerald-300 p-3 rounded-xl bg-slate-900 border border-slate-800 block';
-      }
-
-      const phrase = "¡Hola! Gracias por llamar a la consulta de Adela Alventosa Fisioterapia. Soy Sofía, su asistente virtual. ¿En qué te puedo ayudar hoy?";
-      const ok = await speakWithElevenLabsFisio(phrase, () => {
-        if (btn) {
-          btn.innerHTML = originalText;
-          btn.disabled = false;
-        }
-        if (statusMsg) {
-          statusMsg.innerHTML = '✅ <strong>¡Audio de Sofía reproducido con éxito!</strong> Voz humana de estudio sin cortes ni pausas artificiales.';
-          statusMsg.className = 'text-xs text-emerald-300 p-3 rounded-xl bg-emerald-950/70 border border-emerald-600 block';
-        }
-      });
-
-      if (!ok) {
-        if (btn) {
-          btn.innerHTML = originalText;
-          btn.disabled = false;
-        }
-        if (statusMsg) {
-          statusMsg.innerHTML = '⚠️ No se pudo reproducir con ElevenLabs. Comprueba tu clave API o saldo de caracteres.';
-          statusMsg.className = 'text-xs text-rose-300 p-3 rounded-xl bg-rose-950/60 border border-rose-800 block';
-        }
-      }
-    }
-
-    function playScenarioDirectlyFisio(idx) {
-      if (isCallingFisio) {
-        endCallSimulationFisio();
-      }
-      currentScenarioFisio = idx;
-      updateScenarioButtonsUI(idx, true);
-      startCallSimulationFisio();
-    }
-
-    function selectCallScenarioFisio(idx) {
-      playScenarioDirectlyFisio(idx);
-    }
-
-    function updateScenarioButtonsUI(activeIdx, isPlaying = false) {
-      for (let i = 0; i < 3; i++) {
-        const btn = document.getElementById(`scen-fisio-${i}`);
-        const status = document.getElementById(`scen-status-${i}`);
-        if (!btn) continue;
-        if (i === activeIdx) {
-          btn.className = "scenario-btn p-3.5 rounded-2xl border-2 border-emerald-500 bg-emerald-950/70 text-left text-xs font-semibold text-white transition shadow-lg shadow-emerald-950/60 cursor-pointer";
-          const spTitle = btn.querySelector('span:first-child');
-          if (spTitle) spTitle.className = "block text-emerald-400 font-bold";
-          if (status) {
-            status.textContent = isPlaying ? "● En llamada" : "Listo";
-            status.className = isPlaying ? "text-[10px] px-2 py-0.5 rounded-full bg-emerald-500 text-slate-950 font-bold animate-pulse" : "text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-semibold";
-          }
-        } else {
-          btn.className = "scenario-btn p-3.5 rounded-2xl border border-slate-800 hover:border-emerald-600/60 bg-slate-900 text-left text-xs font-semibold text-slate-300 transition cursor-pointer";
-          const spTitle = btn.querySelector('span:first-child');
-          if (spTitle) spTitle.className = "block text-white font-bold";
-          if (status) {
-            status.textContent = "Listo";
-            status.className = "text-[10px] px-2 py-0.5 rounded-full bg-slate-800 text-slate-400 font-semibold";
-          }
-        }
-      }
-    }
-
-    async function speakWithElevenLabsFisio(text, onEndCallback = null) {
-      const apiKey = localStorage.getItem('elevenlabs_api_key');
-      if (!apiKey) return false;
-
-      let voiceId = localStorage.getItem('elevenlabs_voice_id_fisio') || 'EXAVITQu4vr4xnSDxMaL';
-      const voiceSelect = document.getElementById('eleven-voice-select-fisio');
-      if (voiceSelect && voiceSelect.value) {
-        voiceId = voiceSelect.value;
-      }
-
-      try {
-        const res = await fetch(`https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`, {
-          method: 'POST',
-          headers: {
-            'Accept': 'audio/mpeg',
-            'Content-Type': 'application/json',
-            'xi-api-key': apiKey
-          },
-          body: JSON.stringify({
-            text: text,
-            model_id: 'eleven_multilingual_v2',
-            voice_settings: {
-              stability: 0.55,
-              similarity_boost: 0.85,
-              style: 0.15,
-              use_speaker_boost: true
-            }
-          })
-        });
-
-        if (!res.ok) {
-          console.warn("ElevenLabs Fisio API notice:", res.status);
-          return false;
-        }
-
-        const blob = await res.blob();
-        const audioUrl = URL.createObjectURL(blob);
-        const audio = new Audio(audioUrl);
-        currentElevenAudioFisio = audio;
-
-        let callbackTriggered = false;
-        const triggerCallback = () => {
-          if (!callbackTriggered) {
-            callbackTriggered = true;
-            if (onEndCallback) onEndCallback();
-          }
-        };
-
-        audio.onended = triggerCallback;
-        audio.onerror = triggerCallback;
-
-        await audio.play();
-        return true;
-      } catch (e) {
-        console.warn("ElevenLabs Fisio fallback:", e);
-        return false;
-      }
-    }
-
-    async function speakTextFisio(text, onEndCallback = null) {
-      if (!document.getElementById('toggleSpeechFisio').checked) {
-        if (onEndCallback) onEndCallback();
-        return;
-      }
-
-      if (currentElevenAudioFisio) {
-        try { currentElevenAudioFisio.pause(); } catch(e){}
-        currentElevenAudioFisio = null;
-      }
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-
-      // Intentar primero con la voz de estudio humana de ElevenLabs
-      const usedEleven = await speakWithElevenLabsFisio(text, onEndCallback);
-      if (usedEleven) return;
-
-      // Respaldo navegador si no hay clave API
-      if ('speechSynthesis' in window) {
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'es-ES';
-        utterance.rate = 0.95; // Ritmo relajado y natural
-        utterance.pitch = 1.0;
-
-        const voices = window.speechSynthesis.getVoices();
-        const spanishVoices = voices.filter(v => v.lang.startsWith('es') || v.lang.includes('ES'));
-        const naturalVoice = spanishVoices.find(v => 
-          (v.name.toLowerCase().includes('natural') || v.name.toLowerCase().includes('online')) &&
-          (v.name.toLowerCase().includes('spain') || v.lang === 'es-ES')
-        );
-        const bestVoice = naturalVoice || spanishVoices.find(v => 
-          v.name.toLowerCase().includes('google') || 
-          v.name.toLowerCase().includes('elvira') || 
-          v.name.toLowerCase().includes('laura') || 
-          v.name.toLowerCase().includes('sofia') || 
-          v.name.toLowerCase().includes('monica')
-        ) || spanishVoices[0];
-        if (bestVoice) utterance.voice = bestVoice;
-
-        let callbackTriggered = false;
-        const triggerCallback = () => {
-          if (!callbackTriggered) {
-            callbackTriggered = true;
-            if (onEndCallback) onEndCallback();
-          }
-        };
-
-        utterance.onend = triggerCallback;
-        utterance.onerror = triggerCallback;
-
-        // Temporizador de seguridad para evitar bloqueos del motor del navegador
-        setTimeout(() => {
-          if (!callbackTriggered && isCallingFisio) {
-            triggerCallback();
-          }
-        }, Math.max(3000, text.length * 85));
-
-        window.speechSynthesis.speak(utterance);
-      } else {
-        if (onEndCallback) setTimeout(onEndCallback, 2500);
-      }
-    }
-
-    function startCallSimulationFisio() {
-      // Limpiar llamadas o timers anteriores
-      if (currentStepTimeoutFisio) {
-        clearTimeout(currentStepTimeoutFisio);
-        currentStepTimeoutFisio = null;
-      }
-      if (callTimerIntervalFisio) {
-        clearInterval(callTimerIntervalFisio);
-        callTimerIntervalFisio = null;
-      }
-      if (currentElevenAudioFisio) {
-        try { currentElevenAudioFisio.pause(); } catch(e){}
-        currentElevenAudioFisio = null;
-      }
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-
-      isCallingFisio = true;
-      callSecondsFisio = 0;
-      const callTimerElem = document.getElementById('callTimerFisio');
-      if (callTimerElem) callTimerElem.textContent = "00:00";
-
-      document.getElementById('btnStartCallFisio').classList.add('hidden');
-      document.getElementById('btnEndCallFisio').classList.remove('hidden');
-
-      const statusElem = document.getElementById('callStatusTextFisio');
-      if (statusElem) {
-        statusElem.textContent = "Llamada en curso · Conectado";
-        statusElem.className = "text-xs font-semibold text-emerald-300 mt-1 uppercase tracking-wider";
-      }
-
-      const waveElem = document.getElementById('waveformHolderFisio');
-      if (waveElem) {
-        waveElem.classList.remove('opacity-20');
-        waveElem.classList.add('opacity-100');
-      }
-
-      const ringElem = document.getElementById('callAvatarRingFisio');
-      if (ringElem) ringElem.classList.add('scale-125');
-
-      callTimerIntervalFisio = setInterval(() => {
-        callSecondsFisio++;
-        const mins = String(Math.floor(callSecondsFisio / 60)).padStart(2, '0');
-        const secs = String(callSecondsFisio % 60).padStart(2, '0');
-        if (callTimerElem) callTimerElem.textContent = `${mins}:${secs}`;
+    function startPhoneSimulation() {
+      if (phoneActive) { endPhoneSimulation('Llamada colgada'); return; }
+      phoneActive = true;
+      phoneSeconds = 0;
+      document.getElementById('phoneTimer').textContent = '00:00';
+      document.getElementById('phoneCallBtnText').textContent = 'Colgar';
+      document.getElementById('phoneCallBtn').classList.replace('bg-brand-600', 'bg-rose-600');
+      document.getElementById('phoneCallBtn').classList.replace('hover:bg-brand-700', 'hover:bg-rose-700');
+      document.getElementById('phoneRing').classList.add('scale-125', 'animate-pulse');
+      setPhoneStatus('Llamando…');
+      phoneTimerInterval = setInterval(() => {
+        phoneSeconds++;
+        const m = String(Math.floor(phoneSeconds / 60)).padStart(2, '0');
+        const s = String(phoneSeconds % 60).padStart(2, '0');
+        document.getElementById('phoneTimer').textContent = `${m}:${s}`;
       }, 1000);
 
-      const scenario = callScenariosFisio[currentScenarioFisio];
-      const box = document.getElementById('transcriptBoxFisio');
-      box.innerHTML = '';
-      document.getElementById('callResultCardFisio').classList.add('hidden');
-
-      // Actualizar estado activo en los botones de casos
-      updateScenarioButtonsUI(currentScenarioFisio, true);
-
-      // Aviso contextual si no hay clave API configurada en este dominio
-      const hasApiKey = !!localStorage.getItem('elevenlabs_api_key');
-      if (!hasApiKey) {
-        const tip = document.createElement('div');
-        tip.className = "p-2.5 rounded-xl bg-amber-950/50 border border-amber-700/60 text-amber-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2 shadow-sm";
-        tip.innerHTML = `<span>💡 <em>Voz de prueba del navegador activa.</em> Para escuchar a <strong>Sofía con audio humano HD (ElevenLabs)</strong>:</span> <button onclick="toggleElevenConfigFisio()" class="bg-amber-600 hover:bg-amber-500 text-white font-bold px-2.5 py-1 rounded-lg text-[10px] whitespace-nowrap transition cursor-pointer self-start sm:self-auto shadow">🔑 Pegar API Key</button>`;
-        box.appendChild(tip);
-      }
-
-      const badgeElem = document.getElementById('transcriptionBadgeFisio');
-      if (badgeElem) {
-        badgeElem.textContent = "Hablando...";
-        badgeElem.className = "text-[10px] bg-emerald-500/20 text-emerald-400 font-bold px-2 py-0.5 rounded-full";
-      }
-
-      let step = 0;
-      function playNextStep() {
-        if (!isCallingFisio) return;
-
-        if (step >= scenario.dialogue.length) {
-          currentStepTimeoutFisio = setTimeout(finishCallSuccessfullyFisio, 1500);
-          return;
-        }
-
-        const msg = scenario.dialogue[step];
-        const isIA = msg.speaker === "IA";
-
-        const div = document.createElement('div');
-        div.className = `p-3 rounded-2xl transition-all duration-300 ${isIA ? 'bg-emerald-950/60 border border-emerald-800 text-slate-100 shadow-sm' : 'bg-slate-900 border border-slate-800 text-slate-200 ml-6'}`;
-        div.innerHTML = `<span class="text-[11px] font-bold ${isIA ? 'text-emerald-400' : 'text-slate-400'} block flex items-center justify-between">
-          <span>${isIA ? '🎙️ Contestador IA (Sofía)' : '👤 ' + scenario.patient}</span>
-          ${isIA ? '<span class="text-[9px] font-normal text-emerald-400/80 bg-emerald-950 px-2 py-0.5 rounded-full border border-emerald-800/60">Voz HD</span>' : ''}
-        </span><p class="mt-1 leading-relaxed text-xs sm:text-sm">${msg.text}</p>`;
-        box.appendChild(div);
-        box.scrollTop = box.scrollHeight;
-
-        step++;
-
-        if (isIA) {
-          // La IA habla y NO pasamos al siguiente paso hasta que termine completamente su audio
-          speakTextFisio(msg.text, () => {
-            if (!isCallingFisio) return;
-            // Pausa humana natural de escucha (700ms) antes de la réplica del paciente
-            currentStepTimeoutFisio = setTimeout(playNextStep, 700);
-          });
-        } else {
-          // El paciente habla: tiempo proporcional de lectura antes de que responda Sofía
-          const patientSpeakingMs = Math.max(2200, Math.min(4500, msg.text.length * 52));
-          currentStepTimeoutFisio = setTimeout(playNextStep, patientSpeakingMs);
-        }
-      }
-
-      // Pausa inicial de descuelgue telefónico
-      currentStepTimeoutFisio = setTimeout(playNextStep, 600);
+      setTimeout(() => {
+        if (!phoneActive) return;
+        setPhoneStatus('Reproduciendo mensaje');
+        document.getElementById('phoneMessage').classList.remove('hidden');
+        document.getElementById('phoneMessageText').textContent = PHONE_MESSAGE;
+        speakPhoneMessage(() => endPhoneSimulation('Llamada finalizada · el paciente escribirá por WhatsApp, email o web'));
+      }, 1500);
     }
 
-    function finishCallSuccessfullyFisio() {
-      endCallSimulationFisio();
-      const scenario = callScenariosFisio[currentScenarioFisio];
-      const resCard = document.getElementById('callResultCardFisio');
-      if (resCard) {
-        resCard.classList.remove('hidden');
-        const details = document.getElementById('callResultDetailsFisio');
-        if (details) details.textContent = scenario.result;
-      }
+    function speakPhoneMessage(onEnd) {
+      // Salvaguarda: si el navegador no tiene voz o no avisa del final, la llamada termina igualmente
+      setTimeout(onEnd, 22000);
+      if (!('speechSynthesis' in window)) return;
+      window.speechSynthesis.cancel();
+      const u = new SpeechSynthesisUtterance(PHONE_MESSAGE);
+      u.lang = 'es-ES';
+      u.rate = 1;
+      const esVoice = window.speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith('es'));
+      if (esVoice) u.voice = esVoice;
+      u.onend = onEnd;
+      u.onerror = onEnd;
+      window.speechSynthesis.speak(u);
     }
 
-    function endCallSimulationFisio() {
-      isCallingFisio = false;
-      if (currentStepTimeoutFisio) {
-        clearTimeout(currentStepTimeoutFisio);
-        currentStepTimeoutFisio = null;
-      }
-      if (callTimerIntervalFisio) {
-        clearInterval(callTimerIntervalFisio);
-        callTimerIntervalFisio = null;
-      }
-      if (currentElevenAudioFisio) {
-        try {
-          currentElevenAudioFisio.pause();
-          currentElevenAudioFisio.currentTime = 0;
-        } catch(e){}
-        currentElevenAudioFisio = null;
-      }
-      if ('speechSynthesis' in window) {
-        window.speechSynthesis.cancel();
-      }
-
-      const btnStart = document.getElementById('btnStartCallFisio');
-      const btnEnd = document.getElementById('btnEndCallFisio');
-      if (btnStart) btnStart.classList.remove('hidden');
-      if (btnEnd) btnEnd.classList.add('hidden');
-
-      const statusElem = document.getElementById('callStatusTextFisio');
-      if (statusElem) {
-        statusElem.textContent = "Llamada finalizada";
-        statusElem.className = "text-xs font-semibold text-slate-400 mt-1 uppercase tracking-wider";
-      }
-
-      const waveElem = document.getElementById('waveformHolderFisio');
-      if (waveElem) {
-        waveElem.classList.add('opacity-20');
-        waveElem.classList.remove('opacity-100');
-      }
-
-      const ringElem = document.getElementById('callAvatarRingFisio');
-      if (ringElem) ringElem.classList.remove('scale-125');
-
-      const badgeElem = document.getElementById('transcriptionBadgeFisio');
-      if (badgeElem) {
-        badgeElem.textContent = "Finalizada";
-        badgeElem.className = "text-[10px] bg-slate-800 text-slate-400 font-bold px-2 py-0.5 rounded-full";
-      }
-
-      // Restaurar estado de los botones de casos
-      updateScenarioButtonsUI(currentScenarioFisio, false);
+    function endPhoneSimulation(status) {
+      if (!phoneActive) return;
+      phoneActive = false;
+      clearInterval(phoneTimerInterval);
+      if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+      document.getElementById('phoneCallBtnText').textContent = 'Simular otra llamada';
+      document.getElementById('phoneCallBtn').classList.replace('bg-rose-600', 'bg-brand-600');
+      document.getElementById('phoneCallBtn').classList.replace('hover:bg-rose-700', 'hover:bg-brand-700');
+      document.getElementById('phoneRing').classList.remove('scale-125', 'animate-pulse');
+      setPhoneStatus(status);
+      document.getElementById('phoneChannels').classList.add('ring-4', 'ring-brand-200', 'rounded-2xl');
+      setTimeout(() => document.getElementById('phoneChannels').classList.remove('ring-4', 'ring-brand-200', 'rounded-2xl'), 2500);
     }
 
-    // Inicialización al cargar la página
     document.addEventListener('DOMContentLoaded', () => {
-      checkElevenLabsStatusFisio();
+      document.getElementById('phoneScript').textContent = '«' + PHONE_MESSAGE + '»';
+      const now = new Date();
+      document.getElementById('phoneClock').textContent = now.toTimeString().slice(0, 5);
     });
-    // Llamar también de inmediato por si el DOM ya estuviera listo
-    setTimeout(checkElevenLabsStatusFisio, 100);
   </script>
 </body>
 </html>

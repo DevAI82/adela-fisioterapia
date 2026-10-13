@@ -21,7 +21,8 @@
 | Hosting | **VPS** | Vercel / Netlify (frontend) + Supabase Cloud (región UE) | ❓ |
 | Vídeos de ejercicios | Supabase Storage | Bunny Stream, Vimeo privado, YouTube oculto | ❓ |
 | Mensajería omnicanal | **Zernio** (WhatsApp + Instagram) | WhatsApp Cloud API directa | ❓ |
-| Voz IA | **ElevenLabs** Conversational AI ("Sofía") | — | ❓ |
+| Telefonía | Línea móvil de la clínica con desvío incondicional a un mensaje fijo (operador pendiente) | Centralita virtual "mensaje y colgar" | ✅ Mensaje fijo, sin IA (D-006). Operador ❓ |
+| Voz IA | ~~ElevenLabs Conversational AI ("Sofía")~~ | — | ❌ Fuera por ahora (D-006) |
 | Agenda y videoconsulta | **Google Calendar + Google Meet** | Cal.com + Meet/Jitsi | ❓ |
 | Email transaccional | Resend | Brevo, SMTP de Google Workspace | ❓ |
 | Pagos | ❓ | Stripe (suscripciones), Bizum vía TPV | ❓ |
@@ -32,10 +33,11 @@
 
 ```
    Paciente (web/móvil)          Adela (panel)              Canales externos
-          │                           │                 WhatsApp · Instagram · Teléfono
+          │                           │                 WhatsApp · Instagram · Email
+          │                           │            (Teléfono → mensaje fijo → WhatsApp/web)
           ▼                           ▼                         │
    ┌─────────────────────────────────────────┐          ┌──────┴──────┐
-   │  Frontend (web pública + portal + CRM)  │          │ Zernio / 11L │
+   │  Frontend (web pública + portal + CRM)  │          │ Zernio/Email │
    └───────────────────┬─────────────────────┘          └──────┬──────┘
                        │  supabase-js (anon key + RLS)          │ webhooks
                        ▼                                        ▼
@@ -77,6 +79,7 @@ Ver [`.env.example`](../.env.example). Se ajusta cuando este documento quede apr
 
 1. ¿VPS propio o servicios gestionados? (coste, mantenimiento, RGPD)
 2. ¿Qué framework de frontend usamos?
-3. ¿Se mantiene Zernio o vamos a la API oficial de WhatsApp?
-4. ¿Pasarela de pago?
-5. ¿El prototipo de GitHub Pages se mantiene como demo o lo sustituye la web real?
+3. ¿Se mantiene Zernio o vamos a la API oficial de WhatsApp? (Ojo: el número de WhatsApp será el del móvil de la clínica; ver spec 001 §7.)
+4. ¿Operador de la línea móvil? (pendiente de alta)
+5. ¿Pasarela de pago?
+6. ¿El prototipo de GitHub Pages se mantiene como demo o lo sustituye la web real?

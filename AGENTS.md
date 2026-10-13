@@ -41,7 +41,7 @@ Reglas:
 
 ```
 /                       Sitio publicado en GitHub Pages (prototipo interactivo actual)
-├── index.html          Prototipo: web pública, CRM, portal paciente y teléfono IA
+├── index.html          Prototipo: web pública, CRM, portal paciente y flujo de teléfono
 ├── mockup_interactivo.html  Copia de index.html (se mantiene sincronizada)
 ├── presentacion.html / VER PRESENTACION.html   Dossier de la propuesta inicial
 ├── logo-*.png, favicon.png, apple-touch-icon.png, og-adela-fisio.jpg   Marca
