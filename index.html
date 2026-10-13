@@ -18,13 +18,17 @@
   <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Logotipo Oficial Adela Alventosa Fisioterapia">
+  <meta property="og:image:alt" content="Logotipo Fisioterapia Online con Adela">
 
   <!-- Twitter / X Cards -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Adela Alventosa — Prototipo Interactivo">
   <meta name="twitter:description" content="Explora en vivo el prototipo interactivo de la clínica digital.">
   <meta name="twitter:image" content="https://devai82.github.io/adela-fisioterapia/og-adela-fisio.jpg">
+
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#3c923a">
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,18 +39,42 @@
       theme: {
         extend: {
           colors: {
+            // Paleta oficial extraída del logo "Fisioterapia Online con Adela"
+            // brand = verde del logo (#3C923A) · ocean = azul "Online / Adela" · sun = amarillo del sol
             brand: {
-              50: '#f2f7f4',
-              100: '#e1ede6',
-              200: '#c5dcd0',
-              300: '#9ec3b0',
-              400: '#73a48c',
-              500: '#528770',
-              600: '#3e6c58',
-              700: '#335647',
-              800: '#2c463b',
-              900: '#263b32',
-              950: '#13201b',
+              50: '#f2f8ef',
+              100: '#e1f0da',
+              200: '#c4e2b6',
+              300: '#9ccd86',
+              400: '#6db356',
+              500: '#3c923a',
+              600: '#33822f',
+              700: '#2a6b28',
+              800: '#245824',
+              900: '#1f4920',
+              950: '#0e270f',
+            },
+            ocean: {
+              50: '#eef7fc',
+              100: '#d7edf9',
+              200: '#b0dbf2',
+              300: '#7bc3e8',
+              400: '#3fa9de',
+              500: '#139cd8',
+              600: '#077ab9',
+              700: '#056f9c',
+              800: '#085a7d',
+              900: '#0b4a66',
+              950: '#072f42',
+            },
+            sun: {
+              50: '#fffbea',
+              100: '#fff3c4',
+              200: '#fee68a',
+              300: '#fdda4f',
+              400: '#fdcc1c',
+              500: '#eab308',
+              600: '#c48a04',
             },
             sand: {
               50: '#fbfaf8',
@@ -68,7 +96,7 @@
     .glass-card {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(12px);
-      border: 1px solid rgba(225, 237, 230, 0.85);
+      border: 1px solid rgba(225, 240, 218, 0.85);
     }
     .spring-card {
       transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
@@ -77,15 +105,18 @@
       transform: translateY(-5px);
     }
     .sketch-card {
-      border: 2px dashed rgba(82, 135, 112, 0.35);
+      border: 2px dashed rgba(60, 146, 58, 0.35);
+    }
+    .brand-stripe {
+      background: linear-gradient(90deg, #3c923a 0%, #6db356 30%, #139cd8 62%, #077ab9 82%, #fdcc1c 100%);
     }
     .pulse-dot {
       animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
     }
     @keyframes pulse-ring {
-      0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(82, 135, 112, 0.7); }
-      70% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(82, 135, 112, 0); }
-      100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(82, 135, 112, 0); }
+      0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(60, 146, 58, 0.7); }
+      70% { transform: scale(1.15); box-shadow: 0 0 0 12px rgba(60, 146, 58, 0); }
+      100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(60, 146, 58, 0); }
     }
   </style>
 </head>
@@ -96,7 +127,7 @@
     <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
       <div class="flex items-center space-x-3">
         <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        <span class="text-xs font-bold tracking-wider uppercase text-emerald-400">Adela Fisioterapia — Navegación de Prototipo</span>
+        <span class="text-xs font-bold tracking-wider uppercase text-emerald-400">Fisioterapia Online con Adela — Navegación de Prototipo</span>
       </div>
       <!-- TABS SWITCHER -->
       <nav class="flex items-center space-x-1 sm:space-x-2 bg-slate-900 p-1 rounded-xl text-xs sm:text-sm font-medium border border-slate-800">
@@ -126,13 +157,14 @@
   <section id="view-landing" class="flex-1 flex flex-col">
     <!-- Navbar Pública -->
     <div class="bg-white/95 backdrop-blur-md border-b border-brand-100 sticky top-12 z-40 transition-all">
+      <div class="brand-stripe h-1 w-full"></div>
       <div class="max-w-6xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
-        <!-- Logo Oficial Adela Fisioterapia -->
-        <a href="#inicio" class="flex items-center space-x-3.5 group">
-          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-12 h-12 object-contain rounded-xl border border-brand-200/90 shadow-sm bg-white p-0.5 group-hover:scale-105 transition-transform duration-200">
-          <div>
-            <span class="font-display font-bold text-slate-900 text-lg tracking-tight block leading-tight">ADELA</span>
-            <span class="text-[10px] text-brand-700 font-bold tracking-widest uppercase block leading-none">Fisioterapia Online</span>
+        <!-- Logo oficial: isotipo + logotipo "Fisioterapia Online con Adela" -->
+        <a href="#inicio" class="flex items-center space-x-2.5 group" aria-label="Fisioterapia Online con Adela — Inicio">
+          <img src="logo-isotipo.png" alt="" class="h-14 w-auto object-contain group-hover:scale-105 transition-transform duration-200">
+          <div class="leading-none">
+            <span class="block font-extrabold tracking-tight text-base sm:text-[17px] text-brand-600">Fisioterapia <span class="text-ocean-600">Online</span></span>
+            <span class="block font-semibold text-xs text-brand-600 -mt-0.5">con <span class="font-hand font-bold text-2xl sm:text-[26px] text-ocean-700 leading-none">Adela</span></span>
           </div>
         </a>
 
@@ -161,7 +193,7 @@
       <!-- Columna Izquierda: Titulares y Llamadas a la Acción -->
       <div class="lg:col-span-6 space-y-6">
         <h1 class="text-3xl sm:text-5xl font-display font-semibold text-slate-900 leading-[1.18]">
-          Recupera tu movilidad y dile <span class="italic text-brand-600">adiós al dolor</span> desde casa
+          Recupera tu movilidad y dile <span class="italic text-ocean-600">adiós al dolor</span> desde casa
         </h1>
 
         <p class="text-slate-600 text-base sm:text-lg leading-relaxed max-w-xl">
@@ -751,7 +783,8 @@
     <footer class="bg-slate-900 text-slate-400 py-12 text-xs">
       <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 mb-6">
         <div>
-          <strong class="text-white font-bold text-sm block mb-2">ADELA FISIOTERAPIA</strong>
+          <img src="logo-fisio-online-adela.png" alt="Fisioterapia Online con Adela" class="w-28 h-28 object-contain bg-white rounded-2xl p-2 mb-3 shadow-lg">
+          <strong class="text-white font-bold text-sm block mb-2">Fisioterapia Online con Adela</strong>
           <p>Clínica de fisioterapia digital colegiada. Atención clínica a distancia en España.</p>
         </div>
         <div>
@@ -764,7 +797,7 @@
         </div>
       </div>
       <div class="max-w-6xl mx-auto px-4 sm:px-6 pt-6 border-t border-slate-800 text-slate-500 text-center">
-        © 2026 Adela Fisioterapia. Plataforma desarrollada por Altera.
+        © 2026 Fisioterapia Online con Adela. Plataforma desarrollada por Altera.
       </div>
     </footer>
   </section>
@@ -777,13 +810,16 @@
     <!-- SIDEBAR IZQUIERDA DEL CRM -->
     <aside class="w-64 bg-white border-r border-slate-200 flex flex-col justify-between p-4 shrink-0 shadow-sm">
       <div class="space-y-6">
-        <!-- Logo de la Clínica Adela Fisioterapia -->
-        <div class="flex items-center space-x-3 pb-3 border-b border-slate-100">
-          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-10 h-10 object-contain rounded-xl border border-brand-200/90 bg-white p-0.5 shadow-2xs">
-          <div>
-            <span class="font-display font-bold text-slate-900 text-sm leading-tight block">ADELA FISIOTERAPIA</span>
-            <span class="text-[9px] text-brand-700 font-bold uppercase tracking-wider block">Panel de Control Clínico</span>
+        <!-- Logo oficial Fisioterapia Online con Adela -->
+        <div class="pb-3 border-b border-slate-100">
+          <div class="flex items-center space-x-2">
+            <img src="logo-isotipo.png" alt="" class="h-11 w-auto object-contain">
+            <div class="leading-none">
+            <span class="block font-extrabold tracking-tight text-[13px] text-brand-600">Fisioterapia <span class="text-ocean-600">Online</span></span>
+            <span class="block font-semibold text-[10px] text-brand-600 -mt-0.5">con <span class="font-hand font-bold text-xl text-ocean-700 leading-none">Adela</span></span>
           </div>
+          </div>
+          <span class="text-[9px] text-ocean-700 font-bold uppercase tracking-wider block mt-1.5">Panel de Control Clínico</span>
         </div>
 
         <!-- Perfil Profesional Adela Alventosa -->
@@ -852,7 +888,7 @@
       <!-- TOP NAV DEL CRM -->
       <div class="bg-white border-b border-slate-200 px-6 py-3.5 flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center space-x-6">
-          <h2 class="text-lg font-bold text-slate-900 tracking-tight">Adela Fisioterapia - Panel Clínico</h2>
+          <h2 class="text-lg font-bold text-slate-900 tracking-tight">Fisioterapia Online con Adela · Panel Clínico</h2>
           <div class="hidden sm:flex items-center space-x-1 text-xs font-semibold">
             <button onclick="switchCrmTab('pipeline')" id="crm-top-btn-pipeline" class="px-3.5 py-1.5 rounded-lg bg-slate-100 text-slate-900 border-b-2 border-brand-600">Pipeline</button>
             <button onclick="switchCrmTab('conversaciones')" id="crm-top-btn-conversaciones" class="px-3.5 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 flex items-center gap-1.5">
@@ -1541,12 +1577,12 @@
     <header class="bg-white border-b border-slate-200 px-6 py-3.5 sticky top-12 z-40">
       <div class="max-w-6xl mx-auto flex items-center justify-between">
         
-        <!-- Logo Adela Fisioterapia en Portal Paciente -->
-        <div class="flex items-center space-x-3">
-          <img src="logo-adela-fisioterapia.jpg" alt="Logo Adela Fisioterapia" class="w-10 h-10 object-contain rounded-xl border border-brand-200/90 bg-white p-0.5 shadow-2xs">
-          <div>
-            <span class="font-display font-bold text-slate-900 text-base leading-none">Adela Alventosa</span>
-            <span class="text-[9px] text-brand-700 font-bold uppercase block tracking-wider leading-none">Fisioterapia Online</span>
+        <!-- Logo oficial en Portal Paciente -->
+        <div class="flex items-center space-x-2">
+          <img src="logo-isotipo.png" alt="" class="h-11 w-auto object-contain">
+          <div class="leading-none">
+            <span class="block font-extrabold tracking-tight text-[13px] text-brand-600">Fisioterapia <span class="text-ocean-600">Online</span></span>
+            <span class="block font-semibold text-[10px] text-brand-600 -mt-0.5">con <span class="font-hand font-bold text-xl text-ocean-700 leading-none">Adela</span></span>
           </div>
         </div>
 
@@ -1856,11 +1892,11 @@
           <div class="text-center py-6 space-y-4">
             <div class="relative w-28 h-28 mx-auto">
               <div id="callAvatarRingFisio" class="absolute inset-0 rounded-full bg-emerald-500/20 scale-100 transition-transform duration-500"></div>
-              <img src="logo-adela-fisioterapia.jpg" alt="Adela Alventosa Fisioterapia" class="relative z-10 w-28 h-28 rounded-full object-contain border-2 border-emerald-500 shadow-xl bg-white p-2">
+              <img src="logo-fisio-online-adela.png" alt="Fisioterapia Online con Adela" class="relative z-10 w-28 h-28 rounded-full object-contain border-2 border-ocean-500 shadow-xl bg-white p-2.5">
             </div>
 
             <div>
-              <h2 class="text-xl font-bold font-display text-white tracking-wide">ADELA FISIOTERAPIA</h2>
+              <h2 class="text-xl font-bold font-display text-white tracking-wide">Fisioterapia Online con Adela</h2>
               <p class="text-xs text-slate-400 font-medium">Llamada a consulta: 624 93 90 23</p>
               <p id="callStatusTextFisio" class="text-xs font-semibold text-emerald-400 mt-1 uppercase tracking-wider">Listo para simular llamada</p>
             </div>
