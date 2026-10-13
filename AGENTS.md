@@ -13,7 +13,7 @@ El estado vivo y las decisiones están en [`MEMORY.md`](MEMORY.md). Las especifi
 
 1. `AGENTS.md` (este fichero): reglas.
 2. `MEMORY.md`: estado actual, decisiones tomadas y pendientes.
-3. `specs/00-brief.md` y `specs/01-stack.md`: qué construimos y con qué.
+3. `specs/00-brief.md`, `specs/01-stack.md` y `specs/02-plan.md`: qué construimos, con qué y en qué orden.
 4. La spec de la funcionalidad en curso (`specs/features/NNN-*.md`).
 
 ## 2. Flujo SDD
@@ -52,6 +52,7 @@ Reglas:
 └── specs/
     ├── 00-brief.md     Brief del cliente
     ├── 01-stack.md     Stack tecnológico y arquitectura
+    ├── 02-plan.md      Fases y orden de las specs
     ├── _plantilla-spec.md
     └── features/       Una spec por funcionalidad (NNN-nombre.md)
 ```

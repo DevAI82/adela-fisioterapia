@@ -17,15 +17,16 @@
 |---|---|---|---|
 | Frontend web y portal | ❓ (el prototipo es un HTML con Tailwind por CDN) | Astro, Next.js, SvelteKit, React + Vite | ❓ |
 | Estilos | Tailwind CSS (con build, no CDN) | — | ❓ |
-| Backend / BBDD / Auth | **Supabase** (Postgres + Auth + RLS + Storage + Edge Functions) | Supabase autoalojado en VPS | ❓ |
-| Hosting | **VPS** | Vercel / Netlify (frontend) + Supabase Cloud (región UE) | ❓ |
-| Vídeos de ejercicios | Supabase Storage | Bunny Stream, Vimeo privado, YouTube oculto | ❓ |
-| Mensajería omnicanal | **Zernio** (WhatsApp + Instagram) | WhatsApp Cloud API directa | ❓ |
+| Backend / BBDD / Auth | **Supabase** (Postgres + Auth + RLS + Storage + Edge Functions) | Supabase autoalojado en VPS | ✅ **Supabase autoalojado con Coolify** (D-010) |
+| Hosting | **VPS** | Vercel / Netlify (frontend) + Supabase Cloud (región UE) | ✅ **VPS en Francia + Coolify** (D-010). Proveedor ❓ (OVHcloud, Scaleway…) |
+| Vídeos y voces genéricos | Supabase Storage | Cloudflare R2, Cloudflare Stream, Bunny Stream, Vimeo, YouTube oculto | 🔄 **Cloudflare R2** con enlaces firmados (D-012). Stream solo si hace falta streaming adaptativo |
+| Audios personalizados y adjuntos médicos | — | — | ✅ **Supabase Storage privado en el VPS** (datos de salud, D-012) |
+| Mensajería omnicanal | **Zernio** (WhatsApp + Instagram) | WhatsApp Cloud API directa | ✅ **Zernio**, plan gratuito (2 redes), solo WhatsApp (D-011) |
 | Telefonía | Línea móvil de la clínica con desvío incondicional a un mensaje fijo (operador pendiente) | Centralita virtual "mensaje y colgar" | ✅ Mensaje fijo, sin IA (D-006). Operador ❓ |
 | Voz IA | ~~ElevenLabs Conversational AI ("Sofía")~~ | — | ❌ Fuera por ahora (D-006) |
 | Agenda y videoconsulta | **Google Calendar + Google Meet** | Cal.com + Meet/Jitsi | ❓ |
 | Email transaccional | Resend | Brevo, SMTP de Google Workspace | ❓ |
-| Pagos | ❓ | Stripe (suscripciones), Bizum vía TPV | ❓ |
+| Pagos | ❓ | Stripe (suscripciones), Bizum vía TPV | ✅ **Stripe**: Bizum y tarjeta en pagos únicos; tarjeta en suscripciones (D-009) |
 | Analítica web | ❓ | Plausible / Umami (sin cookies) | ❓ |
 | Repositorio y CI | GitHub (`DevAI82/adela-fisioterapia`) + GitHub Actions | — | ❓ |
 

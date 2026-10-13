@@ -29,6 +29,12 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | D-005 | 2026-10-13 | Secretos solo en `.env` (gitignored) y en el gestor de secretos del proveedor; `.env.example` como plantilla | El repo es público (GitHub Pages) |
 | D-006 | 2026-10-13 | **Sin recepcionista ni contestador con IA. ElevenLabs queda fuera** por ahora | Decisión de Adela: prefiere atender todo por escrito |
 | D-007 | 2026-10-13 | El teléfono **nunca se atiende**: todas las llamadas escuchan un mensaje fijo que deriva a WhatsApp (mismo número), email o web, sin buzón de voz | Decisión de Adela. Spec `features/001-atencion-telefonica.md` |
+| D-008 | 2026-10-13 | Servicio **100 % online**; se mantienen las tarifas de la demo; **primera consulta obligatoria** a 22,50 € (−50 %), 25 min | Acordado con Adela |
+| D-009 | 2026-10-13 | **Stripe**: Bizum o tarjeta en pagos únicos; suscripciones mensuales solo con tarjeta. Siempre se paga antes de reservar | Bizum no sirve para cobros recurrentes |
+| D-010 | 2026-10-13 | Infraestructura: **VPS en Francia con Coolify y Supabase autoalojado** | Control de los datos en la UE |
+| D-011 | 2026-10-13 | Canales: **WhatsApp (vía Zernio, plan gratuito) y web**. Sin Instagram ni LinkedIn | Adela no tiene redes por ahora |
+| D-012 | 2026-10-13 | **Vídeos y voces genéricos en Cloudflare R2**; audios personalizados y adjuntos médicos en Supabase Storage privado en el VPS | R2 es gratis hasta 10 GB y no cobra por reproducciones; los datos de salud no salen del VPS |
+| D-013 | 2026-10-13 | Agenda: citas con **15 min de descanso**; no presentado sin justificar = sin devolución; Adela puede reagendar sin coste | Acordado con Adela |
 
 ## Pendiente de decidir / validar con José Miguel
 
@@ -38,7 +44,14 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] **Línea móvil de la clínica**: pendiente de alta; operador por decidir (spec 001)
 - [ ] **WhatsApp Business** en ese mismo número: pendiente de contratar. Verificarlo *antes* de activar el desvío de llamadas
 - [ ] **Email profesional** de la clínica (va en el mensaje telefónico)
-- [ ] Datos reales de la clínica: nº de colegiada, horarios, tarifas
+- [ ] **Cuenta de Google** de Adela (afecta a Meet y Calendar)
+- [ ] Datos para "Quiénes somos": formación, nº de colegiada, colegio y foto real
+- [ ] Horario definitivo (inicial: martes y jueves de 16:00 a 20:00)
+- [ ] Objetivos medibles del negocio
+- [ ] IVA de los servicios y quién emite las facturas (gestoría); VeriFactu si el CRM factura
+- [ ] Proveedor del VPS en Francia (OVHcloud, Scaleway…)
+- [ ] Revisión RGPD (registro de actividades, posible EIPD, contratos de encargado)
+- [ ] Plazos y subvención JCCM: requiere constituir la SL de José Miguel
 - [ ] Dominio propio
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
@@ -68,4 +81,6 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - Decisión: sin recepcionista IA (D-006); el teléfono siempre reproduce un mensaje y deriva a WhatsApp, email o web (D-007).
 - Prototipo: la pestaña "Voz IA 24/7 (ElevenLabs)" pasa a ser "Teléfono → WhatsApp" con el nuevo flujo; eliminado todo el código de ElevenLabs. Corregido el desbordamiento de la barra de pestañas en móvil.
 - Spec `001-atencion-telefonica` creada (implementación bloqueada por el alta de la línea).
-- **Siguiente paso:** repasar con José Miguel el resto del brief y el stack, y aprobar ambos.
+- Brief reescrito con lo acordado con Adela (D-008 a D-013): flujo del paciente, pagos, agenda, biblioteca de vídeos y voces, prescripción, mini cuestionario e historial del paciente.
+- Creado `specs/02-plan.md` con fases y specs.
+- **Siguiente paso:** aprobar el brief y el plan; cerrar el stack (framework de frontend, videollamada, email).
