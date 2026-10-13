@@ -1,0 +1,23 @@
+# Secretos: nunca al repositorio (el repo se publica en GitHub Pages)
+.env
+.env.*
+!.env.example
+
+# Dependencias y builds
+node_modules/
+dist/
+build/
+.vercel/
+.supabase/
+
+# Sistema / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+
+# Datos de pacientes: nunca en el repo, ni siquiera de prueba
+data/pacientes/
+*.sql.gz
+*.dump
