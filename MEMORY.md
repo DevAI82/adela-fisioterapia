@@ -9,7 +9,7 @@
 
 | Campo | Valor |
 |---|---|
-| Fase | **Arranque del proyecto**: demo aceptada por la clienta; revisión de brief y stack en curso |
+| Fase | **Fase 0 · Validación**: prototipo v2 terminado, pendiente de que lo revise Adela |
 | Cliente | Adela Alventosa, fisioterapeuta colegiada |
 | Responsable | José Miguel (Altera Soluciones Tecnológicas) |
 | Prototipo | https://devai82.github.io/adela-fisioterapia/ |
@@ -55,6 +55,9 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Dominio propio
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
+- [ ] **Validación del prototipo v2 por Adela** (spec 002), incluidos los textos de servicios y de "Quiénes somos"
+- [ ] ¿Se publica el prototipo v2 en `main` (GitHub Pages) y en la demo comercial?
+- [ ] Confirmar los supuestos del brief: notas de consulta con parte privada y resumen para el paciente; gráficas de evolución
 
 ## Riesgos conocidos
 
@@ -84,3 +87,12 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - Brief reescrito con lo acordado con Adela (D-008 a D-013): flujo del paciente, pagos, agenda, biblioteca de vídeos y voces, prescripción, mini cuestionario e historial del paciente.
 - Creado `specs/02-plan.md` con fases y specs.
 - **Siguiente paso:** aprobar el brief y el plan; cerrar el stack (framework de frontend, videollamada, email).
+
+### 2026-10-13 (noche, trabajo autónomo autorizado por José Miguel)
+- **Spec 002 · Prototipo v2 hecha** (28/28 comprobaciones automáticas):
+  - Web: servicios destacados, Quiénes somos y tarifas con la 1ª consulta a 22,50 €.
+  - Alta: tipo de problema, adjuntos médicos, registro y consentimientos; checkout simulado (Bizum o tarjeta; suscripciones solo con tarjeta); reserva martes y jueves 16–20 con 15 min de descanso.
+  - CRM: historial del paciente con línea temporal y filtros, notas privadas y resumen, enlace de pago, agenda con "Reagendar sin coste", biblioteca de vídeos y voces con subida, prescripción con series, repeticiones, frecuencia, duración y nota.
+  - Portal: rutina con pauta, voz en off, "Ejercicio finalizado", mini cuestionario de sesión (rigidez, EVA, estabilidad, comentario), resumen de consulta, plan y pagos.
+- Eliminadas las referencias a Instagram del prototipo (D-011).
+- **Siguiente paso:** enseñar el prototipo v2 a Adela y recoger sus cambios; después, spec 003 (stack definitivo).
