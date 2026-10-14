@@ -6,7 +6,7 @@
 | Fuente | Reunión con la clienta (13/10/2026), demo y conversación con José Miguel |
 | Última actualización | 2026-10-13 |
 
-> Leyenda: ❓ = pendiente de dato o decisión. Lo marcado como **[supuesto]** es una interpretación nuestra a confirmar.
+> Leyenda: ❓ = pendiente de dato o decisión.
 
 ---
 
@@ -113,14 +113,14 @@ Todo va al **historial del paciente** y Adela lo ve en su ficha.
 ### 7.4 Historial del paciente (CRM). **Vital**
 Línea temporal por paciente, ordenada por fecha, con:
 - **cuestionario inicial**, comentarios y **adjuntos médicos**;
-- **consultas**: notas de cada sesión, separadas en **notas privadas** (solo Adela) y **resumen para el paciente** **[supuesto]**;
+- **consultas**: notas de cada sesión, separadas en **notas privadas** (solo Adela) y **resumen para el paciente** (D-014);
 - **rutinas** prescritas y sus cambios;
 - **sesiones realizadas** con su mini cuestionario y comentarios;
 - **respuestas de Adela**;
 - **conversaciones de WhatsApp** (vía Zernio) y mensajes del portal;
 - **pagos** realizados (y facturas, si se integran).
 
-Con gráficas de evolución de dolor, rigidez y estabilidad **[supuesto, deseable]**.
+Con gráficas de evolución de dolor, rigidez y estabilidad (D-014).
 
 ### 7.5 Web pública
 - Landing actual con la nueva marca.

@@ -35,6 +35,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | D-011 | 2026-10-13 | Canales: **WhatsApp (vía Zernio, plan gratuito) y web**. Sin Instagram ni LinkedIn | Adela no tiene redes por ahora |
 | D-012 | 2026-10-13 | **Vídeos y voces genéricos en Cloudflare R2**; audios personalizados y adjuntos médicos en Supabase Storage privado en el VPS | R2 es gratis hasta 10 GB y no cobra por reproducciones; los datos de salud no salen del VPS |
 | D-013 | 2026-10-13 | Agenda: citas con **15 min de descanso**; no presentado sin justificar = sin devolución; Adela puede reagendar sin coste | Acordado con Adela |
+| D-014 | 2026-10-14 | Cada nota de consulta tiene **notas privadas** (solo Adela) y **resumen para el paciente**; la ficha incluye **gráficas de evolución** de dolor, rigidez y estabilidad | Confirmado por José Miguel |
+| D-015 | 2026-10-14 | Se publica el **prototipo v2** en GitHub Pages (`main`) | Confirmado por José Miguel |
 
 ## Pendiente de decidir / validar con José Miguel
 
@@ -56,8 +58,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
 - [ ] **Validación del prototipo v2 por Adela** (spec 002), incluidos los textos de servicios y de "Quiénes somos"
-- [ ] ¿Se publica el prototipo v2 en `main` (GitHub Pages) y en la demo comercial?
-- [ ] Confirmar los supuestos del brief: notas de consulta con parte privada y resumen para el paciente; gráficas de evolución
+- [ ] ¿Se lleva también el prototipo v2 a la demo comercial (`demos-comerciales/adela-fisio`)?
+- [ ] **Aprobar la spec 003 (stack definitivo)**
 
 ## Riesgos conocidos
 
@@ -96,3 +98,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
   - Portal: rutina con pauta, voz en off, "Ejercicio finalizado", mini cuestionario de sesión (rigidez, EVA, estabilidad, comentario), resumen de consulta, plan y pagos.
 - Eliminadas las referencias a Instagram del prototipo (D-011).
 - **Siguiente paso:** enseñar el prototipo v2 a Adela y recoger sus cambios; después, spec 003 (stack definitivo).
+
+### 2026-10-14
+- José Miguel confirma los dos supuestos del brief (D-014) y la publicación del prototipo v2 (D-015): `main` actualizado y GitHub Pages desplegado.
+- La propuesta de stack pasa a su propia spec: `specs/features/003-stack-definitivo.md` (borrador, pendiente de aprobar).
+- **Siguiente paso:** aprobar la spec 003, fila a fila.

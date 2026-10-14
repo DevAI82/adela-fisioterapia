@@ -90,19 +90,6 @@ Ver [`.env.example`](../.env.example). Se ajusta cuando este documento quede apr
 5. ~~¿Pasarela de pago?~~ → Stripe (D-009).
 6. ¿El prototipo de GitHub Pages se mantiene como demo o lo sustituye la web real?
 
-## 7. Propuesta para cerrar el stack (borrador para la spec 003, **no aprobada**)
+## 7. Decisiones pendientes del stack
 
-Redactada por el agente el 13/10/2026 para agilizar la revisión. Cada punto necesita el ✅ de José Miguel.
-
-| Decisión | Propuesta | Por qué | Alternativa |
-|---|---|---|---|
-| Frontend | **Next.js (App Router) + Tailwind + `@supabase/ssr`**, una sola aplicación para web, portal y panel | Renderizado en servidor para el SEO de la web pública, autenticación con cookies seguras, gran ecosistema; se despliega como contenedor en Coolify | SvelteKit (más ligero, ecosistema menor) o Astro para la web pública + app aparte |
-| Proveedor del VPS | **OVHcloud** o **Scaleway** (centros de datos en Francia), con ≥ 8 GB de RAM | Supabase autoalojado levanta varios contenedores (Postgres, Auth, Storage, Realtime, Studio…); 8 GB dan margen junto a la app y la analítica | Hetzner (más barato, pero sin centro de datos en Francia) |
-| Videollamada | **Google Meet** creado desde la API de Google Calendar, con **Google Workspace** (Business Starter) | Adela necesita cuenta de Google de todas formas; Workspace incluye email profesional con su dominio, Calendar, Meet y contrato de encargado del tratamiento | Jitsi autoalojado (más trabajo de mantenimiento) o un servicio de vídeo embebido de pago |
-| Email transaccional | Servicio con **servidores en la UE** (por ejemplo Brevo) o el SMTP de Google Workspace para el volumen inicial | Confirmaciones, recordatorios y justificantes; volumen bajo | Resend (verificar la opción de región UE) |
-| Copias de seguridad | `pg_dump` diario cifrado + snapshot semanal del VPS, en almacenamiento de objetos en la UE; restauración probada cada mes | Exigencia RGPD y Ley 41/2002 | Backups gestionados del proveedor |
-| Analítica web | **Umami** autoalojado en Coolify (sin cookies) | No requiere banner de cookies para analítica | Plausible |
-| Facturación | Fuera del CRM en la fase 1: el CRM registra los pagos de Stripe y la gestoría emite las facturas | Evita VeriFactu en el MVP | Software de facturación homologado conectado por API |
-| Calidad | GitHub Actions: lint, typecheck, tests (Vitest y Playwright) y pruebas de RLS contra un Supabase local | Las políticas RLS son la principal garantía de privacidad: deben tener tests | — |
-
-Si se aprueba, se convierte en la spec `003-stack-definitivo` y se actualizan `.env.example` y `AGENTS.md §3` con la estructura del código.
+Se proponen y se aprueban en la spec [`features/003-stack-definitivo.md`](features/003-stack-definitivo.md). Al aprobarla, este documento se actualiza con lo decidido.
