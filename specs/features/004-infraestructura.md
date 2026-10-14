@@ -93,7 +93,7 @@ No aplica.
 4. El cliente **rota todas las claves** (Supabase, Stripe, Resend, Zernio, Google, R2), porque Altera las tuvo.
 
 ## 8. Tareas
-- [ ] T0 Montar staging en el VPS de Altera con datos ficticios (puede empezar ya)
+- [ ] T0 Montar staging en el VPS de Altera con datos ficticios (puede empezar ya) — guía: [`docs/runbooks/01-staging-en-coolify-altera.md`](../../docs/runbooks/01-staging-en-coolify-altera.md)
 - [ ] T1 Adela contrata el VPS Contabo (Francia) y firma el AVV; Altera y Adela firman el contrato de encargado del tratamiento
 - [ ] T2 Registrar el dominio — *José Miguel / Adela*
 - [ ] T3 Endurecer el servidor (CA-2)
