@@ -43,6 +43,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | D-019 | 2026-10-14 | Frontend: **Astro (SSR) + islas de Vue** para portal y panel | Web pública rápida y con buen SEO; Vue para la interactividad. Preferencia de José Miguel por un acabado premium |
 | D-020 | 2026-10-14 | Copias de seguridad **diarias** con Coolify (BD + ficheros), fuera del VPS en S3 en la UE, con prueba de restauración | Con copias semanales se podría perder hasta una semana de datos clínicos |
 | D-021 | 2026-10-14 | Analítica con **Umami** autoalojado | Sin cookies, gratuito, datos en nuestro servidor |
+| D-022 | 2026-10-14 | **Staging en el VPS de Altera** (solo datos ficticios); **producción en un VPS Contabo a nombre de Adela** | Avanzar sin esperar al VPS de Adela; sin datos reales fuera de su servidor |
+| D-023 | 2026-10-14 | **Coolify central** en el VPS de Altera con un *team* por cliente; los VPS de clientes se gestionan como servidores remotos por SSH; **HetrixTools** para monitorizarlos. Plan de salida en la spec 004 | Gestión de todos los clientes desde un panel; si Coolify cae, las apps siguen funcionando |
 
 ## Pendiente de decidir / validar con José Miguel
 
@@ -57,6 +59,8 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Objetivos medibles del negocio
 - [ ] IVA de los servicios y quién emite las facturas (gestoría); VeriFactu si el CRM factura
 - [ ] Revisión RGPD (registro de actividades, posible EIPD, contratos de encargado)
+- [ ] **Contrato de encargado del tratamiento Adela ↔ Altera** (art. 28 RGPD) con confidencialidad, cláusula de reversibilidad y propiedad del código
+- [ ] Adela contrata el VPS Contabo (Francia)
 - [ ] Plazos y subvención JCCM: requiere constituir la SL de José Miguel
 - [ ] Dominio propio
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
@@ -68,6 +72,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 
 | Riesgo | Mitigación |
 |---|---|
+| El Coolify central concentra las claves de todos los clientes | 2FA, copias de Coolify con su clave de cifrado aparte, team por cliente y rotación de claves en cada salida |
 | Datos de salud (RGPD art. 9) | RLS, servidores en la UE, contratos de encargado del tratamiento, consentimiento explícito |
 | Dependencia de terceros (Zernio) | Abstraer integraciones; plan B documentado en el stack |
 | El operador no permite desactivar el buzón de voz | Centralita virtual "mensaje y colgar" (spec 001, opción B) |
@@ -109,4 +114,5 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - Spec 003 revisada: Contabo, Google Meet, Resend gratuito, copias con Coolify, facturación futura y revisiones con skills (D-016, D-017).
 - **Spec 003 cerrada** (D-019 a D-021): Astro + Vue, copias diarias y Umami. Actualizados `01-stack.md`, `.env.example` y `AGENTS.md §3`.
 - Specs 004 (infraestructura) y 005 (modelo de datos y seguridad) escritas en borrador.
-- **Siguiente paso:** aprobar las specs 004 y 005. Para ejecutar la 004 hace falta: cuenta de Contabo, dominio y acceso SSH al VPS.
+- Decisiones D-022 y D-023: staging en el VPS de Altera, Coolify central con team por cliente, HetrixTools y plan de salida documentado en la spec 004.
+- **Siguiente paso:** aprobar las specs 004 y 005; empezar la 005 en local y montar staging (T0 de la 004).
