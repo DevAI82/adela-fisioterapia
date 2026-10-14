@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |---|---|
-| Estado | `borrador`: **6 de 8 decisiones tomadas**; faltan frontend (1) y frecuencia de copias / analítica (5, 6) |
+| Estado | `hecha` |
 | Módulo | Transversal (infraestructura y arquitectura) |
 | Prioridad | Alta: bloquea las specs 004 (infraestructura) y 005 (modelo de datos) |
-| Aprobada por | — |
+| Aprobada por | José Miguel (14/10/2026) |
 | Fecha | 2026-10-14 |
 
 ## 1. Contexto y objetivo
@@ -16,12 +16,12 @@ Ya están decididos: VPS en Francia con Coolify y Supabase autoalojado (D-010), 
 
 | # | Decisión | Resultado | Notas |
 |---|---|---|---|
-| 1 | Frontend | 🔄 **Propuesta: Astro + Vue** (islas de Vue para el portal y el panel). **Pendiente del ok de José Miguel** | José Miguel prefiere Vue o Astro para una web más premium y con efectos. Astro sirve la web pública muy rápida y bien posicionada (SEO), con transiciones entre páginas; Vue da la interactividad del portal y el panel. Alternativa: Nuxt (Vue completo) |
+| 1 | Frontend | ✅ **Astro + Vue** (islas de Vue para el portal y el panel) | José Miguel prefiere Vue o Astro para una web más premium y con efectos. Astro sirve la web pública muy rápida y bien posicionada (SEO), con transiciones entre páginas; Vue da la interactividad del portal y el panel. Alternativa: Nuxt (Vue completo) |
 | 2 | Proveedor del VPS | ✅ **Contabo**, centro de datos en Francia (Lauterbourg) | José Miguel ya lo conoce. Firmar el contrato de encargado del tratamiento (AVV) de Contabo. Plan de 8 GB de RAM o más para Supabase |
 | 3 | Videollamada | ✅ **Google Meet** | Pendiente de que Adela cree su cuenta de Google. Recomendado Google Workspace (incluye contrato de protección de datos y email con su dominio) |
 | 4 | Email transaccional | ✅ **Resend, plan gratuito** | Límite: 100 emails/día y 3.000/mes. Los emails no llevarán datos de salud (solo avisos y enlaces al portal). Revisar el contrato de encargado del tratamiento de Resend |
-| 5 | Copias de seguridad | ✅ **Copias programadas de Coolify** sobre Supabase autoalojado. **Pendiente: frecuencia** | Propuesta: **diaria** en vez de semanal (con copia semanal se podría perder hasta una semana de notas clínicas), enviada fuera del VPS a almacenamiento compatible con S3 en la UE, y **copia también de los ficheros** (informes adjuntos). Verificar en la spec 004 cómo hace Coolify la copia del Postgres dentro del servicio Supabase y probar una restauración |
-| 6 | Analítica web | ❓ **Umami**, pendiente de decidir | Explicado a José Miguel: alternativa a Google Analytics, gratuita y sin cookies |
+| 5 | Copias de seguridad | ✅ **Copias diarias con Coolify** sobre Supabase autoalojado | Propuesta: **diaria** en vez de semanal (con copia semanal se podría perder hasta una semana de notas clínicas), enviada fuera del VPS a almacenamiento compatible con S3 en la UE, y **copia también de los ficheros** (informes adjuntos). Verificar en la spec 004 cómo hace Coolify la copia del Postgres dentro del servicio Supabase y probar una restauración |
+| 6 | Analítica web | ✅ **Umami** autoalojado en Coolify | Explicado a José Miguel: alternativa a Google Analytics, gratuita y sin cookies |
 | 7 | Facturación | ✅ **Fuera de la fase 1** | Funcionalidad futura. El CRM registra los pagos de Stripe; la gestoría factura |
 | 8 | Calidad | ✅ **Revisión con skills de frontend, SEO y seguridad** antes de cada entrega | Se recomienda mantener además los tests automáticos de RLS (privacidad de los datos clínicos) |
 
@@ -33,7 +33,7 @@ Ya están decididos: VPS en Francia con Coolify y Supabase autoalojado (D-010), 
  │  App Astro + Vue (web pública · portal · panel de Adela)        │
  │        │  Supabase SSR (sesión con cookies, RLS)                 │
  │  Supabase: Postgres · Auth · Storage privado · Edge Functions   │
- │  Umami (analítica sin cookies) · pendiente de decidir          │
+ │  Umami (analítica sin cookies)                                  │
  └──────┬──────────────┬───────────────┬──────────────┬────────────┘
         │              │               │              │
    Stripe (pagos)  Zernio (WhatsApp)  Google Meet      Cloudflare R2
@@ -43,11 +43,11 @@ Ya están decididos: VPS en Francia con Coolify y Supabase autoalojado (D-010), 
 ```
 
 ## 4. Criterios de aceptación
-- [ ] **CA-1:** Cada fila de §2 tiene una decisión (✅, 🔄 con la alternativa elegida, o ❌).
-- [ ] **CA-2:** Todos los proveedores con datos personales están en la UE o tienen contrato de encargado del tratamiento.
-- [ ] **CA-3:** `01-stack.md` refleja lo decidido; `.env.example` tiene solo las variables necesarias.
-- [ ] **CA-4:** `AGENTS.md §3` incluye la estructura de carpetas de la aplicación.
-- [ ] **CA-5:** Las decisiones quedan registradas en `MEMORY.md`.
+- [x] **CA-1:** Cada fila de §2 tiene una decisión (✅, 🔄 con la alternativa elegida, o ❌).
+- [x] **CA-2:** Todos los proveedores con datos personales están en la UE o tienen contrato de encargado del tratamiento.
+- [x] **CA-3:** `01-stack.md` refleja lo decidido; `.env.example` tiene solo las variables necesarias.
+- [x] **CA-4:** `AGENTS.md §3` incluye la estructura de carpetas de la aplicación.
+- [x] **CA-5:** Las decisiones quedan registradas en `MEMORY.md`.
 
 ## 5. Fuera de alcance
 Instalar o contratar nada: eso es la spec 004 (infraestructura).
@@ -61,12 +61,14 @@ Una vez aprobada:
 2. Escribir la spec 004 (infraestructura) y la 005 (modelo de datos y seguridad).
 
 ## 8. Tareas
-- [ ] T1 Revisión con José Miguel fila a fila.
-- [ ] T2 Actualizar la documentación (CA-3, CA-4 y CA-5).
+- [x] T1 Revisión con José Miguel fila a fila.
+- [x] T2 Actualizar la documentación (CA-3, CA-4 y CA-5).
 
 ## 9. Verificación
-_(se rellena al aprobar)_
+- Las 8 filas de §2 tienen decisión (CA-1).
+- Proveedores con datos personales: Contabo (Francia), Supabase autoalojado en el VPS, Stripe, Zernio, Google y Resend, todos con contrato de encargado del tratamiento pendiente de firmar en la spec 004 (CA-2).
+- `01-stack.md`, `.env.example`, `AGENTS.md §3` y `MEMORY.md` actualizados (CA-3, CA-4, CA-5).
 
 ## 10. Notas y decisiones
 - 2026-10-14: propuesta extraída de `01-stack.md §7` a esta spec, a petición de José Miguel.
-- 2026-10-14: revisión fila a fila con José Miguel (tabla de §2).
+- 2026-10-14: revisión fila a fila con José Miguel (tabla de §2). Cerrada el mismo día: Astro + Vue, copias diarias y Umami.

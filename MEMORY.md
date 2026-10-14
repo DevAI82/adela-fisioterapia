@@ -9,7 +9,7 @@
 
 | Campo | Valor |
 |---|---|
-| Fase | **Fase 0 · Validación**: prototipo v2 terminado, pendiente de que lo revise Adela |
+| Fase | **Fase 0 · Cimientos**: prototipo v2 publicado; stack aprobado (spec 003); specs 004 y 005 en borrador |
 | Cliente | Adela Alventosa, fisioterapeuta colegiada |
 | Responsable | José Miguel (Altera Soluciones Tecnológicas) |
 | Prototipo | https://devai82.github.io/adela-fisioterapia/ |
@@ -40,11 +40,13 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | D-016 | 2026-10-14 | VPS en **Contabo** (Francia, Lauterbourg) | José Miguel ya lo conoce |
 | D-017 | 2026-10-14 | Videollamada con **Google Meet**; email transaccional con **Resend (plan gratuito)**; copias con **Coolify**; facturación fuera de la fase 1; revisiones con skills de frontend, SEO y seguridad | Revisión de la spec 003 |
 | D-018 | 2026-10-14 | El prototipo v2 se publica también en la **demo comercial** (`demos-comerciales/adela-fisio`) | José Miguel lo enseña en una reunión |
+| D-019 | 2026-10-14 | Frontend: **Astro (SSR) + islas de Vue** para portal y panel | Web pública rápida y con buen SEO; Vue para la interactividad. Preferencia de José Miguel por un acabado premium |
+| D-020 | 2026-10-14 | Copias de seguridad **diarias** con Coolify (BD + ficheros), fuera del VPS en S3 en la UE, con prueba de restauración | Con copias semanales se podría perder hasta una semana de datos clínicos |
+| D-021 | 2026-10-14 | Analítica con **Umami** autoalojado | Sin cookies, gratuito, datos en nuestro servidor |
 
 ## Pendiente de decidir / validar con José Miguel
 
 - [ ] **Brief definitivo** tras la reunión del 13/10 → `specs/00-brief.md`
-- [ ] **Stack definitivo** → `specs/01-stack.md` (hosting, backend, pagos, dominio)
 - [ ] Alcance de la fase 1 (MVP) frente a fases posteriores
 - [ ] **Línea móvil de la clínica**: pendiente de alta; operador por decidir (spec 001)
 - [ ] **WhatsApp Business** en ese mismo número: pendiente de contratar. Verificarlo *antes* de activar el desvío de llamadas
@@ -60,7 +62,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
 - [ ] **Validación del prototipo v2 por Adela** (spec 002), incluidos los textos de servicios y de "Quiénes somos"
-- [ ] **Spec 003**: confirmar frontend (propuesta Astro + Vue), frecuencia de copias (propuesta diaria) y analítica (Umami sí o no)
+- [ ] **Aprobar las specs 004 (infraestructura) y 005 (modelo de datos y seguridad)**
 
 ## Riesgos conocidos
 
@@ -105,4 +107,6 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - La propuesta de stack pasa a su propia spec: `specs/features/003-stack-definitivo.md` (borrador, pendiente de aprobar).
 - Prototipo v2 publicado también en la demo comercial (D-018); tarjeta del portal de demos y mensaje de WhatsApp actualizados (sin voz IA).
 - Spec 003 revisada: Contabo, Google Meet, Resend gratuito, copias con Coolify, facturación futura y revisiones con skills (D-016, D-017).
-- **Siguiente paso:** cerrar las 3 decisiones pendientes de la spec 003 y escribir las specs 004 (infraestructura) y 005 (modelo de datos).
+- **Spec 003 cerrada** (D-019 a D-021): Astro + Vue, copias diarias y Umami. Actualizados `01-stack.md`, `.env.example` y `AGENTS.md §3`.
+- Specs 004 (infraestructura) y 005 (modelo de datos y seguridad) escritas en borrador.
+- **Siguiente paso:** aprobar las specs 004 y 005. Para ejecutar la 004 hace falta: cuenta de Contabo, dominio y acceso SSH al VPS.

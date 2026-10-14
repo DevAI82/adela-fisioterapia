@@ -57,7 +57,24 @@ Reglas:
     └── features/       Una spec por funcionalidad (NNN-nombre.md)
 ```
 
-La estructura de la aplicación de producción se define en `specs/01-stack.md` y se añadirá aquí cuando esté aprobada.
+### Aplicación de producción (Astro + Vue, spec 003)
+
+Se crea en la spec 004. Mientras tanto el prototipo sigue en la raíz.
+
+```
+app/                        Proyecto Astro (SSR, adaptador Node) desplegado en Coolify
+├── src/pages/              Rutas: web pública (/), portal del paciente (/portal), panel de Adela (/panel), API (/api)
+├── src/layouts/            Plantillas de página
+├── src/components/         Componentes .astro (estáticos) y .vue (interactivos: portal y panel)
+├── src/lib/                Clientes de Supabase, Stripe, Resend, R2 y Google (solo servidor salvo los PUBLIC_)
+├── src/styles/             Tailwind con los tokens de marca de §4
+└── tests/                  Vitest (unitarios) y Playwright (extremo a extremo)
+supabase/
+├── migrations/             Esquema y políticas RLS en SQL versionado (spec 005)
+└── tests/                  Tests de RLS: un paciente nunca ve datos de otro ni notas privadas
+```
+
+Reglas: la lógica con secretos va en `src/pages/api` o en `src/lib/server`, nunca en componentes `.vue`; los componentes Vue se hidratan solo donde hace falta (`client:visible` / `client:load`).
 
 ## 4. Identidad de marca (fuente: logo oficial del cliente)
 

@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Estado | `borrador`: **pendiente de revisar con José Miguel** |
+| Estado | `aprobado` (spec 003, 14/10/2026) |
 | Fuente | Dossier inicial ("despliegue del VPS y Supabase") y demo |
 | Última actualización | 2026-10-13 |
 
@@ -15,30 +15,31 @@
 
 | Capa | Propuesta inicial | Alternativas a valorar | Decisión |
 |---|---|---|---|
-| Frontend web y portal | ❓ (el prototipo es un HTML con Tailwind por CDN) | Astro, Next.js, SvelteKit, React + Vite | ❓ |
-| Estilos | Tailwind CSS (con build, no CDN) | — | ❓ |
+| Frontend web y portal | ❓ (el prototipo es un HTML con Tailwind por CDN) | Astro, Next.js, SvelteKit, React + Vite | ✅ **Astro (SSR, adaptador Node) + islas de Vue** para portal y panel (D-019) |
+| Estilos | Tailwind CSS (con build, no CDN) | — | ✅ Tailwind con los tokens de marca de `AGENTS.md §4` |
 | Backend / BBDD / Auth | **Supabase** (Postgres + Auth + RLS + Storage + Edge Functions) | Supabase autoalojado en VPS | ✅ **Supabase autoalojado con Coolify** (D-010) |
-| Hosting | **VPS** | Vercel / Netlify (frontend) + Supabase Cloud (región UE) | ✅ **VPS en Francia + Coolify** (D-010). Proveedor ❓ (OVHcloud, Scaleway…) |
+| Hosting | **VPS** | Vercel / Netlify (frontend) + Supabase Cloud (región UE) | ✅ **VPS Contabo en Francia (Lauterbourg) + Coolify** (D-010, D-016) |
 | Vídeos y voces genéricos | Supabase Storage | Cloudflare R2, Cloudflare Stream, Bunny Stream, Vimeo, YouTube oculto | 🔄 **Cloudflare R2** con enlaces firmados (D-012). Stream solo si hace falta streaming adaptativo |
 | Audios personalizados y adjuntos médicos | — | — | ✅ **Supabase Storage privado en el VPS** (datos de salud, D-012) |
 | Mensajería omnicanal | **Zernio** (WhatsApp + Instagram) | WhatsApp Cloud API directa | ✅ **Zernio**, plan gratuito (2 redes), solo WhatsApp (D-011) |
 | Telefonía | Línea móvil de la clínica con desvío incondicional a un mensaje fijo (operador pendiente) | Centralita virtual "mensaje y colgar" | ✅ Mensaje fijo, sin IA (D-006). Operador ❓ |
 | Voz IA | ~~ElevenLabs Conversational AI ("Sofía")~~ | — | ❌ Fuera por ahora (D-006) |
-| Agenda y videoconsulta | **Google Calendar + Google Meet** | Cal.com + Meet/Jitsi | ❓ |
-| Email transaccional | Resend | Brevo, SMTP de Google Workspace | ❓ |
+| Agenda y videoconsulta | **Google Calendar + Google Meet** | Cal.com + Meet/Jitsi | ✅ Agenda propia en Supabase + **Google Meet/Calendar** (D-017). Pendiente cuenta de Google de Adela |
+| Email transaccional | Resend | Brevo, SMTP de Google Workspace | ✅ **Resend, plan gratuito** (100/día, 3.000/mes), sin datos de salud en los emails (D-017) |
 | Pagos | ❓ | Stripe (suscripciones), Bizum vía TPV | ✅ **Stripe**: Bizum y tarjeta en pagos únicos; tarjeta en suscripciones (D-009) |
-| Analítica web | ❓ | Plausible / Umami (sin cookies) | ❓ |
-| Repositorio y CI | GitHub (`DevAI82/adela-fisioterapia`) + GitHub Actions | — | ❓ |
+| Analítica web | ❓ | Plausible / Umami (sin cookies) | ✅ **Umami** autoalojado en Coolify (D-021) |
+| Copias de seguridad | — | — | ✅ **Diarias** con Coolify (BD + ficheros), fuera del VPS en almacenamiento S3 en la UE (D-020) |
+| Repositorio y CI | GitHub (`DevAI82/adela-fisioterapia`) + GitHub Actions | — | ✅ GitHub Actions + revisiones con skills de frontend, SEO y seguridad + tests de RLS (D-017) |
 
-## 2. Arquitectura (borrador)
+## 2. Arquitectura
 
 ```
    Paciente (web/móvil)          Adela (panel)              Canales externos
-          │                           │                 WhatsApp · Instagram · Email
+          │                           │                 WhatsApp · Email          
           │                           │            (Teléfono → mensaje fijo → WhatsApp/web)
           ▼                           ▼                         │
    ┌─────────────────────────────────────────┐          ┌──────┴──────┐
-   │  Frontend (web pública + portal + CRM)  │          │ Zernio/Email │
+   │  Astro + Vue (web · portal · panel)     │          │ Zernio/Email │
    └───────────────────┬─────────────────────┘          └──────┬──────┘
                        │  supabase-js (anon key + RLS)          │ webhooks
                        ▼                                        ▼
@@ -84,12 +85,12 @@ Ver [`.env.example`](../.env.example). Se ajusta cuando este documento quede apr
 ## 6. Preguntas abiertas
 
 1. ~~¿VPS propio o servicios gestionados?~~ → VPS Contabo en Francia con Coolify (D-010, D-016).
-2. ¿Qué framework de frontend usamos? → propuesta Astro + Vue, pendiente (spec 003).
+2. ~~¿Qué framework de frontend usamos?~~ → Astro + Vue (D-019).
 3. ~~¿Zernio o la API oficial de WhatsApp?~~ → Zernio (D-011). Pendiente: compatibilidad con la app de WhatsApp Business en el mismo número (spec 001 §7).
 4. ¿Operador de la línea móvil? (pendiente de alta)
 5. ~~¿Pasarela de pago?~~ → Stripe (D-009).
 6. ¿El prototipo de GitHub Pages se mantiene como demo o lo sustituye la web real?
 
-## 7. Decisiones pendientes del stack
+## 7. Decisiones del stack
 
-Se proponen y se aprueban en la spec [`features/003-stack-definitivo.md`](features/003-stack-definitivo.md). Al aprobarla, este documento se actualiza con lo decidido.
+Cerradas en la spec [`features/003-stack-definitivo.md`](features/003-stack-definitivo.md) (14/10/2026). La tabla de §1 refleja lo decidido.

@@ -17,9 +17,9 @@ Objetivo: que Adela valide el producto con el prototipo antes de construir, y de
 | Spec | Qué | Depende de |
 |---|---|---|
 | **002-prototipo-v2** ✅ hecha (13/10, pendiente de validar con Adela) | Actualizar el prototipo con lo acordado: Quiénes somos, servicios destacados, oferta de la 1ª consulta, paso de "tipo de problema" y adjuntos en el cuestionario, biblioteca de vídeos y prescripción con series/repeticiones/frecuencia/duración, mini cuestionario de la sesión, **historial del paciente**, pagos y enlaces de pago. Sirve de **especificación visual** para Adela | — |
-| [003-stack-definitivo](features/003-stack-definitivo.md) · borrador | Cerrar `01-stack.md`: framework de frontend, videollamada, email transaccional y proveedor del VPS | — |
-| 004-infraestructura | VPS en Francia, Coolify, Supabase autoalojado, dominio, TLS, copias de seguridad cifradas, entornos de staging y producción, CI | 003 · dominio |
-| 005-modelo-datos-y-seguridad | Esquema de base de datos, políticas RLS, buckets privados, 2FA de Adela, registro de accesos, consentimientos versionados | 004 |
+| [003-stack-definitivo](features/003-stack-definitivo.md) ✅ hecha | Cerrar `01-stack.md`: framework de frontend, videollamada, email transaccional y proveedor del VPS | — |
+| [004-infraestructura](features/004-infraestructura.md) · borrador | VPS Contabo (Francia), Coolify, Supabase autoalojado, dominio, TLS, copias de seguridad cifradas, entornos de staging y producción, CI | 003 · dominio |
+| [005-modelo-datos-y-seguridad](features/005-modelo-datos-y-seguridad.md) · borrador | Esquema de base de datos, políticas RLS, buckets privados, 2FA de Adela, registro de accesos, consentimientos versionados | 004 |
 
 ## Fase 1 · MVP: captar, cobrar y atender (salida a producción)
 
