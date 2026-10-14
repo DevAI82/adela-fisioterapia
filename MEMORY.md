@@ -9,7 +9,7 @@
 
 | Campo | Valor |
 |---|---|
-| Fase | **Fase 0 · Cimientos**: prototipo v2 publicado; stack aprobado (spec 003); specs 004 y 005 en borrador |
+| Fase | **Fase 0 · Cimientos**: stack aprobado (003); infraestructura aprobada (004); modelo de datos en curso (005) |
 | Cliente | Adela Alventosa, fisioterapeuta colegiada |
 | Responsable | José Miguel (Altera Soluciones Tecnológicas) |
 | Prototipo | https://devai82.github.io/adela-fisioterapia/ |
@@ -66,7 +66,6 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
 - [ ] **Validación del prototipo v2 por Adela** (spec 002), incluidos los textos de servicios y de "Quiénes somos"
-- [ ] **Aprobar las specs 004 (infraestructura) y 005 (modelo de datos y seguridad)**
 
 ## Riesgos conocidos
 
@@ -77,6 +76,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | Dependencia de terceros (Zernio) | Abstraer integraciones; plan B documentado en el stack |
 | El operador no permite desactivar el buzón de voz | Centralita virtual "mensaje y colgar" (spec 001, opción B) |
 | El prototipo usa Tailwind por CDN (no apto para producción) | Build propio en el stack definitivo |
+| Una política RLS mal escrita expondría datos de salud | 36 tests de privacidad en CI que bloquean cualquier cambio que los rompa |
 
 ## Glosario
 
@@ -115,4 +115,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - **Spec 003 cerrada** (D-019 a D-021): Astro + Vue, copias diarias y Umami. Actualizados `01-stack.md`, `.env.example` y `AGENTS.md §3`.
 - Specs 004 (infraestructura) y 005 (modelo de datos y seguridad) escritas en borrador.
 - Decisiones D-022 y D-023: staging en el VPS de Altera, Coolify central con team por cliente, HetrixTools y plan de salida documentado en la spec 004.
-- **Siguiente paso:** aprobar las specs 004 y 005; empezar la 005 en local y montar staging (T0 de la 004).
+- Specs 004 y 005 aprobadas por José Miguel.
+- Plantilla de **contrato de encargado del tratamiento** de Altera redactada en un documento de Claude (fuera del repo). Pendiente: elegir la opción de propiedad del código y que la revise un abogado.
+- **Spec 005 implementada en su parte de base de datos**: 5 migraciones, buckets privados, seed ficticio y **36 tests de privacidad que pasan** (con prueba de control). CI en `.github/workflows/tests-privacidad.yml`.
+- **Siguiente paso:** montar staging en el Coolify de Altera (guía en `docs/runbooks/`) y validar las migraciones contra Supabase real.

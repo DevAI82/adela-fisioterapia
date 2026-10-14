@@ -1,0 +1,21 @@
+# Spec 005 · CA-17: las políticas de privacidad (RLS) se prueban en cada cambio de la base de datos.
+# Un fallo aquí bloquea el merge: una política mal escrita expondría datos de salud.
+name: Tests de privacidad (base de datos)
+
+on:
+  push:
+    paths: ['supabase/**', 'scripts/db/**', '.github/workflows/tests-privacidad.yml']
+  pull_request:
+    paths: ['supabase/**', 'scripts/db/**', '.github/workflows/tests-privacidad.yml']
+
+permissions:
+  contents: read
+
+jobs:
+  rls:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Migraciones, seed ficticio y tests de RLS
+        run: scripts/db/test-local.sh

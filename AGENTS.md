@@ -71,8 +71,12 @@ app/                        Proyecto Astro (SSR, adaptador Node) desplegado en C
 └── tests/                  Vitest (unitarios) y Playwright (extremo a extremo)
 supabase/
 ├── migrations/             Esquema y políticas RLS en SQL versionado (spec 005)
-└── tests/                  Tests de RLS: un paciente nunca ve datos de otro ni notas privadas
+├── seed.sql                Datos de prueba FICTICIOS
+└── tests/                  Tests de RLS (pgTAP): un paciente nunca ve datos de otro ni notas privadas
+scripts/db/test-local.sh    Migra y ejecuta los tests de RLS en un Postgres desechable (también en CI)
 ```
+
+**Regla:** todo cambio en `supabase/migrations/` va acompañado de tests en `supabase/tests/`, y `scripts/db/test-local.sh` debe pasar antes de subirlo.
 
 Reglas: la lógica con secretos va en `src/pages/api` o en `src/lib/server`, nunca en componentes `.vue`; los componentes Vue se hidratan solo donde hace falta (`client:visible` / `client:load`).
 

@@ -2,10 +2,10 @@
 
 | Campo | Valor |
 |---|---|
-| Estado | `borrador`: pendiente de aprobación de José Miguel |
+| Estado | `aprobada` (T0 staging puede empezar; producción espera al VPS de Adela) |
 | Módulo | Transversal |
 | Prioridad | Alta: sin ella no se puede desplegar nada |
-| Aprobada por | — |
+| Aprobada por | José Miguel (14/10/2026) |
 | Fecha | 2026-10-14 |
 
 ## 1. Contexto y objetivo
