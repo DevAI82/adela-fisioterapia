@@ -37,6 +37,9 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 | D-013 | 2026-10-13 | Agenda: citas con **15 min de descanso**; no presentado sin justificar = sin devolución; Adela puede reagendar sin coste | Acordado con Adela |
 | D-014 | 2026-10-14 | Cada nota de consulta tiene **notas privadas** (solo Adela) y **resumen para el paciente**; la ficha incluye **gráficas de evolución** de dolor, rigidez y estabilidad | Confirmado por José Miguel |
 | D-015 | 2026-10-14 | Se publica el **prototipo v2** en GitHub Pages (`main`) | Confirmado por José Miguel |
+| D-016 | 2026-10-14 | VPS en **Contabo** (Francia, Lauterbourg) | José Miguel ya lo conoce |
+| D-017 | 2026-10-14 | Videollamada con **Google Meet**; email transaccional con **Resend (plan gratuito)**; copias con **Coolify**; facturación fuera de la fase 1; revisiones con skills de frontend, SEO y seguridad | Revisión de la spec 003 |
+| D-018 | 2026-10-14 | El prototipo v2 se publica también en la **demo comercial** (`demos-comerciales/adela-fisio`) | José Miguel lo enseña en una reunión |
 
 ## Pendiente de decidir / validar con José Miguel
 
@@ -51,15 +54,13 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Horario definitivo (inicial: martes y jueves de 16:00 a 20:00)
 - [ ] Objetivos medibles del negocio
 - [ ] IVA de los servicios y quién emite las facturas (gestoría); VeriFactu si el CRM factura
-- [ ] Proveedor del VPS en Francia (OVHcloud, Scaleway…)
 - [ ] Revisión RGPD (registro de actividades, posible EIPD, contratos de encargado)
 - [ ] Plazos y subvención JCCM: requiere constituir la SL de José Miguel
 - [ ] Dominio propio
 - [ ] Textos legales: aviso legal, privacidad, consentimiento sanitario, cookies
 - [ ] ¿Se actualiza `presentacion.html` (dossier) con la nueva marca o queda como histórico?
 - [ ] **Validación del prototipo v2 por Adela** (spec 002), incluidos los textos de servicios y de "Quiénes somos"
-- [ ] ¿Se lleva también el prototipo v2 a la demo comercial (`demos-comerciales/adela-fisio`)?
-- [ ] **Aprobar la spec 003 (stack definitivo)**
+- [ ] **Spec 003**: confirmar frontend (propuesta Astro + Vue), frecuencia de copias (propuesta diaria) y analítica (Umami sí o no)
 
 ## Riesgos conocidos
 
@@ -102,4 +103,6 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 ### 2026-10-14
 - José Miguel confirma los dos supuestos del brief (D-014) y la publicación del prototipo v2 (D-015): `main` actualizado y GitHub Pages desplegado.
 - La propuesta de stack pasa a su propia spec: `specs/features/003-stack-definitivo.md` (borrador, pendiente de aprobar).
-- **Siguiente paso:** aprobar la spec 003, fila a fila.
+- Prototipo v2 publicado también en la demo comercial (D-018); tarjeta del portal de demos y mensaje de WhatsApp actualizados (sin voz IA).
+- Spec 003 revisada: Contabo, Google Meet, Resend gratuito, copias con Coolify, facturación futura y revisiones con skills (D-016, D-017).
+- **Siguiente paso:** cerrar las 3 decisiones pendientes de la spec 003 y escribir las specs 004 (infraestructura) y 005 (modelo de datos).

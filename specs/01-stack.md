@@ -83,8 +83,8 @@ Ver [`.env.example`](../.env.example). Se ajusta cuando este documento quede apr
 
 ## 6. Preguntas abiertas
 
-1. ~~¿VPS propio o servicios gestionados?~~ → VPS en Francia con Coolify (D-010). Falta elegir proveedor.
-2. ¿Qué framework de frontend usamos? → ver la propuesta de §7.
+1. ~~¿VPS propio o servicios gestionados?~~ → VPS Contabo en Francia con Coolify (D-010, D-016).
+2. ¿Qué framework de frontend usamos? → propuesta Astro + Vue, pendiente (spec 003).
 3. ~~¿Zernio o la API oficial de WhatsApp?~~ → Zernio (D-011). Pendiente: compatibilidad con la app de WhatsApp Business en el mismo número (spec 001 §7).
 4. ¿Operador de la línea móvil? (pendiente de alta)
 5. ~~¿Pasarela de pago?~~ → Stripe (D-009).

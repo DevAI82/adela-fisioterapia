@@ -2,7 +2,7 @@
 
 | Campo | Valor |
 |---|---|
-| Estado | `borrador`: **pendiente de aprobación de José Miguel** |
+| Estado | `borrador`: **6 de 8 decisiones tomadas**; faltan frontend (1) y frecuencia de copias / analítica (5, 6) |
 | Módulo | Transversal (infraestructura y arquitectura) |
 | Prioridad | Alta: bloquea las specs 004 (infraestructura) y 005 (modelo de datos) |
 | Aprobada por | — |
@@ -12,34 +12,34 @@
 Cerrar las piezas del stack que siguen abiertas en `01-stack.md`, para empezar a construir la aplicación real.
 Ya están decididos: VPS en Francia con Coolify y Supabase autoalojado (D-010), Stripe (D-009), WhatsApp vía Zernio (D-011) y Cloudflare R2 para los vídeos genéricos (D-012).
 
-## 2. Propuesta (cada fila necesita ✅, 🔄 o ❌)
+## 2. Decisiones (revisión con José Miguel, 14/10/2026)
 
-| Decisión | Propuesta | Por qué | Alternativa | ¿Aprobada? |
-|---|---|---|---|---|
-| Frontend | **Next.js (App Router) + Tailwind + `@supabase/ssr`**, una sola aplicación para web, portal y panel | Renderizado en servidor para el SEO de la web pública, autenticación con cookies seguras, gran ecosistema; se despliega como contenedor en Coolify | SvelteKit (más ligero, ecosistema menor) o Astro para la web pública + app aparte | ❓ |
-| Proveedor del VPS | **OVHcloud** o **Scaleway** (centros de datos en Francia), con ≥ 8 GB de RAM | Supabase autoalojado levanta varios contenedores (Postgres, Auth, Storage, Realtime, Studio…); 8 GB dan margen junto a la app y la analítica | Hetzner (más barato, pero sin centro de datos en Francia) | ❓ |
-| Videollamada | **Google Meet** creado desde la API de Google Calendar, con **Google Workspace** (Business Starter) | Adela necesita cuenta de Google de todas formas; Workspace incluye email profesional con su dominio, Calendar, Meet y contrato de encargado del tratamiento | Jitsi autoalojado (más trabajo de mantenimiento) o un servicio de vídeo embebido de pago | ❓ |
-| Email transaccional | Servicio con **servidores en la UE** (por ejemplo Brevo) o el SMTP de Google Workspace para el volumen inicial | Confirmaciones, recordatorios y justificantes; volumen bajo | Resend (verificar la opción de región UE) | ❓ |
-| Copias de seguridad | `pg_dump` diario cifrado + snapshot semanal del VPS, en almacenamiento de objetos en la UE; restauración probada cada mes | Exigencia RGPD y Ley 41/2002 | Backups gestionados del proveedor | ❓ |
-| Analítica web | **Umami** autoalojado en Coolify (sin cookies) | No requiere banner de cookies para analítica | Plausible | ❓ |
-| Facturación | Fuera del CRM en la fase 1: el CRM registra los pagos de Stripe y la gestoría emite las facturas | Evita VeriFactu en el MVP | Software de facturación homologado conectado por API | ❓ |
-| Calidad | GitHub Actions: lint, typecheck, tests (Vitest y Playwright) y pruebas de RLS contra un Supabase local | Las políticas RLS son la principal garantía de privacidad: deben tener tests | — | ❓ |
+| # | Decisión | Resultado | Notas |
+|---|---|---|---|
+| 1 | Frontend | 🔄 **Propuesta: Astro + Vue** (islas de Vue para el portal y el panel). **Pendiente del ok de José Miguel** | José Miguel prefiere Vue o Astro para una web más premium y con efectos. Astro sirve la web pública muy rápida y bien posicionada (SEO), con transiciones entre páginas; Vue da la interactividad del portal y el panel. Alternativa: Nuxt (Vue completo) |
+| 2 | Proveedor del VPS | ✅ **Contabo**, centro de datos en Francia (Lauterbourg) | José Miguel ya lo conoce. Firmar el contrato de encargado del tratamiento (AVV) de Contabo. Plan de 8 GB de RAM o más para Supabase |
+| 3 | Videollamada | ✅ **Google Meet** | Pendiente de que Adela cree su cuenta de Google. Recomendado Google Workspace (incluye contrato de protección de datos y email con su dominio) |
+| 4 | Email transaccional | ✅ **Resend, plan gratuito** | Límite: 100 emails/día y 3.000/mes. Los emails no llevarán datos de salud (solo avisos y enlaces al portal). Revisar el contrato de encargado del tratamiento de Resend |
+| 5 | Copias de seguridad | ✅ **Copias programadas de Coolify** sobre Supabase autoalojado. **Pendiente: frecuencia** | Propuesta: **diaria** en vez de semanal (con copia semanal se podría perder hasta una semana de notas clínicas), enviada fuera del VPS a almacenamiento compatible con S3 en la UE, y **copia también de los ficheros** (informes adjuntos). Verificar en la spec 004 cómo hace Coolify la copia del Postgres dentro del servicio Supabase y probar una restauración |
+| 6 | Analítica web | ❓ **Umami**, pendiente de decidir | Explicado a José Miguel: alternativa a Google Analytics, gratuita y sin cookies |
+| 7 | Facturación | ✅ **Fuera de la fase 1** | Funcionalidad futura. El CRM registra los pagos de Stripe; la gestoría factura |
+| 8 | Calidad | ✅ **Revisión con skills de frontend, SEO y seguridad** antes de cada entrega | Se recomienda mantener además los tests automáticos de RLS (privacidad de los datos clínicos) |
 
 ## 3. Arquitectura resultante
 
 ```
-                         Coolify en VPS (Francia)
+                     Coolify en VPS Contabo (Francia)
  ┌─────────────────────────────────────────────────────────────────┐
- │  App Next.js  (web pública · portal paciente · panel de Adela)  │
- │        │  @supabase/ssr (sesión con cookies, RLS)               │
+ │  App Astro + Vue (web pública · portal · panel de Adela)        │
+ │        │  Supabase SSR (sesión con cookies, RLS)                 │
  │  Supabase: Postgres · Auth · Storage privado · Edge Functions   │
- │  Umami (analítica sin cookies)                                  │
+ │  Umami (analítica sin cookies) · pendiente de decidir          │
  └──────┬──────────────┬───────────────┬──────────────┬────────────┘
         │              │               │              │
-   Stripe (pagos)  Zernio (WhatsApp)  Google Workspace  Cloudflare R2
-   webhooks        webhooks          Calendar + Meet   vídeos genéricos
-                                     + email           (URLs firmadas)
- Copias cifradas diarias → almacenamiento de objetos en la UE
+   Stripe (pagos)  Zernio (WhatsApp)  Google Meet      Cloudflare R2
+   webhooks        webhooks          + Calendar        vídeos genéricos
+   Resend (emails transaccionales)                     (URLs firmadas)
+ Copias programadas de Coolify (BD + ficheros) → almacenamiento S3 en la UE
 ```
 
 ## 4. Criterios de aceptación
@@ -69,3 +69,4 @@ _(se rellena al aprobar)_
 
 ## 10. Notas y decisiones
 - 2026-10-14: propuesta extraída de `01-stack.md §7` a esta spec, a petición de José Miguel.
+- 2026-10-14: revisión fila a fila con José Miguel (tabla de §2).
