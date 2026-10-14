@@ -16,6 +16,35 @@
 | Demo comercial | https://devai82.github.io/demos-comerciales/adela-fisio/ |
 | Financiación | Bono Crecimiento Pyme JCCM (pendiente de confirmar para este cliente) |
 
+## Cómo retomar (actualizado el 14/10/2026 al cerrar la sesión)
+
+**Estado de las specs**
+
+| Spec | Estado | Dónde |
+|---|---|---|
+| 001 Atención telefónica | Aprobada; bloqueada hasta el alta de la línea | `specs/features/001-atencion-telefonica.md` |
+| 002 Prototipo v2 | Hecha y publicada; falta que la valide Adela | GitHub Pages + demo comercial |
+| 003 Stack definitivo | Hecha | Astro + Vue, Contabo, Coolify, Supabase, Meet, Resend, Umami |
+| 004 Infraestructura | Aprobada; T0 (staging) lista para ejecutar | Guía: `docs/runbooks/01-staging-en-coolify-altera.md` |
+| 005 Modelo de datos y seguridad | En curso: BD + RLS + 36 tests hechos; faltan CA-13 a CA-16 | `supabase/` · `scripts/db/test-local.sh` · CI `tests-privacidad.yml` (en verde) |
+| 006 Web pública (Astro + Vue) | Sin escribir: es la siguiente spec de desarrollo | — |
+
+**Siguientes pasos, en orden**
+1. José Miguel monta **staging** en su Coolify siguiendo el runbook 01 (o da acceso SSH temporal para hacerlo). Incluye pasar las migraciones y los 36 tests contra **Supabase real** (aquí se probó con un sustituto del Storage).
+2. Escribir la **spec 006 (web pública en Astro + Vue)** y crear la app en `app/` (estructura en `AGENTS.md §3`).
+3. Enseñar el prototipo v2 a Adela y recoger sus cambios: textos de servicios, "Quiénes somos" y foto.
+4. Cerrar el **contrato de encargado del tratamiento**: elegir la opción A o B de la cláusula 18 (propiedad del código) y pasarlo por un abogado.
+
+**Dónde está cada cosa**
+- Prototipo publicado: https://devai82.github.io/adela-fisioterapia/ · demo comercial: https://devai82.github.io/demos-comerciales/adela-fisio/
+- Plantilla del contrato de encargado del tratamiento (documento de Claude, privado, fuera del repo): https://claude.ai/code/artifact/36016d91-0d41-44d4-8a87-4efa5b1247ad
+- Repos: `DevAI82/adela-fisioterapia` y `DevAI82/demos-comerciales`. Rama de trabajo `claude/amazing-davinci-culuiq`, fusionada en `main` en ambos (publicado con autorización de José Miguel).
+- En `demos-comerciales` hay otra rama sin fusionar, `claude/trusting-faraday-sg5jvh`, que reintroduce ElevenLabs en `adela-fisio/`. Si se fusiona, **descartar sus cambios en esa carpeta**.
+
+**Notas técnicas del entorno de desarrollo de Claude** (no afectan a producción)
+- `supabase start` no funciona aquí (ECR bloqueado y límite de Docker Hub). Usar `scripts/db/test-local.sh`, que levanta `supabase/postgres:17.6.1.064` desechable.
+- El CDN de Tailwind y github.io están bloqueados por el proxy. Para hacer capturas del prototipo se genera el CSS en local con `tailwindcss@3` y la configuración del `index.html`. Para comprobar despliegues de Pages, usar la API de GitHub Actions.
+
 ## Decisiones
 
 Formato: fecha · decisión · motivo · alternativas descartadas.
@@ -48,7 +77,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 
 ## Pendiente de decidir / validar con José Miguel
 
-- [ ] **Brief definitivo** tras la reunión del 13/10 → `specs/00-brief.md`
+- [ ] **Brief**: reescrito con todo lo acordado el 13/10 (`specs/00-brief.md`, estado "listo para aprobar"); falta el visto bueno formal de José Miguel
 - [ ] Alcance de la fase 1 (MVP) frente a fases posteriores
 - [ ] **Línea móvil de la clínica**: pendiente de alta; operador por decidir (spec 001)
 - [ ] **WhatsApp Business** en ese mismo número: pendiente de contratar. Verificarlo *antes* de activar el desvío de llamadas
@@ -59,7 +88,7 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - [ ] Objetivos medibles del negocio
 - [ ] IVA de los servicios y quién emite las facturas (gestoría); VeriFactu si el CRM factura
 - [ ] Revisión RGPD (registro de actividades, posible EIPD, contratos de encargado)
-- [ ] **Contrato de encargado del tratamiento Adela ↔ Altera** (art. 28 RGPD) con confidencialidad, cláusula de reversibilidad y propiedad del código
+- [ ] **Contrato de encargado del tratamiento Adela ↔ Altera** (art. 28 RGPD): plantilla redactada; falta elegir la opción A/B de propiedad del código y la revisión de un abogado
 - [ ] Adela contrata el VPS Contabo (Francia)
 - [ ] Plazos y subvención JCCM: requiere constituir la SL de José Miguel
 - [ ] Dominio propio
@@ -118,4 +147,5 @@ Formato: fecha · decisión · motivo · alternativas descartadas.
 - Specs 004 y 005 aprobadas por José Miguel.
 - Plantilla de **contrato de encargado del tratamiento** de Altera redactada en un documento de Claude (fuera del repo). Pendiente: elegir la opción de propiedad del código y que la revise un abogado.
 - **Spec 005 implementada en su parte de base de datos**: 5 migraciones, buckets privados, seed ficticio y **36 tests de privacidad que pasan** (con prueba de control). CI en `.github/workflows/tests-privacidad.yml`.
-- **Siguiente paso:** montar staging en el Coolify de Altera (guía en `docs/runbooks/`) y validar las migraciones contra Supabase real.
+- Runbook 01 (staging en Coolify) escrito. CI de privacidad en verde en GitHub (en `main` y en la rama de trabajo).
+- Sesión cerrada a petición de José Miguel. **Para retomar: ver "Cómo retomar" al principio de este fichero.**
